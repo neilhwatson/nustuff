@@ -1,0 +1,62 @@
+set history=50
+set ruler
+set tabstop=3
+set shiftwidth=3
+set smartindent
+set autoindent
+set undolevels=100
+set showmatch
+set showcmd
+set number
+set expandtab
+set tw=0
+if v:version >= 703
+   set colorcolumn=80
+endif
+
+"personal info in this file.
+source ~/neil/scripts/vim/personalrc
+
+" autowrite buffer on suspend, buffer switch etc...
+set autowrite
+
+syntax on
+colorscheme slate
+
+"for scp
+set nocp
+if v:version >= 600
+    filetype plugin indent on
+endif
+
+"date stamps
+"Sunday January 02 2008.
+iab  dmy  <c-r>=strftime("%A %B %d %Y")<cr>
+"20080102
+iab  ymd   <c-r>=strftime("%Y%m%d")<cr>
+"02:32:22
+iab  hms   <c-r>=strftime("%H:%M:%S")<cr> 
+
+" misc abbs
+iab CFE CFEngine
+
+au BufRead,BufNewFile */journal/*.txt set tw=80 et spell
+" Add help tags
+:helptags ~/.vim/doc/
+let g:EnableCFE3KeywordAbbreviations=1
+
+"===================================
+"FUNCTIONS
+"===================================
+fun! Getchar()
+  let c = getchar()
+  if c != 0
+    let c = nr2char(c)
+  endif
+  return c
+endfun
+
+fun! Eatchar(pat)
+   let c = Getchar()
+   return (c =~ a:pat) ? '' : c
+endfun

@@ -1,4 +1,4 @@
-nustuff
+nustuff Neil's unfinished stuff
 =======
 
-Miscellaneous collection of scripts and rc files.
+A collection of miscellaneous scripts and rc files.

@@ -1,0 +1,104 @@
+(custom-set-variables
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+  '(org-agenda-start-on-weekday nil)
+)
+(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ )
+;;(require 'vimpulse)
+(setq viper-mode t)
+(require 'viper)
+
+(setq org-agenda-files (list "/home/neil/neil/docs/nhw.org"))
+(require 'org-install)
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-log-done t)
+
+;; For Easter calculation
+(defun da-easter (year)
+  "Calculate the date for Easter Sunday in YEAR. Returns the date in the
+Gregorian calendar, ie (MM DD YY) format."
+  (let* ((century (1+ (/ year 100)))
+         (shifted-epact (% (+ 14 (* 11 (% year 19))
+                              (- (/ (* 3 century) 4))
+                              (/ (+ 5 (* 8 century)) 25)
+                              (* 30 century))
+                           30))
+         (adjusted-epact (if (or (= shifted-epact 0)
+                                 (and (= shifted-epact 1)
+                                      (< 10 (% year 19))))
+                             (1+ shifted-epact)
+                           shifted-epact))
+         (paschal-moon (- (calendar-absolute-from-gregorian
+                           (list 4 19 year))
+                          adjusted-epact)))
+    (calendar-dayname-on-or-before 0 (+ paschal-moon 7))))
+
+
+(defun da-easter-gregorian (year)
+  (calendar-gregorian-from-absolute (da-easter year)))
+
+(defun calendar-days-from-easter ()
+"When used in a diary sexp, this function will calculate how many days
+are between the current date (DATE) and Easter Sunday."
+(- (calendar-absolute-from-gregorian date)
+(da-easter (calendar-extract-year date))))
+
+;; Agenda notification
+    (require 'org-agenda)
+
+    ;; Insinuate appt
+    (require 'appt)
+    (setq appt-time-msg-list nil)
+    (org-agenda-to-appt)
+    ;; When use 'r' (rebuild agenda) reload appt
+    (add-hook 'org-agenda-mode-hook (lambda ()
+                                      (setq appt-time-msg-list nil)
+                                      (org-agenda-to-appt)))
+    (setq appt-audible t)
+    (setq appt-display-format 'echo)
+
+    ;; turn appointment checking on
+    (appt-activate 1)
+
+    ;; time in minutes before an appointment that the warning begins
+    (setq appt-message-warning-time 15)  ; 12
+
+    ;; number of minutes to wait between checking the appointment list
+    (setq appt-display-interval 5)  ; 3
+
+    ;; update appt each time agenda opened
+    (add-hook 'org-finalize-agenda-hook 'org-agenda-to-appt)
+
+    (when window-system
+      (setq appt-display-format 'window)
+
+      ;; FIXME Check `notify-send' (in `libnotify-bin' Ubuntu package) is installed
+      (defun rgr/org-display (min-to-app new-time msg)
+        (shell-command
+         (concat "notify-send "
+                 "-t 0 "
+                 "'Appointment' "
+                 "'" msg "'")))
+      ;; TODO For Windows users: use todochicku.el and the snarl notifier
+
+      (setq appt-disp-window-function (function rgr/org-display)))
+
+(defun kiwon/org-agenda-redo-in-other-window ()
+  ;; Refresh agenda at interval
+    "Call org-agenda-redo function even in the non-agenda buffer."
+       (interactive)
+          (let ((agenda-window (get-buffer-window org-agenda-buffer-name t)))
+                 (when agenda-window
+                           (with-selected-window agenda-window (org-agenda-redo))))
+)
+(run-at-time nil 300 'kiwon/org-agenda-redo-in-other-window)
+

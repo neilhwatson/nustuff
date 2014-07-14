@@ -1,0 +1,23 @@
+
+# Xterm 
+xterm*faceName: Bitstream Vera Sans Mono:style=Bold
+xterm*faceSize: 10
+xterm*termName: xterm
+xterm*background: black
+xterm*foreground: white
+xterm*geometry: 78x68+1+1
+xterm*tn: xterm
+xterm*scrollBar: false
+xterm*sl: 1000
+xterm*colorMode: 1
+xterm*Utf8: 1
+xterm*loginShell: 1
+xterm*charClass: 33:48, 37:48, 42:48, 45-47:48, 58:48, 63-64:48, 126:48
+
+# Fonts
+Xft.antialias:true
+Xft.dpi:120
+Xft.hinting:true
+Xft.hintstyle:hintslight
+
+# Cursor
