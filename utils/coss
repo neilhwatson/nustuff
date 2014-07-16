@@ -1,0 +1,344 @@
+#!/bin/sh
+
+# Limit path for good security practice
+OLDPATH=$PATH
+export PATH=/bin:/usr/bin:/usr/sbin:/sbin
+
+PROGRAM=coss
+VERSION=1.0
+
+# Output man page to this default unless specified later.
+mcmd=cat
+
+SYSTEM=$(uname|tr [:upper:] [:lower:])
+supported_systems="linux"
+subs="header disk vol fs net mem cpu kernel hardware software misc"
+
+usage(){
+    cat 1>&2 <<EOF
+
+EOF
+}
+
+man() {
+    cat <<EOF | $mcmd
+# Get from skel.man
+.\" view by piping to nroff -c -man |col|less
+.\"-----------------------------------------
+.TH $PROGRAM 1 "Month Year" $VERSION
+.\"-----------------------------------------
+.SH NAME
+$PROGRAM \(em Gather host information for build books..
+.\"-----------------------------------------
+.SH SYNOPSIS
+.B $PROGRAM 
+.B [ \-h | \-\^\-help ]
+.B [ \-v | \-\^\-version ]
+.B [ \-m | \-\^\-man ]
+.B [ \-mm | \-\^\-mman ]
+]
+.\"-----------------------------------------
+.SH DESCRIPTION
+.\"-----------------------------------------
+.SH OPTIONS
+Options can be prefixed with either one or two hyphens, and
+can be abbreviated to any unique prefix.  Thus,
+.BR \-v ,
+.BR \-ver ,
+and
+.B \-\^\-version
+are equivalent.
+.PP
+.IP "[ \-h | \-\^\-help ]"
+Print usage and exit.
+.IP "[ \-v | \-\^\-version ]"
+Print version number an exit.
+.\"-----------------------------------------
+.SH EXAMPLES
+.IP "$PROGRAM "
+Description
+.\"-----------------------------------------
+.SH "SEE ALSO"
+.BR command1 (1),
+.BR command2 (1),
+.\"-----------------------------------------
+.SH AUTHOR
+Neil H. Watson, watson-wilson.ca, neil@watson-wilson.ca
+.\"-----------------------------------------
+.SH "LICENSE AND COPYING"
+The MIT License (MIT)
+
+Copyright (c) 2014 Neil H Watson
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+EOF
+    exit
+}
+
+version(){
+    printf "$PROGRAM version $VERSION"
+}
+
+error(){
+# Errors are sent to stderr
+
+    # This syslog action need only be used on hosts that have a running syslog
+    #logger -s -t $PROGRAM "$@, $STATUS $ERROR"
+    printf "Error: $@\n\n" 1>&2
+    usage
+    exit 1
+}
+
+pshead(){
+    cat <<END
+
+####################
+# $shead
+####################
+
+END
+}
+
+linux_header(){
+    shead="
+# $PROGRAM (v$VERSION) Report for $(hostname -f)
+# $distro
+# $(cat $(ls /etc/*version /etc/*release))
+# Date: $(date)
+# Uptime: $(uptime)
+#"
+END
+    pshead
+}
+linux_vol(){
+    shead="Disk Volumes"
+    pshead
+
+    vgdisplay
+    lvdisplay
+}
+
+
+linux_fs() {
+    shead="File Systems"
+    pshead
+
+    df -Pk
+}
+
+linux_net(){
+    shead="Network Settings"
+    pshead
+
+    ip addr list
+
+    printf "\n\n## Routes ##\n\n"
+    ip route list
+
+    printf "\n\n## Resolver ##\n\n"
+    cat /etc/resolv.conf
+
+    printf "\n## Interface scripts ##\n\n"
+
+    if [ $distro = 'redhat' ] || [ $distro = 'suse' ] || [ $distro = 'centos' ] 
+    then
+        for f in $(ls /etc/sysconfig/network-scripts/ifcfg-*)
+        do
+            printf "\n# $f #\n\n";
+            cat $f
+        done
+                
+    elif [ $distro = 'debian' ]
+    then
+        cat /etc/network/interfaces
+    fi
+
+}
+
+linux_disk(){
+    shead="Disk Partitions"
+    pshead
+
+    fdisk -l
+}
+
+linux_mem(){
+    shead="RAM and Swap"
+    pshead
+
+    free
+}
+
+linux_cpu(){
+    shead=CPU
+    pshead
+
+    grep -E 'processor|model name' /proc/cpuinfo
+}
+
+linux_software(){
+    shead="Installed software"
+    pshead
+
+    if [ $distro = 'redhat' ] || [ $distro = 'suse' ] || [ $distro = 'centos' ]
+    then
+        rpm -qa --last                
+    elif [ $distro = 'debian' ]
+    then
+		 dpkg -l
+    fi
+}
+
+linux_kernel(){
+    shead="Kernel info"
+    pshead
+
+    uname -a
+    printf "\n ## sysctl settings ##\n\n";
+    grep -Ev '^#|^$' /etc/sysctl.conf
+
+    printf "\n ## kernel modules ##\n\n";
+    modprobe -c
+}
+
+linux_hardware(){
+    shead="Hardware"
+    pshead
+
+    printf "\n ## PCI ##\n\n";
+    lspci
+
+    printf "\n ## USB ##\n\n";
+    lsusb
+}
+
+linux_misc(){
+    shead="Misc."
+    pshead
+
+    printf "\n ## dmesg ##\n\n";
+    dmesg
+}
+
+# get opts
+while test $# -gt 0
+do
+    case $1 in
+
+        # For each option
+        #-o)
+        #shift
+        #option="$1"
+        #;;
+        # Add custom options ABOVE the defaults below.
+
+        --man | --ma | --m |\
+        -man | -ma | -m )
+        man=1
+        # Read man command
+        mcmd="eval nroff -c -man | col | less"
+        ;;
+
+        --mman | --mma | --mm |\
+        -mman | -mma | -mm )
+        mman=1
+        ;;
+
+        --version | --versio | --versi | --vers | --ver | --ve | --v |\
+        -version | -versio | -versi | -vers | -ver | -ve | -v)
+        version
+        exit 0
+        ;;
+
+        --help | --hel | --he | --h | --\? |\
+        -help | -hel | -he | -h | -\?)
+        usage
+        exit 0
+        ;;
+
+        -*)
+        error "Unrecognized option: $1"
+        ;;
+
+        *)
+        break
+        ;;
+    esac
+    shift
+done
+
+# Left over arguments
+rcmd="$@"
+
+############
+# Validation
+############
+
+# Validate arguments 
+if [ "0$man" -eq 1 ] && [ "0$mman" -eq 1 ]
+then
+    error "-m and --m are mutually exclusive"
+elif [ "0$man" -eq 1 ] || [ "0$mman" -eq 1 ]
+then
+    man
+fi
+
+
+# Validate system support.
+case $supported_systems in
+
+    $SYSTEM )
+    ;;
+
+    *)
+    error "$SYSTEM not supported ($supported_systems)"
+    exit
+    ;;
+
+esac
+
+
+############
+# Determine distribution
+if grep -qiE 'red hat' /etc/*release 
+then 
+    distro=redhat
+
+elif grep -qiE 'centos' /etc/*release
+    then
+    distro=centos
+
+elif grep -qiE 'suse' /etc/*release
+    then
+    distro=suse
+
+elif grep -qiE 'debian' /etc/*release
+then
+    distro=debian
+
+else
+    error "Unrecognized $SYSNAME distribution."
+fi
+
+############
+# Main
+for s in $subs;
+do
+    ${SYSTEM}_$s
+done
