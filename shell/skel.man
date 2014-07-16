@@ -1,0 +1,64 @@
+.\" view by piping to nroff -c -man |col|less
+.\"-----------------------------------------
+.TH $PROGRAM 1 "Month Year" $VERSION
+.\"-----------------------------------------
+.SH NAME
+$PROGRAM \(em Execute remote commands or copies via SSH to multiple hosts.
+.\"-----------------------------------------
+.SH SYNOPSIS
+.B $PROGRAM 
+.B [ \-h | \-\^\-help ]
+.B [ \-v | \-\^\-version ]
+.B [ \-m | \-\^\-man ]
+.B [ \-mm | \-\^\-mman ]
+]
+.\"-----------------------------------------
+.SH DESCRIPTION
+.\"-----------------------------------------
+.SH OPTIONS
+Options can be prefixed with either one or two hyphens, and
+can be abbreviated to any unique prefix.  Thus,
+.BR \-v ,
+.BR \-ver ,
+and
+.B \-\^\-version
+are equivalent.
+.PP
+.IP "[ \-h | \-\^\-help ]"
+Print usage and exit.
+.IP "[ \-v | \-\^\-version ]"
+Print version number an exit.
+.\"-----------------------------------------
+.SH EXAMPLES
+.IP "$PROGRAM "
+Description
+.\"-----------------------------------------
+.SH "SEE ALSO"
+.BR command1 (1),
+.BR command2 (1),
+.\"-----------------------------------------
+.SH AUTHOR
+Neil H. Watson, www.watson-wilson.ca, neil-NOSPAM@watson-wilson.ca
+.\"-----------------------------------------
+.SH "LICENSE AND COPYING"
+The MIT License (MIT)
+
+Copyright (c) 2014 Neil H Watson
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
