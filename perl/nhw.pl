@@ -125,7 +125,7 @@ sub _run_tests
    eval q( use Test::More tests => $number_of_tests );
 
    # Run tests in order
-   foreach my $test ( sort keys %tests )
+   for my $test ( sort keys %tests )
    {
       $tests{$test}->{name}->( $tests{$test}->{arg} );
    }
