@@ -23,6 +23,19 @@ I hope you find this helpful.
       two => "Second argument"
    );
 
+   sub named_params_with_defaults
+   {
+      my %args = (
+         one => 'default value',
+         two => 'default value',
+         @_, # Will override the above values.
+      );
+   }
+
+   named_params_with_defaults(
+      one => "override arg 'one'"
+   );
+
 =back
 
 =head2 Shell search and replace
