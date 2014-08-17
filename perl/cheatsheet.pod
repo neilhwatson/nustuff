@@ -25,6 +25,14 @@ I hope you find this helpful.
 
 =back
 
+=head2 Shell search and replace
+
+=over 3
+
+   find /path -name "*.*" -exec perl -pi -e 's///g' {} \;
+
+=back
+
 =head2 Licence
 
 The MIT License (MIT)
