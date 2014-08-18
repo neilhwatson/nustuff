@@ -46,6 +46,22 @@ I hope you find this helpful.
 
 =back
 
+=head2 Search and replace, keep original and assign change to new variable.
+
+=over 3
+
+   ( my $new_var = $original ) =~ s/teh/the/g ;
+
+=back
+
+=head2 Match and store match in a single line
+
+=over 3 
+
+   ( my $match ) = $original =~ m/(kept)/;
+
+=back
+
 =head2 What module should I use?
 
 Consult CPAN's Task::Kensho.
