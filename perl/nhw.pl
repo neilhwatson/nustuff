@@ -65,8 +65,14 @@ SOFTWARE.
 sub _get_cli_args
 {
    use Getopt::Long qw/GetOptionsFromArray/;
+
+   # Set default CLI args here. Getopts will override.
+   my %arg = (
+      myarg => 'default value',
+   );
+
    my @args = @_;
-   my %arg;
+
    GetOptionsFromArray
    (
       \@args,
@@ -75,6 +81,8 @@ sub _get_cli_args
       'version',
       'examples',
       'test',
+      'dumpargs',
+      'myarg:s',
    )
    or eval
    {
@@ -149,10 +157,10 @@ sub _test_doc_examples
 my $argref = _get_cli_args( @ARGV );
 
 # TODO arg validation here
+say '%args = '. Dumper( $argref ) if ( $argref->{dumpargs} );
 
 # Perhaps a dispatch table?
 _run_tests          if ( $argref->{test} );
 usage( 'HELP' )     if ( $argref->{help} );
 usage( 'EXAMPLES' ) if ( $argref->{examples} );
 say $VERSION        if ( $argref->{version} );
-

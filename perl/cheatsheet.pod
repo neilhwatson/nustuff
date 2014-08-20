@@ -38,6 +38,31 @@ I hope you find this helpful.
 
 =back
 
+=head2 Return named params from a subroutine
+   
+=over 3
+
+   sub foo
+   {
+      my $clause = 'This is a clause';
+      my @param = qw/ pone ptwo pthee /;
+
+      return (
+         clause => $clause,
+         params => \@param
+      );
+   }
+
+   my %r = foo();
+
+   say "clause = [$r{clause}]";
+   for my $p ( @{ $r{params} } )
+   {
+      say "param = [$p]";
+   }
+
+=back
+
 =head2 Shell search and replace
 
 =over 3
