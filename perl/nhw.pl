@@ -15,7 +15,7 @@ nhw - A generic Perl script template
 
 =head1 SYNOPSIS
 
-nhw [-v|--version], [-h|-?|--help], [-t|--test]
+nhw [-v|--version], [-h|-?|--help], [-t|--test], [-d|--dumpargs]
 
 =head2 OPTIONS
 
@@ -104,9 +104,10 @@ sub usage
    {
       $section = "SYNOPSIS";
    }
-   pod2usage(-verbose=>99,
-      -sections=>"$section",
-      -msg => $msg
+   pod2usage(
+      -verbose  => 99,
+      -sections => "$section",
+      -msg      => $msg
    );
 }
 
