@@ -63,6 +63,23 @@ I hope you find this helpful.
 
 =back
 
+=head4 Or as a reference
+
+=over 3
+
+sub foo
+{
+   return {
+      one => 1,
+      two => 2,
+   }
+}
+
+my $hashref = foo();
+say "foo{one} = [$hashref->{one}]";
+
+=back
+
 =head2 Shell search and replace
 
 =over 3
