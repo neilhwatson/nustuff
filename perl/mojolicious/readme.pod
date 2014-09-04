@@ -1,0 +1,3 @@
+=head1 SYNOPSIS
+
+This is a starting template for a basic Mojoicious application. Mojolicious is modern Perl web framework.
