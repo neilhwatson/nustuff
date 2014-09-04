@@ -11,12 +11,9 @@ sub startup
 ## Routes
    my $r = $self->routes;
 
-   $r->any( '/' => sub
-   # Calls the home.html.ep template.
-   {
-      my $self = shift;
-      $self->stash( title => 'Myapp home page' );
-   } => 'home' ); 
+   # Any http request for '/' returns the template 'home'. The value of title
+   # is 'stashed' and sent to the template.
+   $r->any( '/' )->to( template => 'home', title => 'Myapp home page' );
 }
 
 1;
