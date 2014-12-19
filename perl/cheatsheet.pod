@@ -23,6 +23,10 @@ I hope you find this helpful.
       two => "Second argument"
    );
 
+=head3 With default values
+
+=over 3
+
    sub named_params_with_defaults
    {
       my %args = (
@@ -63,7 +67,7 @@ I hope you find this helpful.
 
 =back
 
-=head4 Or as a reference
+=head3 Or as a reference
 
 =over 3
 
