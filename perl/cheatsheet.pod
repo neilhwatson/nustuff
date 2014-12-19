@@ -23,6 +23,8 @@ I hope you find this helpful.
       two => "Second argument"
    );
 
+=back
+
 =head3 With default values
 
 =over 3
