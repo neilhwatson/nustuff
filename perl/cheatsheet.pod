@@ -110,6 +110,16 @@ say "foo{one} = [$hashref->{one}]";
 
 =back
 
+=head2 List available module
+
+=over 3
+
+   perl -MFile::Find=find -MFile::Spec::Functions -Tlwe \
+      'find { wanted => sub { print canonpath $_ if /\.pm\z/ }, \
+      no_chdir => 1 }, @INC'
+
+=back
+
 =head2 What module should I use?
 
 Consult CPAN's Task::Kensho.
