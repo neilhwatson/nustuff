@@ -124,6 +124,123 @@ say "foo{one} = [$hashref->{one}]";
 
 Consult CPAN's Task::Kensho.
 
+=head2 Satellite snippets, including Cobbler
+
+To access Satellite and Cobbler API's use XMLRPC::Lite
+
+=head3 Connect to Cobbler API
+
+=over 3
+
+   $server = XMLRPC::Lite->new( proxy => $server_url);
+   $token = $server->login( $username, $password )->result();
+
+=back
+
+=head3 Dump Cobbler systems
+
+=over 3
+
+  sub dump_systems
+  {
+    my $results;
+    my $systems = $server->get_systems->result();
+    if ( $opts{hostname} )
+    {   
+        foreach my $s ( @{$systems} )
+        {
+            push @{$results}, $s if ( $s->{hostname} eq $opts{hostname} );
+        }
+        return $results;
+    }   
+    else
+    {   
+        return $systems;
+    }   
+  }
+ 
+=back
+
+=head3 Create Cobbler system
+   
+=over 3
+
+   my $system_id = $server->new_system( $token )->result()
+     or die "Could not create new system, [$!]";
+
+=back
+
+=head3 Update Cobbler system
+
+=over 3
+
+   $server->modify_system(
+      $system_id, 'name', $opts{profile_name}, $token )->result()
+      or die "Could not set name [$opts{profile_name}], [$!]";
+
+   $server->modify_system(
+      $system_id, 'kernel_options', "$opts{append}", $token)->result()
+      or die "Could not set append, [$!]";
+
+   $server->modify_system(
+      $system_id, 'server', "$proxy{$sitename}.$domain", $token)->result()
+      or die "Could not set server, [$!]";
+
+=back
+
+=head3 How to purge a Cobbler system
+
+The mtime attribute form get_systems is in epoch seconds.
+
+=head3 Delete Cobbler system
+
+=over 3
+
+   $server->remove_system($opts{profile_name}, $token )->result()
+     or  die "Could not delete system [$opts{profile_name}], [$!]";
+
+   $server->sync($token )->result()
+     or die "Could not sync new system, [$!]";
+
+=back
+
+=head3 Connect to Satellite API
+
+=over 3
+
+   my $server  = XMLRPC::Lite->new( proxy => $server_url );
+   my $token   = $server->call( 'auth.login', $username, $password )->result();
+
+=back
+
+=head3 List Satellite systems
+
+=over 3
+
+   my $systems = $server->call( 'system.listSystems', $token )->result;
+
+=back
+
+=head3 Access date from systems
+
+=over 3
+
+   $rec->{name}
+   $rec->{id} # Note that id and SystemId are equal in the API.
+   $rec->{last_checkin} # in form YYYMMDDTHH:MM:SS
+   
+=back
+
+=head3 Delete Satellite systems
+
+=over 3
+
+   # @delete is an array of id or SystemId from returned systems.
+   my $err = $server->call(
+      'system.deleteSystems', $token, \@delete ) unless $argref->{dryrun};
+
+=back
+
 =head2 Licence
 
 The MIT License (MIT)
