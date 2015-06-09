@@ -122,11 +122,11 @@ say "foo{one} = [$hashref->{one}]";
 
 =head2 What module should I use?
 
-Consult CPAN's Task::Kensho.
+Consult CPAN's L<Task::Kensho|http://search.cpan.org/~ether/Task-Kensho-0.38/lib/Task/Kensho.pm/>
 
 =head2 Satellite snippets, including Cobbler
 
-To access Satellite and Cobbler API's use XMLRPC::Lite
+To access Satellite and Cobbler API's use L<XMLRPC::Lite|http://search.cpan.org/~phred/XMLRPC-Lite-0.717/lib/XMLRPC/Lite.pm/>
 
 =head3 Connect to Cobbler API
 
