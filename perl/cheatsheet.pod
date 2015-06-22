@@ -241,6 +241,26 @@ The mtime attribute form get_systems is in epoch seconds.
 
 =back
 
+=head2 Time and dates
+
+=head3 Difference or two date stamps in days
+
+=over 3
+   use Time::Piece;
+   my $date1 = Time::Piece->strptime(
+      $args{date}, "%Y-%m-%dT%H:%M:%S" );
+   my $date2 = Time::Piece->strptime(
+      $args{date}, "%Y-%m-%dT%H:%M:%S" );
+
+   my $diff = $date1 - $date2;
+   my $days = $diff->days
+
+=back
+
+Useful in converting datastamps to time objects. Can also diff in minues. See
+L<module documentation|http://search.cpan.org/~rjbs/Time-Piece-1.30/Piece.pm>
+for more info.
+
 =head2 Licence
 
 The MIT License (MIT)
