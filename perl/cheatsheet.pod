@@ -246,11 +246,10 @@ The mtime attribute form get_systems is in epoch seconds.
 =head3 Difference or two date stamps in days
 
 =over 3
+
    use Time::Piece;
-   my $date1 = Time::Piece->strptime(
-      $args{date}, "%Y-%m-%dT%H:%M:%S" );
-   my $date2 = Time::Piece->strptime(
-      $args{date}, "%Y-%m-%dT%H:%M:%S" );
+   my $date1 = Time::Piece->strptime( $args{date}, "%Y-%m-%dT%H:%M:%S" );
+   my $date2 = Time::Piece->strptime( $args{date}, "%Y-%m-%dT%H:%M:%S" );
 
    my $diff = $date1 - $date2;
    my $days = $diff->days
