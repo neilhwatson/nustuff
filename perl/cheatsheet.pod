@@ -110,13 +110,21 @@ say "foo{one} = [$hashref->{one}]";
 
 =back
 
-=head2 List available module
+=head2 List available modules
 
 =over 3
 
    perl -MFile::Find=find -MFile::Spec::Functions -Tlwe \
       'find { wanted => sub { print canonpath $_ if /\.pm\z/ }, \
       no_chdir => 1 }, @INC'
+
+=back
+
+=head2 Repeat operator
+
+=over 3
+
+   print '-' x 80;     # print row of 80 dashes
 
 =back
 
