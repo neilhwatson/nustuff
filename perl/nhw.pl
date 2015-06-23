@@ -155,13 +155,13 @@ sub _test_doc_examples
 #
 # Main matter
 #
-my $argref = _get_cli_args( @ARGV );
+my $args = _get_cli_args( @ARGV );
 
 # TODO arg validation here
-say '%args = '. Dumper( $argref ) if ( $argref->{dumpargs} );
+say '%args = '. Dumper( $args ) if ( $args->{dumpargs} );
 
 # Perhaps a dispatch table?
-_run_tests          if ( $argref->{test} );
-usage( 'HELP' )     if ( $argref->{help} );
-usage( 'EXAMPLES' ) if ( $argref->{examples} );
-say $VERSION        if ( $argref->{version} );
+_run_tests          if ( $args->{test} );
+usage( 'HELP' )     if ( $args->{help} );
+usage( 'EXAMPLES' ) if ( $args->{examples} );
+say $VERSION        if ( $args->{version} );
