@@ -11,17 +11,25 @@ I hope you find this helpful.
 
    sub named_params_example
    {
-      my %args = @_;
-      # Use my ( $self, %args ) = @_; if you are in object land.
+      my ( $arg ) = @_;
+      # Use my ( $self, $arg ) = @_; if you are in object land.
 
-      say $args{one};
-      say $args{two};
+      say $arg->{one};
+      say $arg->{two};
    }
 
-   named_params_example(
+   named_params_example({
       one => "First argument",
       two => "Second argument"
-   );
+   });
+
+   # In object land
+   named_params_example(
+   $self,
+   {
+      one => "First argument",
+      two => "Second argument"
+   });
 
 =back
 
@@ -31,16 +39,17 @@ I hope you find this helpful.
 
    sub named_params_with_defaults
    {
-      my %args = (
-         one => 'default value',
-         two => 'default value',
-         @_, # Will override the above values.
-      );
+      my ( $arg ) = @_;
+      # Use my ( $self, $arg ) = @_; if you are in object land.
+      
+      # Set defaults
+      #         If option given     Use options       Else
+      my $one = exits $arg->{one} ? say $arg->{one} : "default1";
+      my $two = exits $arg->{two} ? say $arg->{two} : "default2";
+
    }
 
-   named_params_with_defaults(
-      one => "override arg 'one'"
-   );
+   named_params_with_defaults({ one => "override arg 'one'" });
 
 =back
 
@@ -51,38 +60,21 @@ I hope you find this helpful.
    sub foo
    {
       my $clause = 'This is a clause';
-      my @param = qw/ pone ptwo pthee /;
+      my @param = qw/ one two thee /;
 
-      return (
+      return ({
          clause => $clause,
          params => \@param
-      );
+      });
    }
 
-   my %r = foo();
+   my $r = foo();
 
-   say "clause = [$r{clause}]";
-   for my $p ( @{ $r{params} } )
+   say "clause = [$r->{clause}]";
+   for my $p ( @{ $r->{params} } )
    {
       say "param = [$p]";
    }
-
-=back
-
-=head3 Or as a reference
-
-=over 3
-
-sub foo
-{
-   return {
-      one => 1,
-      two => 2,
-   }
-}
-
-my $hashref = foo();
-say "foo{one} = [$hashref->{one}]";
 
 =back
 

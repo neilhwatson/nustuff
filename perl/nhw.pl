@@ -81,9 +81,9 @@ sub _get_cli_args
       'examples',
       'test',
       'dumpargs',
-      'myarg:s',
+      'myarg=s',
    )
-   or eval
+   or do
    {
       usage( 'USAGE' );
       exit 1;
@@ -144,27 +144,27 @@ sub _run_tests
 sub _test_doc_help
 {
    my $help = qx/ $0 -? /;
-   like( $help, qr/Usage:.*?Options:/ms,  "[$0] -h, for usage" );
+   ok( $help =~ qr/Usage:.*?Options:/ms,  "[$0] -h, for usage" );
    return;
 }
 
 sub _test_doc_examples
 {
    my $examples = qx/ $0 -e /;
-   like( $examples, qr/EXAMPLES/, "[$0] -e, for usage examples." );
+   ok( $examples =~ qr/EXAMPLES/, "[$0] -e, for usage examples." );
    return;
 }
 
 #
 # Main matter
 #
-my $args = _get_cli_args( @ARGV );
+my $arg = _get_cli_args( @ARGV );
 
 # TODO arg validation here
-say '%args = '. Dumper( $args ) if ( $args->{dumpargs} );
+say '$arg = '. Dumper( $arg ) if ( $arg->{dumpargs} );
 
 # Perhaps a dispatch table?
-_run_tests()        if ( $args->{test} );
-usage( 'HELP' )     if ( $args->{help} );
-usage( 'EXAMPLES' ) if ( $args->{examples} );
-say $VERSION        if ( $args->{version} );
+_run_tests()        if ( $arg->{test} );
+usage( 'HELP' )     if ( $arg->{help} );
+usage( 'EXAMPLES' ) if ( $arg->{examples} );
+say $VERSION        if ( $arg->{version} );
