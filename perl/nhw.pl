@@ -3,11 +3,12 @@
 use strict;
 use warnings;
 use feature qw/say/;
+use Getopt::Long qw/GetOptionsFromArray/;
 use Pod::Usage;
-
+use Test::More;
 use Data::Dumper; # TODO safe to remove after testing.
 
-my $VERSION = 0.01;
+my $VERSION = "0.01";
 
 =head1 NAME
 
@@ -64,14 +65,12 @@ SOFTWARE.
 #
 sub _get_cli_args
 {
-   use Getopt::Long qw/GetOptionsFromArray/;
+   my @args = @_;
 
    # Set default CLI args here. Getopts will override.
    my %arg = (
       myarg => 'default value',
    );
-
-   my @args = @_;
 
    GetOptionsFromArray
    (
@@ -109,6 +108,7 @@ sub usage
       -sections => "$section",
       -msg      => $msg
    );
+   return;
 }
 
 #
@@ -131,25 +131,28 @@ sub _run_tests
    );
 
    my $number_of_tests = keys %tests;
-   eval q( use Test::More tests => $number_of_tests );
 
    # Run tests in order
    for my $test ( sort keys %tests )
    {
       $tests{$test}->{name}->( $tests{$test}->{arg} );
    }
+   done_testing( $number_of_tests );
+   return;
 }
 
 sub _test_doc_help
 {
    my $help = qx/ $0 -? /;
    like( $help, qr/Usage:.*?Options:/ms,  "[$0] -h, for usage" );
+   return;
 }
 
 sub _test_doc_examples
 {
    my $examples = qx/ $0 -e /;
    like( $examples, qr/EXAMPLES/, "[$0] -e, for usage examples." );
+   return;
 }
 
 #
@@ -161,7 +164,7 @@ my $args = _get_cli_args( @ARGV );
 say '%args = '. Dumper( $args ) if ( $args->{dumpargs} );
 
 # Perhaps a dispatch table?
-_run_tests          if ( $args->{test} );
+_run_tests()        if ( $args->{test} );
 usage( 'HELP' )     if ( $args->{help} );
 usage( 'EXAMPLES' ) if ( $args->{examples} );
 say $VERSION        if ( $args->{version} );
