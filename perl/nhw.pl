@@ -34,7 +34,7 @@ Run test suite for developing this application
 
 Neil H. Watson, http://watson-wilson.ca, C<< <neil@watson-wilson.ca> >>
 
-=head1 COPYRIGHT
+=head1 LICENSE and COPYRIGHT
 
 The MIT License (MIT)
 
