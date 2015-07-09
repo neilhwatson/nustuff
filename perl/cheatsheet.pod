@@ -43,9 +43,9 @@ I hope you find this helpful.
       # Use my ( $self, $arg ) = @_; if you are in object land.
       
       # Set defaults
-      #         If option given     Use options       Else
-      my $one = exits $arg->{one} ? say $arg->{one} : "default1";
-      my $two = exits $arg->{two} ? say $arg->{two} : "default2";
+      #         If option given      Use options   Else
+      my $one = exists $arg->{one} ? $arg->{one} : "default1";
+      my $two = exists $arg->{two} ? $arg->{two} : "default2";
 
    }
 
