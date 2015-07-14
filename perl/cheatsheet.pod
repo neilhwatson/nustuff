@@ -78,6 +78,45 @@ I hope you find this helpful.
 
 =back
 
+=head2 Making an object
+
+Consider using object packages like Moose for larger projects, but by hand:
+
+=over 3
+   #!/usr/bin/perl
+
+   use strict;
+   use warnings;
+   use feature 'say';
+
+   my $o = Neil->new({ foo => 'bar', time => '11:30'});
+
+   $o->dump_args;
+
+   #######
+   package Neil;
+
+   use strict;
+   use warnings;
+
+   sub new
+   {
+      my ( $class, $arg ) = @_;
+      my $self = bless $arg, $class;
+
+      return $self;
+   }
+
+   sub dump_args
+   {
+      my $self = shift;
+      say 'arg foo is '. $self->{foo};
+      say 'arg time is '. $self->{time};
+   }
+
+   1;
+=back
+
 =head2 Shell search and replace
 
 =over 3
