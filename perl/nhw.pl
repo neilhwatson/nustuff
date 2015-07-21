@@ -69,7 +69,21 @@ sub _get_cli_args
 
    # Set default CLI args here. Getopts will override.
    my %arg = (
-      myarg => 'default value',
+      myarg => 'default',
+   );
+
+   # To validate inputs
+   my %valid = (
+      myarg =>
+      {
+         constraint => sub { my ( $val ) = @_; return ( $val =~ m/\A\w+\Z/ ) },
+         error => 'myarg is invalid'
+      },
+      arg2 =>
+      {
+         constraint => qr/\A[0|1]\Z/,
+         error => 'arg2 is invalid'
+      }
    );
 
    GetOptionsFromArray
@@ -82,18 +96,56 @@ sub _get_cli_args
       'test',
       'dumpargs',
       'myarg=s',
+      'arg2=i',
    )
    or do
    {
       usage( 'USAGE' );
       exit 1;
    };
+
+   _validate({ inputs => \%arg, valid => \%valid });
+
    return \%arg;
+}
+
+sub _validate
+{
+   my ( $arg ) = @_;
+
+   my $inputs = $arg->{inputs};
+   my $valid  = $arg->{valid};
+   my $errors;
+
+   for my $k ( keys %{ $inputs })
+   {
+      if ( defined $valid->{$k} )
+      {
+         my $constraint = $valid->{$k}->{constraint};
+         my $error      = $valid->{$k}->{error};
+         my $ref = ref $constraint;
+
+         if ( $ref eq 'CODE' )
+         {
+            $errors .= "\n".$error unless ( $valid->{$k}->{constraint}( $inputs->{$k} ) );
+         }
+         elsif ( $ref eq 'Regexp' )
+         {
+            $errors .= "\n".$error unless ( $inputs->{$k} =~ $constraint );
+         }
+
+      }
+   }
+   usage( $errors, 2  ) if length $errors > 0;
+   return 1;
 }
 
 sub usage
 {
-   my $msg = shift;
+   my ( $msg, $exit ) = @_;
+
+   $exit = defined $exit ? $exit : 0;
+
    my $section;
    if ( $msg =~ m/\AEXAMPLES\Z/ )
    {
@@ -106,7 +158,8 @@ sub usage
    pod2usage(
       -verbose  => 99,
       -sections => "$section",
-      -msg      => $msg
+      -msg      => $msg,
+      -exitval  => $exit
    );
    return;
 }
