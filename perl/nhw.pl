@@ -63,8 +63,7 @@ SOFTWARE.
 #
 # Subs
 #
-sub _get_cli_args
-{
+sub _get_cli_args {
    my @args = @_;
 
    # Set default CLI args here. Getopts will override.
@@ -74,20 +73,17 @@ sub _get_cli_args
 
    # To validate inputs
    my %valid = (
-      myarg =>
-      {
+      myarg => {
          constraint => sub { my ( $val ) = @_; return ( $val =~ m/\A\w+\Z/ ) },
          error => 'myarg is invalid'
       },
-      arg2 =>
-      {
+      arg2 => {
          constraint => qr/\A[0|1]\Z/,
          error => 'arg2 is invalid'
       }
    );
 
-   GetOptionsFromArray
-   (
+   GetOptionsFromArray (
       \@args,
       \%arg,
       'help|?',
@@ -98,8 +94,7 @@ sub _get_cli_args
       'myarg=s',
       'arg2=i',
    )
-   or do
-   {
+   or do {
       usage( 'USAGE' );
       exit 1;
    };
@@ -109,50 +104,41 @@ sub _get_cli_args
    return \%arg;
 }
 
-sub _validate
-{
+sub _validate {
    my ( $arg ) = @_;
 
    my $inputs = $arg->{inputs};
    my $valid  = $arg->{valid};
-   my $errors;
+   my $errors = '';
 
-   for my $k ( keys %{ $inputs })
-   {
-      if ( defined $valid->{$k} )
-      {
+   for my $k ( keys %{ $inputs }) {
+      if ( defined $valid->{$k} ) {
          my $constraint = $valid->{$k}->{constraint};
          my $error      = $valid->{$k}->{error};
          my $ref = ref $constraint;
 
-         if ( $ref eq 'CODE' )
-         {
-            $errors .= "\n".$error unless ( $valid->{$k}->{constraint}( $inputs->{$k} ) );
+         if ( $ref eq 'CODE' ) {
+            $errors .= "\n".$error unless ( ${constraint}->( $inputs->{$k} ) );
          }
-         elsif ( $ref eq 'Regexp' )
-         {
+         elsif ( $ref eq 'Regexp' ) {
             $errors .= "\n".$error unless ( $inputs->{$k} =~ $constraint );
          }
-
       }
    }
    usage( $errors, 2  ) if length $errors > 0;
    return 1;
 }
 
-sub usage
-{
+sub usage {
    my ( $msg, $exit ) = @_;
 
    $exit = defined $exit ? $exit : 0;
 
    my $section;
-   if ( $msg =~ m/\AEXAMPLES\Z/ )
-   {
+   if ( $msg =~ m/\AEXAMPLES\Z/ ) {
       $section = $msg;
    }
-   else
-   {
+   else {
       $section = "SYNOPSIS";
    }
    pod2usage(
@@ -167,17 +153,14 @@ sub usage
 #
 # Testing
 #
-sub _run_tests
-{
+sub _run_tests {
    my %tests = (
       # Name test 't\d\d' to ensure order
-      t01 =>
-      {
+      t01 => {
          name => \&_test_doc_help,
          arg  => '',
       },
-      t02 =>
-      {
+      t02 => {
          name => \&_test_doc_examples,
          arg  => '',
       }
@@ -186,23 +169,20 @@ sub _run_tests
    my $number_of_tests = keys %tests;
 
    # Run tests in order
-   for my $test ( sort keys %tests )
-   {
+   for my $test ( sort keys %tests ) {
       $tests{$test}->{name}->( $tests{$test}->{arg} );
    }
    done_testing( $number_of_tests );
    return;
 }
 
-sub _test_doc_help
-{
+sub _test_doc_help {
    my $help = qx/ $0 -? /;
    ok( $help =~ qr/Usage:.*?Options:/ms,  "[$0] -h, for usage" );
    return;
 }
 
-sub _test_doc_examples
-{
+sub _test_doc_examples {
    my $examples = qx/ $0 -e /;
    ok( $examples =~ qr/EXAMPLES/, "[$0] -e, for usage examples." );
    return;

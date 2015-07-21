@@ -9,8 +9,7 @@ I hope you find this helpful.
 
 =over 3
 
-   sub named_params_example
-   {
+   sub named_params_example {
       my ( $arg ) = @_;
       # Use my ( $self, $arg ) = @_; if you are in object land.
 
@@ -25,8 +24,7 @@ I hope you find this helpful.
 
    # In object land
    named_params_example(
-   $self,
-   {
+   $self, {
       one => "First argument",
       two => "Second argument"
    });
@@ -37,8 +35,7 @@ I hope you find this helpful.
 
 =over 3
 
-   sub named_params_with_defaults
-   {
+   sub named_params_with_defaults {
       my ( $arg ) = @_;
       # Use my ( $self, $arg ) = @_; if you are in object land.
       
@@ -57,8 +54,7 @@ I hope you find this helpful.
    
 =over 3
 
-   sub foo
-   {
+   sub foo {
       my $clause = 'This is a clause';
       my @param = qw/ one two thee /;
 
@@ -71,8 +67,7 @@ I hope you find this helpful.
    my $r = foo();
 
    say "clause = [$r->{clause}]";
-   for my $p ( @{ $r->{params} } )
-   {
+   for my $p ( @{ $r->{params} } ) {
       say "param = [$p]";
    }
 
@@ -99,16 +94,14 @@ Consider using object packages like Moose for larger projects, but by hand:
    use strict;
    use warnings;
 
-   sub new
-   {
+   sub new {
       my ( $class, $arg ) = @_;
       my $self = bless $arg, $class;
 
       return $self;
    }
 
-   sub dump_args
-   {
+   sub dump_args {
       my $self = shift;
       say 'arg foo is '. $self->{foo};
       say 'arg time is '. $self->{time};
@@ -180,20 +173,16 @@ To access Satellite and Cobbler API's use L<XMLRPC::Lite|http://search.cpan.org/
 
 =over 3
 
-  sub dump_systems
-  {
+  sub dump_systems {
     my $results;
     my $systems = $server->get_systems->result();
-    if ( $opts{hostname} )
-    {   
-        foreach my $s ( @{$systems} )
-        {
+    if ( $opts{hostname} ) {   
+        foreach my $s ( @{$systems} ) {
             push @{$results}, $s if ( $s->{hostname} eq $opts{hostname} );
         }
         return $results;
     }   
-    else
-    {   
+    else {   
         return $systems;
     }   
   }

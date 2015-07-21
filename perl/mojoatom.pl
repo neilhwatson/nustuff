@@ -13,8 +13,7 @@ use warnings;
 use feature 'say';
 use Mojo::UserAgent;
 
-sub atom_feed
-{
+sub atom_feed {
    my ( $arg ) = @_;
 
    # Set defaults
@@ -25,8 +24,7 @@ sub atom_feed
 
    my $ua = Mojo::UserAgent->new();
    my $feed = $ua->get( $url ) or warn "Get feed error with [$url]";
-   for my $e ( $feed->res->dom( 'entry' )->each )
-   {
+   for my $e ( $feed->res->dom( 'entry' )->each ) {
       my $title = $e->title->text;
       my $link  = $e->link->{href};
 
@@ -35,8 +33,7 @@ sub atom_feed
          \s+
          \( (Open|Closed|Merged|Rejected|Unconfirmed) \) # Status of bug
          /ix 
-      )
-      {
+      ) {
          push @events, $title .", ". $link;
       }
    }

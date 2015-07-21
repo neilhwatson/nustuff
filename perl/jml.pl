@@ -75,12 +75,10 @@ say "YAML format \n". $yml;
 
 say "Convert YAML back to Perl data and iterate over it.";
 my $y = Load $yml;
-for my $i ( @{ $y } )
-{
+for my $i ( @{ $y } ) {
    say "\n--- # Next document\n";
 
-   for my $a ( qw/ class command useshell module ifelapsed promisee / )
-   {
+   for my $a ( qw/ class command useshell module ifelapsed promisee / ) {
       say "$a => $i->{$a}";
    }
 }
