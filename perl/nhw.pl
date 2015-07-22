@@ -6,8 +6,8 @@ use feature qw/say/;
 use Getopt::Long qw/GetOptionsFromArray/;
 use Pod::Usage;
 use Test::More;
-use English;
-use Data::Dumper; # TODO safe to remove after testing.
+use English qw/ -no_match_vars/;
+use Data::Dumper;
 
 my $VERSION = 1;
 
@@ -48,13 +48,13 @@ sub _get_cli_args {
          say '$cli_arg_ref = '. Dumper( $cli_arg_ref ); exit
       },
       'help|?'   => sub {
-         pod2usage( -sections => ['OPTIONS'], -exitval => 0, -verbose => 99)
+         pod2usage( -sections => ['OPTIONS'],  -exitval => 0, -verbose => 99)
       },
       'usage'    => sub {
          pod2usage( -sections => ['SYNOPSIS'], -exitval => 0, -verbose => 99)
       },
       'examples' => sub {
-         pod2usage( -sections => 'EXAMPLES', -exitval => 0 , -verbose => 99)
+         pod2usage( -sections => 'EXAMPLES',   -exitval => 0, -verbose => 99)
       },
    );
 
