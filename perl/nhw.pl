@@ -6,25 +6,172 @@ use feature qw/say/;
 use Getopt::Long qw/GetOptionsFromArray/;
 use Pod::Usage;
 use Test::More;
+use English;
 use Data::Dumper; # TODO safe to remove after testing.
 
-my $VERSION = "0.01";
+my $VERSION = 1;
 
+#
+# Subs
+#
+sub _get_cli_args {
+
+   # Set default CLI args here. Getopts will override.
+   my $cli_arg_ref = {
+      myarg => 'default',
+   };
+
+   # To validate inputs
+   my $valid_arg_ref = {
+      myarg => {
+         constraint => sub {
+            my ( $val ) = @_; return ( $val =~ m/\A\w+\Z/ )
+         },
+         error      => 'myarg is invalid'
+      },
+      arg2 => {
+         constraint => qr/\A[0|1]\Z/,
+         error      => 'arg2 is invalid'
+      }
+   };
+
+   GetOptions(
+      $cli_arg_ref,
+      'myarg=s',
+      'arg2=i',
+
+      'version'  => sub { say $VERSION; exit                            },
+      'test'     => sub { _run_tests()                                  },
+      'man'      => sub { pod2usage( -verbose => 2, -exitval => 0 )     },
+
+      'dumpargs' => sub {
+         say '$cli_arg_ref = '. Dumper( $cli_arg_ref ); exit
+      },
+      'help|?'   => sub {
+         pod2usage( -sections => ['OPTIONS'], -exitval => 0, -verbose => 99)
+      },
+      'usage'    => sub {
+         pod2usage( -sections => ['SYNOPSIS'], -exitval => 0, -verbose => 99)
+      },
+      'examples' => sub {
+         pod2usage( -sections => 'EXAMPLES', -exitval => 0 , -verbose => 99)
+      },
+   );
+
+   usage({ msg => "No args given", exit => 1 }) unless $cli_arg_ref;
+
+   _validate_cli_args({
+         cli_inputs   => $cli_arg_ref,
+         valid_inputs => $valid_arg_ref
+   });
+
+   return $cli_arg_ref;
+}
+
+sub _validate_cli_args {
+   my ( $arg ) = @_;
+
+   my $cli         = $arg->{cli_inputs};
+   my $valid_input = $arg->{valid_inputs};
+   my $errors      = q{};
+
+   for my $arg ( keys %{ $cli }) {
+      if ( defined $valid_input->{$arg} ) {
+         my $constraint = $valid_input->{$arg}->{constraint};
+         my $error      = $valid_input->{$arg}->{error};
+         my $ref        = ref $constraint;
+
+         if ( $ref eq 'CODE' ) {
+            $errors
+               .= "\n" . $error unless ( ${constraint}->( $cli->{$arg} ) );
+         }
+         elsif ( $ref eq 'Regexp' ) {
+            $errors .= "\n" . $error unless ( $cli->{$arg} =~ $constraint );
+         }
+      }
+   }
+   pod2usage( -msg => $errors, -exitval => 2 ) if length $errors > 0;
+   return 1;
+}
+
+#
+# Testing
+#
+sub _run_tests {
+   my %tests = (
+      # Name test 't\d\d' to ensure order
+      t01 => {
+         name => \&_test_doc_help,
+         arg  => q{},
+      },
+      t02 => {
+         name => \&_test_doc_usage,
+         arg  => q{},
+      },
+      t03 => {
+         name => \&_test_doc_examples,
+         arg  => q{},
+      }
+   );
+
+   my $number_of_tests = keys %tests;
+
+   # Run tests in order
+   for my $test ( sort keys %tests ) {
+      $tests{$test}->{name}->( $tests{$test}->{arg} );
+   }
+   done_testing( $number_of_tests );
+   return;
+}
+
+sub _test_doc_help {
+   my $returned_text = qx/ $PROGRAM_NAME -? /;
+   like( $returned_text, qr/Options:.+test/ims
+      , "[$PROGRAM_NAME] -h, for help" );
+   return;
+}
+
+sub _test_doc_usage {
+   my $returned_text = qx/ $PROGRAM_NAME -u /;
+   like( $returned_text, qr/Usage.+usage/ims
+      , "[$PROGRAM_NAME] -u, for usage." );
+   return;
+}
+
+sub _test_doc_examples {
+   my $returned_text = qx/ $PROGRAM_NAME -e /;
+   like( $returned_text, qr/Examples:.+/ims
+      , "[$PROGRAM_NAME] -e, for examples." );
+   return;
+}
+
+#
+# Main matter
+#
+my $cli_arg_ref = _get_cli_args();
+
+#
+# POD
+#
 =head1 NAME
 
 nhw - A generic Perl script template
 
 =head1 SYNOPSIS
 
-nhw [-v|--version], [-h|-?|--help], [-t|--test], [-d|--dumpargs]
+nhw [-v|--version], [-h|-?|--help], [-u|--usage ], [-t|--test], [-d|--dumpargs]
 
-=head2 OPTIONS
+=head1 OPTIONS
 
 =over 4
 
 =item
 [-t|--test]
-Run test suite for developing this application
+Run test suite for developing this application.
+
+=item
+[-d|--dumpargs]
+Dump cli args to stdout for development testing.
 
 =back
 
@@ -59,145 +206,3 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 =cut
-
-#
-# Subs
-#
-sub _get_cli_args {
-   my @args = @_;
-
-   # Set default CLI args here. Getopts will override.
-   my %arg = (
-      myarg => 'default',
-   );
-
-   # To validate inputs
-   my %valid = (
-      myarg => {
-         constraint => sub { my ( $val ) = @_; return ( $val =~ m/\A\w+\Z/ ) },
-         error => 'myarg is invalid'
-      },
-      arg2 => {
-         constraint => qr/\A[0|1]\Z/,
-         error => 'arg2 is invalid'
-      }
-   );
-
-   GetOptionsFromArray (
-      \@args,
-      \%arg,
-      'help|?',
-      'version',
-      'examples',
-      'test',
-      'dumpargs',
-      'myarg=s',
-      'arg2=i',
-   )
-   or do {
-      usage( 'USAGE' );
-      exit 1;
-   };
-
-   _validate({ inputs => \%arg, valid => \%valid });
-
-   return \%arg;
-}
-
-sub _validate {
-   my ( $arg ) = @_;
-
-   my $inputs = $arg->{inputs};
-   my $valid  = $arg->{valid};
-   my $errors = '';
-
-   for my $k ( keys %{ $inputs }) {
-      if ( defined $valid->{$k} ) {
-         my $constraint = $valid->{$k}->{constraint};
-         my $error      = $valid->{$k}->{error};
-         my $ref = ref $constraint;
-
-         if ( $ref eq 'CODE' ) {
-            $errors .= "\n".$error unless ( ${constraint}->( $inputs->{$k} ) );
-         }
-         elsif ( $ref eq 'Regexp' ) {
-            $errors .= "\n".$error unless ( $inputs->{$k} =~ $constraint );
-         }
-      }
-   }
-   usage( $errors, 2  ) if length $errors > 0;
-   return 1;
-}
-
-sub usage {
-   my ( $msg, $exit ) = @_;
-
-   $exit = defined $exit ? $exit : 0;
-
-   my $section;
-   if ( $msg =~ m/\AEXAMPLES\Z/ ) {
-      $section = $msg;
-   }
-   else {
-      $section = "SYNOPSIS";
-   }
-   pod2usage(
-      -verbose  => 99,
-      -sections => "$section",
-      -msg      => $msg,
-      -exitval  => $exit
-   );
-   return;
-}
-
-#
-# Testing
-#
-sub _run_tests {
-   my %tests = (
-      # Name test 't\d\d' to ensure order
-      t01 => {
-         name => \&_test_doc_help,
-         arg  => '',
-      },
-      t02 => {
-         name => \&_test_doc_examples,
-         arg  => '',
-      }
-   );
-
-   my $number_of_tests = keys %tests;
-
-   # Run tests in order
-   for my $test ( sort keys %tests ) {
-      $tests{$test}->{name}->( $tests{$test}->{arg} );
-   }
-   done_testing( $number_of_tests );
-   return;
-}
-
-sub _test_doc_help {
-   my $help = qx/ $0 -? /;
-   ok( $help =~ qr/Usage:.*?Options:/ms,  "[$0] -h, for usage" );
-   return;
-}
-
-sub _test_doc_examples {
-   my $examples = qx/ $0 -e /;
-   ok( $examples =~ qr/EXAMPLES/, "[$0] -e, for usage examples." );
-   return;
-}
-
-#
-# Main matter
-#
-my $arg = _get_cli_args( @ARGV );
-
-# TODO arg validation here
-say '$arg = '. Dumper( $arg ) if ( $arg->{dumpargs} );
-
-# Perhaps a dispatch table?
-_run_tests()        if ( $arg->{test} );
-usage( 'HELP' )     if ( $arg->{help} );
-usage( 'EXAMPLES' ) if ( $arg->{examples} );
-say $VERSION        if ( $arg->{version} );

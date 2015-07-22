@@ -33,7 +33,7 @@ set number
 set expandtab
 set tw=0
 if v:version >= 703
-   set colorcolumn=80
+   set colorcolumn=78
 endif
 
 " autowrite buffer on suspend, buffer switch etc...
@@ -59,7 +59,7 @@ iab  hms   <c-r>=strftime("%H:%M:%S")<cr>
 " misc abbs
 iab CFE CFEngine
 
-au BufRead,BufNewFile */journal/*.txt set tw=80 et spell
+au BufRead,BufNewFile */journal/*.txt set tw=78 et spell
 " Add help tags
 :helptags ~/.vim/doc/
 let g:EnableCFE3KeywordAbbreviations=1
