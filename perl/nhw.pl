@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 use feature qw/say/;
-use Getopt::Long qw/GetOptionsFromArray/;
+use Getopt::Long;
 use Pod::Usage;
 use Test::More;
 use English qw/ -no_match_vars/;
@@ -21,7 +21,7 @@ sub _get_cli_args {
       myarg => 'default',
    };
 
-   # To validate inputs
+   # Define ways to valid your arguments using anonymous subs or regexes.
    my $valid_arg_ref = {
       myarg => {
          constraint => sub {
@@ -35,6 +35,7 @@ sub _get_cli_args {
       }
    };
 
+   # Read, process, and validate cli args
    GetOptions(
       $cli_arg_ref,
       'myarg=s',
@@ -58,8 +59,7 @@ sub _get_cli_args {
       },
    );
 
-   usage({ msg => "No args given", exit => 1 }) unless $cli_arg_ref;
-
+   # Futher, more complex cli arg validation
    _validate_cli_args({
          cli_inputs   => $cli_arg_ref,
          valid_inputs => $valid_arg_ref
@@ -69,28 +69,34 @@ sub _get_cli_args {
 }
 
 sub _validate_cli_args {
-   my ( $arg ) = @_;
-
+   my ( $arg )     = @_;
    my $cli         = $arg->{cli_inputs};
    my $valid_input = $arg->{valid_inputs};
    my $errors      = q{};
 
+   # Process cli args and test against the given contraint
    for my $arg ( keys %{ $cli }) {
       if ( defined $valid_input->{$arg} ) {
          my $constraint = $valid_input->{$arg}->{constraint};
          my $error      = $valid_input->{$arg}->{error};
          my $ref        = ref $constraint;
 
+         # Test when constraint is a code reference.
          if ( $ref eq 'CODE' ) {
             $errors
                .= "\n" . $error unless ( ${constraint}->( $cli->{$arg} ) );
          }
+
+         # Test when contraint is a regular expression.
          elsif ( $ref eq 'Regexp' ) {
             $errors .= "\n" . $error unless ( $cli->{$arg} =~ $constraint );
          }
       }
    }
+
+   # Report any invalid cli args 
    pod2usage( -msg => $errors, -exitval => 2 ) if length $errors > 0;
+
    return 1;
 }
 
@@ -98,7 +104,9 @@ sub _validate_cli_args {
 # Testing
 #
 sub _run_tests {
-   my %tests = (
+
+   # Define test subs and sub arguments.
+   my %test = (
       # Name test 't\d\d' to ensure order
       t01 => {
          name => \&_test_doc_help,
@@ -113,35 +121,51 @@ sub _run_tests {
          arg  => q{},
       }
    );
-
    my $number_of_tests = keys %tests;
 
    # Run tests in order
-   for my $test ( sort keys %tests ) {
-      $tests{$test}->{name}->( $tests{$test}->{arg} );
+   for my $next_test ( sort keys %test ) {
+      $test{$next_test}->{name}->( $test{$next_test}->{arg} );
    }
+
    done_testing( $number_of_tests );
+
    return;
 }
 
 sub _test_doc_help {
+
+   # Get command output
    my $returned_text = qx/ $PROGRAM_NAME -? /;
+
+   # Test command oupput
    like( $returned_text, qr/Options:.+test/ims
       , "[$PROGRAM_NAME] -h, for help" );
+
    return;
 }
 
 sub _test_doc_usage {
+   
+   # Get command output
    my $returned_text = qx/ $PROGRAM_NAME -u /;
+
+   # Test command oupput
    like( $returned_text, qr/Usage.+usage/ims
       , "[$PROGRAM_NAME] -u, for usage." );
+
    return;
 }
 
 sub _test_doc_examples {
+
+   # Get command output
    my $returned_text = qx/ $PROGRAM_NAME -e /;
+
+   # Test command oupput
    like( $returned_text, qr/Examples:.+/ims
       , "[$PROGRAM_NAME] -e, for examples." );
+
    return;
 }
 
@@ -150,6 +174,7 @@ sub _test_doc_examples {
 #
 my $cli_arg_ref = _get_cli_args();
 
+__END__
 #
 # POD
 #
