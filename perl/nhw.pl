@@ -121,7 +121,7 @@ sub _run_tests {
          arg  => q{},
       }
    );
-   my $number_of_tests = keys %tests;
+   my $number_of_tests = keys %test;
 
    # Run tests in order
    for my $next_test ( sort keys %test ) {
