@@ -8,7 +8,7 @@ use Pod::Usage;
 use Test::More;
 use English qw/ -no_match_vars/;
 use Data::Dumper;
-
+use Carp;
 my $VERSION = 1;
 
 #
@@ -18,31 +18,34 @@ sub _get_cli_args {
 
    # Set default CLI args here. Getopts will override.
    my $cli_arg_ref = {
-      myarg => 'default',
+      myarg => 'default', # Sample can be removed
    };
 
    # Define ways to valid your arguments using anonymous subs or regexes.
+   # These are samples that you can remove.
    my $valid_arg_ref = {
       myarg => {
          constraint => sub {
-            my ( $val ) = @_; return ( $val =~ m/\A\w+\Z/ )
+            my ( $val ) = @_; return ( $val =~ m/\A \w+ \z/xms )
          },
-         error      => 'myarg is invalid'
+         error      => 'Myarg must be a single word with no odd symbols.'
       },
       arg2 => {
-         constraint => qr/\A[0|1]\Z/,
-         error      => 'arg2 is invalid'
+         constraint => qr/\A [01] \z/xms,
+         error      => 'Arg2 can only be 0 or 1.'
       }
    };
 
    # Read, process, and validate cli args
    GetOptions(
       $cli_arg_ref,
+
+      # These two samples can be removed
       'myarg=s',
       'arg2=i',
 
       'version'  => sub { say $VERSION; exit                            },
-      'test'     => sub { _run_tests()                                  },
+      'test'     => sub { _run_tests(); exit                            },
       'man'      => sub { pod2usage( -verbose => 2, -exitval => 0 )     },
 
       'dumpargs' => sub {
@@ -84,7 +87,7 @@ sub _validate_cli_args {
          # Test when constraint is a code reference.
          if ( $ref eq 'CODE' ) {
             $errors
-               .= "\n" . $error unless ( ${constraint}->( $cli->{$arg} ) );
+            .= "\n" . $error unless ( ${constraint}->( $cli->{$arg} ) );
          }
 
          # Test when contraint is a regular expression.
@@ -95,7 +98,7 @@ sub _validate_cli_args {
    }
 
    # Report any invalid cli args 
-   pod2usage( -msg => $errors, -exitval => 2 ) if length $errors > 0;
+   pod2usage( -msg => 'Error '.$errors, -exitval => 2 ) if length $errors > 0;
 
    return 1;
 }
@@ -119,7 +122,17 @@ sub _run_tests {
       t03 => {
          name => \&_test_doc_examples,
          arg  => q{},
-      }
+      },
+
+      # These two samples can be removed
+      t04 => {
+         name => \&_test_cli_myarg_failure,
+         arg  => q{wrong arg},
+      },
+      t05 => {
+         name => \&_test_cli_arg2_failure,
+         arg  => 2,
+      },
    );
    my $number_of_tests = keys %test;
 
@@ -133,40 +146,68 @@ sub _run_tests {
    return;
 }
 
+# Test that program returns general help
 sub _test_doc_help {
 
    # Get command output
-   my $returned_text = qx/ $PROGRAM_NAME -? /;
+   my $returned_text = qx{ $PROGRAM_NAME -? };
 
    # Test command oupput
-   like( $returned_text, qr/Options:.+test/ims
+   like( $returned_text, qr{ Options: .+ test }xims
       , "[$PROGRAM_NAME] -h, for help" );
 
    return;
 }
 
+# Test that program returns usage
 sub _test_doc_usage {
    
    # Get command output
    my $returned_text = qx/ $PROGRAM_NAME -u /;
 
    # Test command oupput
-   like( $returned_text, qr/Usage.+usage/ims
+   like( $returned_text, qr{ Usage .+ usage }ixms
       , "[$PROGRAM_NAME] -u, for usage." );
 
    return;
 }
 
+# Test that examples documentation is returned
 sub _test_doc_examples {
 
    # Get command output
    my $returned_text = qx/ $PROGRAM_NAME -e /;
 
    # Test command oupput
-   like( $returned_text, qr/Examples:.+/ims
+   like( $returned_text, qr{ Examples: .+ }ixms
       , "[$PROGRAM_NAME] -e, for examples." );
 
    return;
+}
+
+# These to sample test subs can be remove.
+# Test error when cli arg myarg is wrong
+sub _test_cli_myarg_failure {
+   my $arg = shift;
+
+   # Get command output
+   my $returned_text = qx{ $PROGRAM_NAME -myarg '$arg' 2>&1 };
+
+   # Test command oupput
+   like( $returned_text, qr{ Error \s+ myarg \s+ must \s+ be }xmis,
+      'Error message myarg is invalid');
+}
+
+# Test error when cli arg myarg is wrong
+sub _test_cli_arg2_failure{
+   my $arg = shift;
+
+   # Get command output
+   my $returned_text = qx{ $PROGRAM_NAME -arg2 $arg 2>&1 };
+
+   # Test command oupput
+   like( $returned_text, qr{ Error \s+ arg2 \s+ can \s+ only \s+ be }xmis,
+      'Error message arg2 is invalid');
 }
 
 #
@@ -175,6 +216,7 @@ sub _test_doc_examples {
 my $cli_arg_ref = _get_cli_args();
 
 __END__
+
 #
 # POD
 #
