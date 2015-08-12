@@ -187,6 +187,20 @@ Consider using object packages like for larger projects, but by hand:
 
 =back
 
+=head2 Slurp a file the Perl 6 way
+
+=over 3
+
+   use Perl6::Slurp;
+
+   # For text content:
+   my $file_data = slurp '/etc/passwd';
+
+   # For binary:
+   my $file_data = slurp '/etc/passwd', { raw => 1 };
+
+=back
+
 =head2 Shell search and replace
 
 =over 3
