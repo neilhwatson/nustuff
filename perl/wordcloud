@@ -1,0 +1,383 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use feature qw/say/;
+use Getopt::Long;
+use Pod::Usage;
+use Test::More;
+use English qw/ -no_match_vars/;
+use Data::Dumper;
+use Carp;
+use Perl6::Slurp;
+use Image::WordCloud;
+my $VERSION = 1;
+
+#
+# Subs
+#
+sub _get_cli_args {
+
+   # Define ways to valid your arguments using anonymous subs or regexes.
+   # These are samples that you can remove.
+   my $valid_arg_ref = { 
+      file => {
+         constraint => sub {
+            my ( $file ) = @_; return ( -e $file )
+         },
+         error      => "File to parse does not exist.",
+      },
+   };
+
+   # Get standard options, that all progs should have, from reusable module
+   my $options = Std::Opts->new();
+   my $std_cli_arg_ref = $options->get_standard_args;
+
+   # Set default CLI args here. Getopts will override.
+   my $cli_arg_ref = { render => 'firefox' };
+
+   # Read, process, and validate cli args
+   GetOptions(
+      $cli_arg_ref,
+      %{ $std_cli_arg_ref },
+   );
+
+   # Last remaining arg must be the file to read
+   $cli_arg_ref->{file} = $ARGV[0];
+
+   # Futher, more complex cli arg validation
+   _validate_cli_args({
+         cli_inputs   => $cli_arg_ref,
+         valid_inputs => $valid_arg_ref
+   });
+
+   return $cli_arg_ref;
+}
+
+sub _validate_cli_args {
+   my ( $arg )     = @_;
+   my $cli         = $arg->{cli_inputs};
+   my $valid_input = $arg->{valid_inputs};
+   my $errors      = q{};
+
+   # Process cli args and test against the given contraint
+   for my $arg ( keys %{ $cli }) {
+      if ( defined $valid_input->{$arg} ) {
+         my $constraint = $valid_input->{$arg}->{constraint};
+         my $error      = $valid_input->{$arg}->{error};
+         my $ref        = ref $constraint;
+
+         # Test when constraint is a code reference.
+         if ( $ref eq 'CODE' ) {
+            $errors
+            .= "\n" . $error unless ( ${constraint}->( $cli->{$arg} ) );
+         }
+
+         # Test when contraint is a regular expression.
+         elsif ( $ref eq 'Regexp' ) {
+            $errors .= "\n" . $error unless ( $cli->{$arg} =~ $constraint );
+         }
+      }
+   }
+
+   # Report any invalid cli args 
+   pod2usage( -msg => 'Error '.$errors, -exitval => 2 ) if length $errors > 0;
+
+   return 1;
+}
+
+#
+# Testing
+#
+sub _run_tests {
+
+   # Define test subs and sub arguments.
+   my %test = (
+      # Name test 't\d\d' to ensure order
+      t01 => {
+         name => \&_test_doc_help,
+         arg  => q{},
+      },
+      t02 => {
+         name => \&_test_doc_usage,
+         arg  => q{},
+      },
+      t03 => {
+         name => \&_test_doc_examples,
+         arg  => q{},
+      },
+
+      # These two samples can be removed
+      t04 => {
+         name => \&_test_cli_file_does_not_exist,
+         arg  => q{/tmp/wouldcloud.txt},
+      },
+   );
+   my $number_of_tests = keys %test;
+
+   # Run tests in order
+   for my $next_test ( sort keys %test ) {
+      $test{$next_test}->{name}->( $test{$next_test}->{arg} );
+   }
+
+   done_testing( $number_of_tests );
+
+   return;
+}
+
+# Test that program returns general help
+sub _test_doc_help {
+
+   # Get command output
+   my $returned_text = qx{ $PROGRAM_NAME -? };
+
+   # Test command oupput
+   like( $returned_text, qr{ Options: .+ test }xims
+      , "[$PROGRAM_NAME] -h, for help" );
+
+   return;
+}
+
+# Test that program returns usage
+sub _test_doc_usage {
+   
+   # Get command output
+   my $returned_text = qx/ $PROGRAM_NAME -u /;
+
+   # Test command oupput
+   like( $returned_text, qr{ Usage .+ usage }ixms
+      , "[$PROGRAM_NAME] -u, for usage." );
+
+   return;
+}
+
+# Test that examples documentation is returned
+sub _test_doc_examples {
+
+   # Get command output
+   my $returned_text = qx/ $PROGRAM_NAME -e /;
+
+   # Test command oupput
+   like( $returned_text, qr{ Examples: .+ }ixms
+      , "[$PROGRAM_NAME] -e, for examples." );
+
+   return;
+}
+
+# These to sample test subs can be remove.
+# Test error when cli arg myarg is wrong
+sub _test_cli_file_does_not_exist{
+   my $arg = shift;
+
+   # Get command output
+   my $returned_text = qx{ $PROGRAM_NAME '$arg' 2>&1 };
+
+   # Test command oupput
+   like( $returned_text, qr{ File \s+ to \s+ parse \s+ does }xmis,
+      'Error message file does not exist');
+}
+
+#
+# Main matter
+#
+my $cli_arg_ref = _get_cli_args();
+
+# Create wordcloud data
+my $word_cloud = Image::WordCloud->new(
+   word_count => 20,
+   font_path  => '/usr/share/fonts/truetype/msttcorefonts/'
+);
+my $text = slurp $cli_arg_ref->{file};
+$word_cloud->words($text);
+my $gd = $word_cloud->cloud();
+
+# Make image
+my $image_file = "$cli_arg_ref->{file}.png";
+open( my $image, '>', $image_file ) or die
+   "Cannot open [$image_file], [$!]";
+binmode $image;
+print $image $gd->png();
+close( $image );
+
+# Display image file
+system( $cli_arg_ref->{render}, $image_file );
+
+#
+# POD
+#
+=head1 NAME
+
+Wordcloud - Create and display a wordcloud image.
+
+=head1 SYNOPSIS
+
+wordcloud [-v|--version], [-h|-?|--help], [-u|--usage ], [-t|--test], [-d|--dumpargs], [-r|--render <program>] <file>
+
+Generates a word cloud image from <file> and renders it to the given program, which defalts to Firefox.
+
+=head1 OPTIONS
+
+=over 4
+
+=item
+[-t|--test]
+Run test suite for developing this application.
+
+=item
+[-d|--dumpargs]
+Dump cli args to stdout for development testing.
+
+=item
+[-r|--render] <program>
+Program to render image.
+
+=back
+
+=head1 EXAMPLES
+
+=over 4
+
+=item
+Make word cloud from page.txt and render it Firefox.
+
+   wordcloud page.txt
+
+=item
+Make word cloud from page.txt and render it with display.
+
+   wordcloud -r display page-txt 
+
+=back
+
+=head1 AUTHOR
+
+Neil H. Watson, http://watson-wilson.ca, C<< <neil@watson-wilson.ca> >>
+
+=head1 LICENSE and COPYRIGHT
+
+The MIT License (MIT)
+
+Copyright (c) 2014 Neil H Watson
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+=cut
+
+#
+# Modules
+#
+package Std::Opts;
+
+use strict;
+use warnings;
+
+sub new {
+   my ( $class ) = @_;
+   return bless {}, $class;
+}
+
+sub get_standard_args {
+   my $self = shift;
+
+   my $std_cli_arg_ref = {
+      'version'  => sub { say $VERSION; exit                              },
+      'test'     => sub { main::_run_tests(); exit                        },
+      'man'      => sub { main::pod2usage( -verbose => 2, -exitval => 0 ) },
+
+      'dumpargs' => sub {
+         say '$cli_arg_ref = '. main::Dumper( $cli_arg_ref ); exit
+      },
+      'help|?'   => sub {
+         main::pod2usage( -sections => ['OPTIONS'],  -exitval => 0,
+            -verbose => 99)
+      },
+      'usage'    => sub {
+         main::pod2usage( -sections => ['SYNOPSIS'], -exitval => 0,
+            -verbose => 99)
+      },
+      'examples' => sub {
+         main::pod2usage( -sections => 'EXAMPLES',   -exitval => 0,
+            -verbose => 99)
+      },
+   };
+
+   return $std_cli_arg_ref;
+}
+
+=pod
+
+=head1 NAME
+
+Std::Opts - A module to hand standard cli options like man, help, usage, 
+version, and examples.
+
+=head1 SYNOPSIS
+
+Std::Opts contains standard CLI options that all your programs and scripts
+should contain. In a corporate environment you might separate this module
+and install it properly. You could also add to is or extend it with sub 
+modules.
+
+Your program will require Getop::long, Data::Dumper, and Pod::Usage. 
+
+   my $options = Std::Opts->new();
+   my $std_cli_arg_ref = $options->get_standard_args;
+
+   # Read, process, and validate cli args
+   GetOptions(
+      $cli_arg_ref,
+      %{ $std_cli_arg_ref },
+
+      # Custom args for your program here
+      'myarg=s',
+      'arg2=i',
+
+   );
+
+=head1 AUTHOR
+
+Neil H. Watson, http://watson-wilson.ca, C<< <neil@watson-wilson.ca> >>
+
+=head1 LICENSE and COPYRIGHT
+
+The MIT License (MIT)
+
+Copyright (c) 2014 Neil H Watson
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+=cut
+1;

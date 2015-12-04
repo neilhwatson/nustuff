@@ -60,6 +60,7 @@ iab  hms   <c-r>=strftime("%H:%M:%S")<cr>
 iab CFE CFEngine
 
 au BufRead,BufNewFile */journal/*.txt set tw=78 et spell
+au BufRead,BufNewFile *.md set tabstop=4 shiftwidth=4
 " Add help tags
 :helptags ~/.vim/doc/
 let g:EnableCFE3KeywordAbbreviations=1
