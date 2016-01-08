@@ -1,0 +1,15 @@
+---
+- hosts: foo.example.com
+  vars:
+     html_page: /usr/share/nginx/html/index.html
+
+  tasks:
+     - name: install nginx
+       yum: name=nginx state=present
+     - name: copy index.html
+       copy: src=/home/neil/src/mysite/index.html dest={{ html_page }}
+     - name: promise index.html perms
+       file: path={{ html_page }} mode=0644
+     - name: start nginx
+       service: name=nginx state=started
+
