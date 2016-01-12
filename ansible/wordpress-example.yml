@@ -1,0 +1,30 @@
+---
+- hosts: wp.example.com
+
+  tasks:
+     - name: install httpd
+       yum: name=httpd state=present
+     - name: install php
+       yum: name=php state=present
+     - name: install mysql
+       yum: name=mysql state=present
+     - name: install mysql-server
+       yum: name=mysql-server state=present
+     - name: install MySQL-python27
+       yum: name=MySQL-python27 state=present
+
+     - name: start httpd
+       service: name=httpd state=started
+     - name: start mysqld
+       service: name=mysqld state=started
+
+     - name: include db credentials
+       include_vars: dbcreds.yml
+     - name: create mysqldb
+       mysql_db: name={{ mysql.database }} state=present
+     - name: create mysql user and grant access
+       mysql_user: name={{ mysql.username }} password={{ mysql.password }} priv={{ mysql.database }}.*:ALL,GRANT host=localhost state=present
+
+     - name: get wordpress
+       get_url: url=https://wordpress.org/latest.tar.gz dest=/usr/local
+

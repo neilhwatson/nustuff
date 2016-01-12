@@ -1,0 +1,5 @@
+---
+   mysql:
+      database: wordpress
+      username: wordpress
+      password: wordpress99
