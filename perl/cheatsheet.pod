@@ -201,6 +201,19 @@ Consider using object packages like for larger projects, but by hand:
 
 =back
 
+=head2 Read from stdin
+
+Foreach will read in the whole file, consuming ram, but while
+consumes the file line by line.
+
+=over3
+
+   while ( my $line = <> ) {
+      chomp line;
+      ....
+
+=back
+
 =head2 Shell search and replace
 
 =over 3
