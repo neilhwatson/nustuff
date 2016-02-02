@@ -222,6 +222,14 @@ consumes the file line by line.
 
 =back
 
+=head2 Remove DOS format carriage return characters.
+
+=over 3
+
+   perl -pi -e 's/\r\n/\n/g' input.file
+
+=back
+
 =head2 Search and replace, keep original and assign change to new variable.
 
 =over 3
