@@ -256,6 +256,34 @@ consumes the file line by line.
 
 =back
 
+=head2 Checking the return of a system call
+
+=over 3
+
+   use POSIX qw/ WIFEXITED /;
+   use Test::More;
+   use feature 'say';
+
+   sub return_false {
+      return WIFEXITED( (system "/bin/false" ) >> 8 );
+   }
+
+   sub return_true {
+      return WIFEXITED( (system "/bin/true" ) >> 8 );
+   }
+
+   my $ret = return_false();
+   say "returned [$ret]";
+   ok( ! return_false(), 'This should return false' );
+
+   $ret = return_true();
+   say "returned [$ret]";
+   ok( return_true(),    'This should return true' );
+
+   done_testing;
+
+=back
+
 =head2 Repeat operator
 
 =over 3
