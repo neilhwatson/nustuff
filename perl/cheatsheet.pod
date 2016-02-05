@@ -206,7 +206,7 @@ Consider using object packages like for larger projects, but by hand:
 Foreach will read in the whole file, consuming ram, but while
 consumes the file line by line.
 
-=over3
+=over 3
 
    while ( my $line = <> ) {
       chomp line;
