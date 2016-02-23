@@ -5,7 +5,9 @@
 Can't remember how to do that thing in Perl? Neither can I, so I write it down.
 I hope you find this helpful.
 
-=head2 Named parameters to subroutines.
+=head2 Subroutines
+
+=head3 Named parameters to subroutines.
 
 =over 3
 
@@ -50,7 +52,7 @@ I hope you find this helpful.
 
 =back
 
-=head2 Return named params from a subroutine
+=head3 Return named params from a subroutine
    
 =over 3
 
@@ -73,7 +75,9 @@ I hope you find this helpful.
 
 =back
 
-=head2 Making an object
+=head2 Objects
+
+=head3 Making an object
 
 Consider using object packages like Moo for larger projects, but by hand:
 
@@ -112,7 +116,7 @@ Consider using object packages like Moo for larger projects, but by hand:
 
 =back
 
-=head2 Making an inside out object
+=head3 Making an inside out object
 
 Consider using object packages like for larger projects, but by hand:
 
@@ -187,7 +191,11 @@ Consider using object packages like for larger projects, but by hand:
 
 =back
 
-=head2 Slurp a file the Perl 6 way
+Or use Class::InsideOut.
+
+=head2 Input Output
+
+=head3 Slurp a file the Perl 6 way
 
 =over 3
 
@@ -201,7 +209,7 @@ Consider using object packages like for larger projects, but by hand:
 
 =back
 
-=head2 Read from stdin
+=head3 Read from stdin
 
 Foreach will read in the whole file, consuming ram, but while
 consumes the file line by line.
@@ -214,7 +222,9 @@ consumes the file line by line.
 
 =back
 
-=head2 Shell search and replace
+=head2 In the shell
+
+=head3 Shell search and replace
 
 =over 3
 
@@ -222,7 +232,7 @@ consumes the file line by line.
 
 =back
 
-=head2 Remove DOS format carriage return characters.
+=head3 Remove DOS format carriage return characters.
 
 =over 3
 
@@ -230,7 +240,9 @@ consumes the file line by line.
 
 =back
 
-=head2 Search and replace, keep original and assign change to new variable.
+=head2 Matching and search and replace
+
+=head3 Search and replace, keep original and assign change to new variable.
 
 =over 3
 
@@ -238,7 +250,7 @@ consumes the file line by line.
 
 =back
 
-=head2 Match and store match in a single line
+=head3 Match and store match in a single line
 
 =over 3 
 
@@ -246,7 +258,9 @@ consumes the file line by line.
 
 =back
 
-=head2 List available modules
+=head2 Debugging
+
+=head3 List available modules
 
 =over 3
 
@@ -256,7 +270,23 @@ consumes the file line by line.
 
 =back
 
-=head2 Checking the return of a system call
+=head3 Deparse Perl code
+
+Useful for seeing how Perl sees your code.
+
+=over 3
+
+   perl -MO=Deparse,-p -e \
+      'mkdir "foo" unless -e "foo" or die "Cannot create foo: $!"'
+
+   (((-e 'foo') or die("Cannot create foo: $!")) or mkdir('foo'));
+   -e syntax OK
+
+=back
+
+=head2 Shelling out
+
+=head3 Checking the return of a system call
 
 =over 3
 
