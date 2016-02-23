@@ -191,7 +191,7 @@ Consider using object packages like for larger projects, but by hand:
 
 =back
 
-Or use Class::InsideOut.
+Or use L<Class::InsideOut|https://metacpan.org/pod/Class::InsideOut>
 
 =head2 Input Output
 
