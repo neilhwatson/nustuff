@@ -44,4 +44,8 @@
        (*[!0-9]*|'') error "--num [$num] is not a number"
     esac
 
+## Schedule a command
+
+    echo 'mycommand -w args'|at now + 5 minutes
+
 
