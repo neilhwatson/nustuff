@@ -209,6 +209,17 @@ Or use L<Class::InsideOut|https://metacpan.org/pod/Class::InsideOut>
 
 =back
 
+=head3 Slurp a file the old way
+
+=over 3
+
+   open( my $fh, '<', '/etc/passwd' )
+      or die "Cannot open passwd [$!]";
+   my $file_data = do { local $/; <$fh> };
+   close $fh;
+
+=back
+
 =head3 Read from stdin
 
 Foreach will read in the whole file, consuming ram, but while
@@ -219,6 +230,20 @@ consumes the file line by line.
    while ( my $line = <> ) {
       chomp line;
       ....
+
+=back
+
+=head3 Slurp from stdout of a command
+
+=over 3
+
+   $results = qx{ ls -l };
+
+   OR
+
+   open( my $fh, '-|', 'ls -l' ) or die "Cannot open ls [$!]";
+   my $results = do { local $/; <$fh> };
+   close $fh;
 
 =back
 
