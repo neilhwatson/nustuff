@@ -1,5 +1,14 @@
 #!/usr/bin/env perl
 
+=pod
+
+=head1 SYNOPSIS
+
+This desmonstrates a modulino, a script that runs like a module, allowing for
+separate testing scripts.
+
+=cut
+
 package app;
 
 use strict;
@@ -21,7 +30,7 @@ sub run{
 GetOptions(
 );
 
-# Main matter
+# Main matter unless this module was called from another program.
 run() unless caller;
 
 1;

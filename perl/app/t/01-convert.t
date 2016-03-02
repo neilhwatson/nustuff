@@ -2,6 +2,8 @@
 
 use strict;
 use warnings;
+
+# Place app's subs in the app:: namespace.
 require app;
 
 use Test::More tests => 1;
