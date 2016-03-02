@@ -1,5 +1,14 @@
 #!/usr/bin/env perl
 
+=pod
+
+=head1 SYNOPSIS
+
+This is a test script can tests parts of the app.pm modulino. You can run
+it stand alone or using prove.
+
+=cut
+
 use strict;
 use warnings;
 
