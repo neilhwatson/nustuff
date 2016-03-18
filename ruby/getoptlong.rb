@@ -1,5 +1,4 @@
-#!/usr/bin/ruby -w
-# Use -w for warnings
+#!/usr/bin/env ruby
 
 # Fancy CLI arg parser
 require 'optparse'
@@ -27,7 +26,7 @@ def _get_cli_args
          args[:required] = r
       end
 
-		opts.on("-h", "--help", "Prints this help") do
+		opts.on("-?", "-h", "--help", "Prints this help") do
 			puts opts
 			exit
 		end
