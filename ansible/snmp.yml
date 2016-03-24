@@ -1,0 +1,26 @@
+---
+- hosts: your_servers
+  remote_user: neil
+  become: yes
+  become_user: root
+
+  vars:
+
+     snmpd_conf: /etc/snmp/snmpd.conf
+
+  tasks:
+
+     - package: name=net-snmp state=present
+
+     - copy: src=snmpd.conf dest={{ snmpd_conf }}
+       notify: restart snmpd
+
+     - file: path={{ snmpd_conf }} owner=root group=root mode=600
+
+     - service: name=snmpd enabled=yes state=started
+
+  handlers:
+
+     - name: restart snmpd
+       service: name=snmpd state=restarted
+
