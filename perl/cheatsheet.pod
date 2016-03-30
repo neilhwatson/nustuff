@@ -351,6 +351,16 @@ Useful for seeing how Perl sees your code.
 
 Consult CPAN's L<Task::Kensho|http://search.cpan.org/~ether/Task-Kensho-0.38/lib/Task/Kensho.pm>
 
+=head2 Markdown
+
+=head3 Quicky test your markdown
+
+=over 3
+
+   perl -MText::Markdown -E'say Text::Markdown->new->markdown( join "", <> )' index.md
+
+=back
+
 =head2 Satellite snippets, including Cobbler
 
 To access Satellite and Cobbler API's use L<XMLRPC::Lite|http://search.cpan.org/~phred/XMLRPC-Lite-0.717/lib/XMLRPC/Lite.pm>
