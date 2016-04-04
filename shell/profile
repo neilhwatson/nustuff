@@ -1,0 +1,1 @@
+alias sshome='ssh -t oort.watson-wilson.ca ssh -t ettin tmux'
