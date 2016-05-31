@@ -27,3 +27,7 @@ require 'my_mod'
 Documentation
 
 POD vs Rdoc ?
+
+Error handling
+die "some error"
+raise "some error"
