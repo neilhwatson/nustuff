@@ -1,0 +1,19 @@
+---
+
+- hosts: localhost
+  vars:
+   - feed:  "https://api.github.com/repos"
+   - owner: "cfengine"
+   - repo:  "core"
+
+  tasks:
+    - uri: url="{{ feed }}/{{ owner }}/{{ repo }}/events" return-content=yes
+      register: events 
+
+    - debug: msg="{{ events.json.0 }}"
+
+    - debug: msg="Success retrieved second event"
+      when: events.json.1 is defined
+
+
+
