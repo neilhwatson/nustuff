@@ -7,6 +7,8 @@
 This is a test script can tests parts of the app.pm modulino. You can run
 it stand alone or using prove.
 
+In this test we test only the convert subroutine.
+
 =cut
 
 use strict;
