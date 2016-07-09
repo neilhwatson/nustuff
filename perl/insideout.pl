@@ -50,7 +50,7 @@ my $person = My::Person->new({
 
 say 'Name is ', $person->given_name;
 
-# Now allowed
+# These are not allowed
 # $person->surname( 'Crane' );
 # $person->salary = 20000;
 
