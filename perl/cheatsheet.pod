@@ -5,6 +5,94 @@
 Can't remember how to do that thing in Perl? Neither can I, so I write it down.
 I hope you find this helpful.
 
+=head2 Table of contents
+
+=over
+
+=item L</Subroutines>
+
+=item L</Named parameters to subroutines.>
+
+=item L</With default values>
+
+=item L</Return named params from a subroutine>
+
+=item L</Objects>
+
+=item L</Making an object>
+
+=item L</Making an inside out object>
+
+=item L</Input Output>
+
+=item L</Slurp a file the Perl 6 way>
+
+=item L</Slurp a file the old way>
+
+=item L</Read from stdin>
+
+=item L</Slurp from stdout of a command>
+
+=item L</In the shell>
+
+=item L</Shell search and replace>
+
+=item L</Remove DOS format carriage return characters.>
+
+=item L</Matching and search and replace>
+
+=item L</Search and replace, keep original and assign change to new variable.>
+
+=item L</Match and store match in a single line>
+
+=item L</Debugging>
+
+=item L</List available modules>
+
+=item L</Deparse Perl code>
+
+=item L</Shelling out>
+
+=item L</Checking the return of a system call>
+
+=item L</Repeat operator>
+
+=item L</What module should I use?>
+
+=item L</Markdown>
+
+=item L</Quicky test your markdown>
+
+=item L</Satellite snippets, including Cobbler>
+
+=item L</Connect to Cobbler API>
+
+=item L</Dump Cobbler systems>
+
+=item L</Create Cobbler system>
+
+=item L</Update Cobbler system>
+
+=item L</How to purge a Cobbler system>
+
+=item L</Delete Cobbler system>
+
+=item L</Connect to Satellite API>
+
+=item L</List Satellite systems>
+
+=item L</Access date from systems>
+
+=item L</Delete Satellite systems>
+
+=item L</Time and dates>
+
+=item L</Difference or two date stamps in days>
+
+=item L</Licence>
+
+=back
+
 =head2 Subroutines
 
 =head3 Named parameters to subroutines.

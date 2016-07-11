@@ -8,6 +8,7 @@ use feature qw{ say };
 use Pod::Usage;
 use Getopt::Long qw{ GetOptionsFromArray };
 use Data::Dumper;
+use Carp;
 use Params::Validate qw{ :all };
 
 my $VERSION = 1;
@@ -23,9 +24,8 @@ sub convert{
    return $val;
 }
 
+# Provide standard cli args that any program should have.
 sub _get_standard_args {
-
-   # These are standard args that any program should have.
    
    my $std_cli_arg_ref = {
       'version'  => sub { say $VERSION; exit                        },
@@ -62,15 +62,16 @@ sub _get_cli_args {
 
       # Custom args for your program here
 
-   ) or die "error [$!]";
+   ) or croak "error [$!]";
 
    return \%cli_arg;
 }
 
 sub _validate_cli_args {
+   my @args = @_;
    
    validate(
-      @_, {
+      @args, {
 
          # This test is for demonstration purposes
          # Validate the cli arg '--mytest <some_string>'
@@ -86,25 +87,28 @@ sub _validate_cli_args {
    return;
 }
 
+#
+# Main matter unless this module was called from another program.
+#
+
 sub run{
 
-   # Process cli args
+   # Get cli args
    $CLI_ARG_REF = _get_cli_args( @ARGV );
 
    # Validate cli args
    _validate_cli_args( $CLI_ARG_REF );
+
+   return;
 }
 
-#
-# Main matter unless this module was called from another program.
-#
 run() unless caller;
 
 =pod
 
 =head1 SYNOPSIS
 
-This desmonstrates a modulino, a script that runs like a module, allowing for
+This demonstrates a modulino, a script that runs like a module, allowing for
 separate testing scripts.
 
 =head1 OPTIONS
