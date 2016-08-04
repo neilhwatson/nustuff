@@ -26,7 +26,7 @@
 
 "/home/neil/firefox/firefox"
     F1
-"emacs ~/neil/docs/nhw.org"
+"emacs ~/calendar/nhw.org"
 	F2
 "pidgin"
     F3
@@ -37,10 +37,7 @@
 "xterm" 
     F7
 "gvim"
-    #F9
-"gkrellm"
-    F11
-=======
+    F8
 #"vncviewer 192.168.0.3"
 #    F10
 "dmenu_run"
