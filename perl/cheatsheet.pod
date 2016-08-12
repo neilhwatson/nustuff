@@ -437,7 +437,7 @@ Useful for seeing how Perl sees your code.
 
 =head2 What module should I use?
 
-Consult CPAN's L<Task::Kensho|http://search.cpan.org/~ether/Task-Kensho-0.38/lib/Task/Kensho.pm>
+Consult CPAN's L<Task::Kensho|https://metacpan.org/pod/Task::Kensho>
 
 =head2 Markdown
 
