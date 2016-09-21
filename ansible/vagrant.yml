@@ -1,0 +1,14 @@
+---
+# Stub for vagrant provisioning. Put this in your Vagrant file:
+#   config.vm.provision "ansible" do |ansible|
+#      ansible.verbose = 'v'
+#      ansible.playbook = "vagrant.yml"
+#   end
+
+- hosts: all
+  remote_user: vagrant
+  become: yes
+  become_user: root
+
+
+  tasks:
