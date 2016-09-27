@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# SYNOPSIS
+#
+# starter <app to start>
+#
+# I see a strange bug in using 'fn <function key' to start apps using
+# xbindkeys. Instead of starting once an large number will start, sometimes
+# crashing the host. This script esnures that multiple instances are not
+# started.
+
+PROGRAM=starter
+APP_TO_START=$@
+PROCESS_COUNT_LIMIT=3
+MESSAGE=\
+"$PROGRAM 'more than $PROCESS_COUNT_LIMIT $APP_TO_START already running'"
+
+if [ 0$(pgrep -cu $USERNAME $APP_TO_START) -gt $PROCESS_COUNT_LIMIT  ]
+then
+
+   if [ -e $(which notify-send) ]
+   then
+      eval notify-send -u critical $MESSAGE
+         
+   else
+      echo "$MESSAGE"
+   fi
+   exit 1
+else
+    nohup $APP_TO_START >/dev/null 2>&1 & 
+fi
+
+exit $?
