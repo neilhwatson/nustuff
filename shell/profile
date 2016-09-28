@@ -1,1 +1,29 @@
+export PATH=~/bin:$PATH
+
+case $- in
+   *i*)
+      eval $(keychain --quiet --eval --agents ssh id_rsa nextpw)
+      ;;
+esac
+
+alias apgen='apg -m 15 -M CSN -n 1'
+alias bme='sqlite3 places.sqlite .dump moz_bookmarks'
+alias bmi='sqlite3 places.sqlite "drop table moz_bookmarks"; sqlite3 places.sqlite'
+alias bzflag='bzflag -window -geometry 1280x1024'
+alias ctmux='LANG=C tmux'
+alias dir='dir --color=auto'
+alias draftsight='/opt/dassault-systemes/DraftSight/Linux/DraftSight'
+alias draftsite='/opt/dassault-systemes/DraftSight/Linux/DraftSight'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias grep='grep --color=auto'
+alias journal='vim ~/neil/docs/journal/$(date +%Y).txt'
+alias ls='ls --color=auto'
+alias lshort='kpdf /usr/share/doc/texlive-doc/english/lshort-english/lshort.pdf'
 alias sshome='ssh -t oort.watson-wilson.ca ssh -t ettin tmux'
+alias tvnc='vncviewer -compresslevel 9 -quality 5'
+alias vdir='vdir --color=auto'
+alias vm='virsh --connect qemu:///system'
+alias vnc='vncviewer -compresslevel 3 -quality 8'
+alias update_calendar="cd ~/calendar; git commit -am 'update' \
+   && git push origin master; cd \$OLDPWD"
