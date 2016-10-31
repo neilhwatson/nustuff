@@ -15,8 +15,6 @@ PROCESS_COUNT_LIMIT=1
 MESSAGE=\
 "$PROGRAM 'more than $PROCESS_COUNT_LIMIT $APP_TO_START already running'"
 
-sleep 1
-
 case $APP_TO_START in
 
    xterm)
@@ -38,6 +36,7 @@ then
    exit 1
 else
     nohup $APP_TO_START >/dev/null 2>&1 & 
+    sleep 2
 fi
 
 exit $?
