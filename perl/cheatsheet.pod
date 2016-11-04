@@ -341,7 +341,11 @@ consumes the file line by line.
 
 =over 3
 
-   find /path -name "*.*" -exec perl -pi -e 's///g' {} \;
+   perl -pi -e 's///g' <file>
+
+   # Treat file as one string and match over multiple lines
+
+   perl -pi -0 -e 's///msg' <file>
 
 =back
 

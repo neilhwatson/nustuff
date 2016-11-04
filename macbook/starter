@@ -20,6 +20,9 @@ case $APP_TO_START in
    xterm)
       PROCESS_COUNT_LIMIT=6
       ;;
+   gnome-terminal)
+      PROCESS_COUNT_LIMIT=6
+      ;;
 
 esac
 
