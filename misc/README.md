@@ -1,6 +1,6 @@
 ## Miscellaneous things
 
-### Check whether last [Travis-ci](http://travis-ci.com) built passed or failed.
+### Check whether last [Travis-ci](http://travis-ci.com) build passed or failed.
 
     curl -s https://api.travis-ci.org/repos/<username)/<repo>/builds \
         |jq .[0].result
