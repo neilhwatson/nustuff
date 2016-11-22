@@ -1,4 +1,4 @@
-## Miscellenaeous things
+## Miscellaneous things
 
 ### Check whether last [Travis-ci](http://travis-ci.com) built passed or failed.
 
