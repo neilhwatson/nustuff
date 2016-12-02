@@ -20,9 +20,11 @@
 " OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 " SOFTWARE.
 
+set cursorline
 set history=50
 set ruler
 set tabstop=3
+set softtabstop=3
 set shiftwidth=3
 set smartindent
 set autoindent
@@ -61,8 +63,11 @@ iab CFE CFEngine
 
 au BufRead,BufNewFile */journal/*.txt set tw=78 et spell
 au BufRead,BufNewFile *.md set tabstop=4 shiftwidth=4
+au BufRead,BufNewFile *.markdown set tabstop=4 shiftwidth=4
+au BufRead,BufNewFile *.yml set softtabstop=2 tabstop=2 shiftwidth=2
+
 " Add help tags
-:helptags ~/.vim/doc/
+":helptags ~/.vim/doc/
 let g:EnableCFE3KeywordAbbreviations=1
 
 "===================================
