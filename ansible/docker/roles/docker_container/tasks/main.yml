@@ -1,0 +1,24 @@
+---
+- name: image build {{ container.name }}
+  command: "docker build . -t {{ container.name }}"
+  args:
+    chdir: "{{ container.dest }}"
+
+- name: test if container {{ container.name }} exists
+  command: "docker ps -a |awk '{ print $7 }'|grep -q {{ container.name }}"
+  ignore_errors: true
+  register: container_found
+
+- block:
+
+  - name: stop existing old {{ container.name }} before starting with new image
+    command: "docker stop {{ container.name }}"
+
+  - name: remove old {{ container.name }} stopped container
+    command: "docker rm {{ container.name }}"
+
+  when: container_found|succeeded
+
+- name: start new {{ container.name }} with newly build image
+  command: "docker run {{ container.caps }} --restart=unless-stopped --publish {{ container.publish }} --detach --name {{ container.name }} -t {{ container.name }}"
+

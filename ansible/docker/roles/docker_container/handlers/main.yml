@@ -1,0 +1,19 @@
+---
+- name: force image build
+  docker_image:
+    # Force because it won't rebuild if sources change.
+    force:     yes
+    path:     "{{ image.path }}"
+    name:     "{{ image.name }}"
+    state:    "{{ image.state }}"
+  notify: recreate container
+
+- name: recreate container
+  docker_container:
+    name:            "{{ container.name }}"
+    image:           "{{ container.name }}"
+    published_ports: "{{ container.published_ports }}"
+    state:           "{{ container.state }}"
+    recreate:        true
+
+

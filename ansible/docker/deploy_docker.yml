@@ -1,0 +1,61 @@
+---
+#- hosts: web
+#remote_user: neil
+
+# vagrant version
+- hosts: all
+  remote_user: vagrant
+  become: yes
+  become_user: root
+
+  vars:
+
+    base_dir: /home/neil/src/
+# Repo where docker containers are stored
+    
+    # TODO two roles:
+    # 1. Check containers and containers
+    # 2. Force containers and containers
+# Docker containers:
+#    container_proxy:
+#      repo: github.com/neilhwatson/proxy-watson-wilson.ca
+#      dest: "{{ base_dir }}/proxy-watson-wilson.ca"
+#      caps: "--cap-drop=all --cap-add=chown --cap-add=net_bind_service --cap-add=setgid"
+#      publish: 80:80
+#      name: my_proxy
+
+    container_www_watson_wilson_ca:
+      repo: github.com/neilhwatson/www.watson-wilson.ca
+      dest: "{{ base_dir }}/www.watson-wilson.ca"
+      caps: "--cap-drop=all --cap-add=chown --cap-add=net_bind_service --cap-add=setgid --cap-add=setuid"
+      publish: 8000:80
+      name: www.watson-wilson.ca
+
+    container_thewaves:
+      repo: github.com/neilhwatson/thewaves
+      dest: "{{ base_dir }}/thewaves"
+      caps: "--cap-drop=all --cap-add=net_bind_service"
+      publish: 3000:3000
+      name: thewaves
+      
+  roles:
+
+    - role: docker
+#    - role: git-repo
+#      repo: "{{ container_proxy }}"
+
+    - role: git-repo
+      repo: "{{ container_www_watson_wilson_ca}}"
+
+    - role: git-repo
+      repo: "{{ container_thewaves }}"
+
+#    - role: docker_container
+#      container: "{{ container_proxy }}"
+
+    - role: docker_container
+      container: "{{ container_www_watson_wilson_ca }}"
+
+    - role: docker_container
+      container: "{{ container_thewaves }}"
+

@@ -1,0 +1,3 @@
+---
+  - debug:
+      msg: "state: {{image.state}}, path: {{image.path}}"

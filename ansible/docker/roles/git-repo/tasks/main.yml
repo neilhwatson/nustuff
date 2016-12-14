@@ -1,0 +1,6 @@
+---
+- name: clone or update git repo {{ repo.repo }}
+  git:
+    repo: "https://{{ repo.repo}}"
+    dest: "{{ repo.dest }}"
+    force: yes
