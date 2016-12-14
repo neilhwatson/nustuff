@@ -23,7 +23,9 @@ case $APP_TO_START in
    gnome-terminal)
       PROCESS_COUNT_LIMIT=6
       ;;
-
+   firefox)
+      sleep 3
+      ;;
 esac
 
 if [ 0$(pgrep -cu $USERNAME $APP_TO_START) -ge $PROCESS_COUNT_LIMIT  ]
