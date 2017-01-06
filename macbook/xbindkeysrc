@@ -25,20 +25,20 @@
 #keystate_capslock = enable
 
 ## For a macbook
-"starter firefox"
-    F1
-"starter emacs ~/calendar/nhw.org"
-	 F2
-"starter pidgin"
-    F3
-"starter xterm" 
-    F7
-"starter gvim"
-    F8
+"~/bin/starter /home/neil/firefox/firefox"
+    Control + 1
+"~/bin/starter emacs ~/calendar/nhw.org"
+	 Control + 2
+"~/bin/starter pidgin"
+    Control + 3
+"~/bin/starter gnome-terminal" 
+    Control + 7
+"~/bin/starter gvim"
+    Control + 8
 #"vncviewer 192.168.0.3"
 #    F10
 "dmenu_run"
-    F12
+    Control + 0
 "sh -c '/bin/sleep 2;  xscreensaver-command -lock'"
     Control+Alt + l 
 "feh --bg-center $(find ~/wallpapers/ -type f|shuf|head -n1)"
