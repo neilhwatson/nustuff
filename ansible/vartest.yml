@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  # any_errors_fatal: true # <<< use to abort playbook on any errors
+  vars:
+    ip1: ""
+    ip2: 10.120.8.30
+
+  tasks:
+
+    - name: Pass because ip2 is something
+      fail: msg="Pass {{ ip2 }} is not blank"
+      when: ip2 is not defined and ip2 != ""
+
+    - name: Fail because ip1 is blank string
+      fail: msg="Fail {{ ip1 }} is blank"
+      when: ip1 is not defined or ip1 == ""
