@@ -47,6 +47,7 @@ colorscheme slate
 
 "for scp
 set nocp
+let g:netrw_silent=1
 if v:version >= 600
     filetype plugin indent on
 endif
