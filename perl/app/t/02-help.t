@@ -8,6 +8,7 @@ This tests app's arge.
 
 =cut
 
+use lib '.';
 use strict;
 use warnings;
 

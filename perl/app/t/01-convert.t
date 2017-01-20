@@ -11,6 +11,7 @@ In this test we test only the convert subroutine.
 
 =cut
 
+use lib '.';
 use strict;
 use warnings;
 

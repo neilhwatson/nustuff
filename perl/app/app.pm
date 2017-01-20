@@ -12,7 +12,7 @@ use Carp;
 use Params::Validate qw{ :all };
 
 my $VERSION = 1;
-my ( $CLI_ARG_REF );
+my ( $ARG );
 
 #
 # Subs
@@ -27,7 +27,7 @@ sub convert{
 # Provide standard cli args that any program should have.
 sub _get_standard_args {
    
-   my $std_cli_arg_ref = {
+   my $std_arg = {
       'version'  => sub { say $VERSION; exit                        },
       'man'      => sub { pod2usage( -verbose => 2, -exitval => 0 ) },
 
@@ -42,7 +42,7 @@ sub _get_standard_args {
       },
    };
 
-   return $std_cli_arg_ref;
+   return $std_arg;
 }
 
 # Read and return args 
@@ -50,12 +50,12 @@ sub _get_cli_args {
    my @opts = @_;
 
    my %cli_arg;
-   my $std_arg_ref = _get_standard_args;
+   my $std_arg = _get_standard_args;
 
    GetOptionsFromArray(
       \@opts,
       \%cli_arg,
-      %{ $std_arg_ref },
+      %{ $std_arg },
 
       # This is an arg for demonstration purposes
       'mytest=s'
@@ -94,10 +94,10 @@ sub _validate_cli_args {
 sub run{
 
    # Get cli args
-   $CLI_ARG_REF = _get_cli_args( @ARGV );
+   $ARG = _get_cli_args( @ARGV );
 
    # Validate cli args
-   _validate_cli_args( $CLI_ARG_REF );
+   _validate_cli_args( $ARG );
 
    return;
 }
