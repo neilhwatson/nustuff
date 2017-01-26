@@ -6,7 +6,7 @@ use strict;
 use warnings;
 use feature qw{ say };
 use Pod::Usage;
-use Getopt::Long qw{ GetOptionsFromArray };
+use Getopt::Long;
 use Data::Dumper;
 use Carp;
 use Params::Validate qw{ :all };
@@ -47,13 +47,11 @@ sub _get_standard_args {
 
 # Read and return args 
 sub _get_cli_args {
-   my @opts = @_;
 
    my %cli_arg;
    my $std_arg = _get_standard_args;
 
-   GetOptionsFromArray(
-      \@opts,
+   GetOptions(
       \%cli_arg,
       %{ $std_arg },
 
@@ -82,6 +80,7 @@ sub _validate_cli_args {
             # Must contain only lower case letters
             regex    => qr{ \A [a-z]+ \Z }msx,
          },
+         # For custom validation sub see callbacks in Params::Validate
       }
    );
    return;
@@ -94,7 +93,7 @@ sub _validate_cli_args {
 sub run{
 
    # Get cli args
-   $ARG = _get_cli_args( @ARGV );
+   $ARG = _get_cli_args;
 
    # Validate cli args
    _validate_cli_args( $ARG );
