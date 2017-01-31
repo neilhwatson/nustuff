@@ -3,6 +3,8 @@
 """
 This example shows how to make and use a class. It mirrors my perl example
 'moo.pl'
+
+BEWARE that read-only attributes are not possible or discouraged in python.
 """
 
 
