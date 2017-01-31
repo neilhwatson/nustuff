@@ -34,50 +34,55 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-import argparse, re
+import argparse
+import re
 
 #
 # Subs
 #
 
+
 def convert(val):
     """A simple function for a testing example"""
     return val
+
 
 def get_cli_args():
     """Process cli args"""
 
     parser = argparse.ArgumentParser(
-	    description="Brief description, one line only"
-	    ,epilog="Use pydoc ./%(prog)s for more detail.")
+        description="Brief description, one line only"
+        , epilog="Use pydoc ./%(prog)s for more detail.")
 
     parser.add_argument(
-	    '--version'
-	    , action='version'
-	    , version='%(prog)s 1.0')
+        '--version'
+        , action='version'
+        , version='%(prog)s 1.0')
 
-    parser.add_argument( '--mytest' )
+    parser.add_argument('--mytest')
 
     # Get the rest of the args tha are not specific
     parser.add_argument('args', nargs=argparse.REMAINDER)
 
     arg = parser.parse_args()
 
-    validate_args( arg )
+    validate_args(arg)
 
     return arg
+
 
 def validate_args(arg):
     """Validate command line arguments."""
 
-    if not re.match( '(?x) \A [a-z]+ \Z', arg.mytest):
-	raise TypeError( "Arg mytest invalid expects [a-z]+ only." )
+    if not re.match('(?x) \A [a-z]+ \Z', arg.mytest):
+        raise TypeError("Arg mytest invalid expects [a-z]+ only.")
 
     return
 
 #
 # Main matter unless this module was called from another program.
 #
+
 
 def run():
     """Start the program when run from CLI"""
@@ -89,4 +94,3 @@ def run():
 
 if __name__ == '__main__':
     run()
-
