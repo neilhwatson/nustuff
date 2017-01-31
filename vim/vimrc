@@ -27,13 +27,13 @@ set ruler
 set tabstop=3
 set softtabstop=3
 set shiftwidth=3
+set expandtab
 set smartindent
 set autoindent
 set undolevels=100
 set showmatch
 set showcmd
 set number
-set expandtab
 set tw=0
 if v:version >= 703
    set colorcolumn=78
@@ -43,7 +43,8 @@ endif
 set autowrite
 
 syntax on
-colorscheme slate
+"colorscheme slate
+"colorscheme industry
 
 "for scp
 set nocp
@@ -67,7 +68,7 @@ au BufRead,BufNewFile */journal/*.txt set tw=78 et spell
 au BufRead,BufNewFile *.md set tabstop=4 shiftwidth=4
 au BufRead,BufNewFile *.markdown set tabstop=4 shiftwidth=4
 au BufRead,BufNewFile *.yml set softtabstop=2 tabstop=2 shiftwidth=2
-au BufRead,BufNewFile *.py set noexpandtab
+"au BufRead,BufNewFile *.py set noexpandtab
 au BufRead,BufNewFile Makefile* set noexpandtab
 
 " Add help tags
