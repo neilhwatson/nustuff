@@ -20,7 +20,13 @@
 
     fh.close()
 
-### Read from stdin
+### Read from stdin into one string
+
+    import sys
+    content = sys.stdin.read()
+    print content
+
+### Read from stdin line by line
 
     import sys
     for line in sys.stdin:
@@ -41,3 +47,18 @@
     import re
     match = re.search( '>(this)<', str ).group(1)
     print match
+
+### Style test your code
+
+    pep3 mine.py
+
+### Run test suite
+
+    pytest test_file.py
+    pytest t/*.py
+
+### Check return status of external commad
+
+    import subprocess
+    status = subprocess.call("/bin/false")
+    print "status is" , status

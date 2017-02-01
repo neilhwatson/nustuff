@@ -74,7 +74,7 @@ def get_cli_args():
 def validate_args(arg):
     """Validate command line arguments."""
 
-    if not re.match('(?x) \A [a-z]+ \Z', arg.mytest):
+    if not re.match('(?x) \A [a-z]+ \Z', str(arg.mytest)):
         raise TypeError("Arg mytest invalid expects [a-z]+ only.")
 
     return
