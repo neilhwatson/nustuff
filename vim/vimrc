@@ -68,8 +68,11 @@ au BufRead,BufNewFile */journal/*.txt set tw=78 et spell
 au BufRead,BufNewFile *.md set tabstop=4 shiftwidth=4
 au BufRead,BufNewFile *.markdown set tabstop=4 shiftwidth=4
 au BufRead,BufNewFile *.yml set softtabstop=2 tabstop=2 shiftwidth=2
-"au BufRead,BufNewFile *.py set noexpandtab
 au BufRead,BufNewFile Makefile* set noexpandtab
+"au BufRead,BufNewFile *.py set noexpandtab
+
+command! Autorun   au BufWritePost <buffer> !%:p
+command! Noautorun au! BufWritePost <buffer>
 
 " Add help tags
 ":helptags ~/.vim/doc/
@@ -78,6 +81,7 @@ let g:EnableCFE3KeywordAbbreviations=1
 "===================================
 "FUNCTIONS
 "===================================
+
 fun! Getchar()
   let c = getchar()
   if c != 0
