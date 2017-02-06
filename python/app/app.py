@@ -40,8 +40,6 @@ import re
 #
 # Subs
 #
-
-
 def convert(val):
     """A simple function for a testing example"""
     return val
@@ -59,7 +57,22 @@ def get_cli_args():
         , action='version'
         , version='%(prog)s 1.0')
 
-    parser.add_argument('--mytest')
+# A required arg. Optional is the default behaviour. Stores in arg.myfile
+    parser.add_argument('--mytest', '-m',
+            , required=True,
+            , help='Helpful sentence here')
+
+# Mutually exclusive args, but one or the other is required.
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument(
+        '--add', '-ad'
+        , action='store_true'  # Means arg.add is True or False.
+        , help='Add something.')
+
+    group.add_argument(
+        '--remove', '-re'
+        , action='store_true'
+        , help='Remove something.')
 
     # Get the rest of the args tha are not specific
     parser.add_argument('args', nargs=argparse.REMAINDER)
@@ -74,7 +87,7 @@ def get_cli_args():
 def validate_args(arg):
     """Validate command line arguments."""
 
-    if not re.match('(?x) \A [a-z]+ \Z', str(arg.mytest)):
+    if not re.search('(?x) \A [a-z]+ \Z', str(arg.mytest)):
         raise TypeError("Arg mytest invalid expects [a-z]+ only.")
 
     return
@@ -82,8 +95,6 @@ def validate_args(arg):
 #
 # Main matter unless this module was called from another program.
 #
-
-
 def run():
     """Start the program when run from CLI"""
 
