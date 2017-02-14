@@ -92,6 +92,12 @@ The magic is in the empty init file.
 
     from lib import mod
 
+#### Alternate method
+
+    import sys
+    sys.path.insert(0, './lib')
+    from mod import <class>
+
 ### License
 
 The MIT License (MIT)
