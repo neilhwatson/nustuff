@@ -61,8 +61,9 @@
 ### Match and store match in a single line
 
     import re
-    match = re.search( '>(this)<', str ).group(1)
-    print match
+    match = re.search( '>(this)<', str )
+    if match
+        print match.group(1)
 
 ### Style test your code
 
