@@ -79,6 +79,19 @@
     status = subprocess.call("/bin/false")
     print "status is" , status
 
+### import a custom module
+
+The magic is in the empty init file.
+
+    ./app.py
+    ./lib/mod.py
+
+    touch ./lib/__init__.py
+
+#### app.py
+
+    from lib import mod
+
 ### License
 
 The MIT License (MIT)
