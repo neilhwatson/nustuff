@@ -24,25 +24,22 @@
 #keystate_scrolllock = enable
 #keystate_capslock = enable
 
-"/home/neil/firefox/firefox"
-    F1
-"emacs ~/calendar/nhw.org"
-	F2
-"pidgin"
-    F3
-"xterm -e mutt"
-    F5
-"xterm -e mutt -F ~/.mutt-evt-rc"
-    F6
-"xterm" 
-    F7
-"gvim"
-    F8
+## For a macbook
+"~/bin/starter /home/neil/firefox/firefox"
+    Control + 1
+"~/bin/starter emacs ~/calendar/nhw.org"
+	 Control + 2
+"~/bin/starter pidgin"
+    Control + 3
+"~/bin/starter gnome-terminal" 
+    Control + 7
+"~/bin/starter gvim"
+    Control + 8
 #"vncviewer 192.168.0.3"
 #    F10
 "dmenu_run"
-    F12
-"sh -c '/bin/sleep 2;  xscreensaver-command -lock'"
+    Control + 0
+"xscreensaver-command --lock"
     Control+Alt + l 
 "feh --bg-center $(find ~/wallpapers/ -type f|shuf|head -n1)"
     Control+Alt + w
@@ -50,9 +47,31 @@
     Control+Alt + c
 
 #hibernate
-"sudo /usr/sbin/pm-hibernate"
-    m:0x0 + c:213
-    XF86Suspend 
+#"sudo /usr/sbin/pm-hibernate"
+    #m:0x0 + c:213
+    #XF86Suspend 
 
+# xbacklight and kbdlight (AUR) needed WIP
+
+'sh -c "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 +5%"'
+    XF86AudioRaiseVolume
+
+'sh -c "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 -5%"'
+    XF86AudioLowerVolume
+
+'pactl set-sink-mute 0 toggle'
+    XF86AudioMute
+
+"~/bin/brightness -10"
+  XF86MonBrightnessDown
+
+"~/bin/brightness +10"
+  XF86MonBrightnessUp
+
+#"kbdlight up"
+  #XF86KbdBrightnessUp
+
+#"kbdlight down"
+  #XF86KbdBrightnessDown
 #
 # End of xbindkeys configuration
