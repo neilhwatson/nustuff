@@ -1,0 +1,63 @@
+# -*- mode: ruby -*-
+ 
+# vi: set ft=ruby :
+ 
+boxes = [
+    {
+        :name => "server1",
+        :eth1 => "192.168.205.10",
+        :mem => "4096",
+        :cpu => "8",
+ 
+        # Bind host port to guest port
+        :hostport => "3001",
+        :guestport => "3000"
+    },
+    {
+        :name => "server2",
+        :eth1 => "192.168.205.11",
+        :mem => "1024",
+        :cpu => "4",
+ 
+        :hostport => "3002",
+        :guestport => "3000"
+    },
+    {
+        :name => "server3",
+        :eth1 => "192.168.205.12",
+        :mem => "1024",
+        :cpu => "2",
+ 
+        :hostport => "3003",
+        :guestport => "3000"
+    },
+]
+ 
+box_type = "centos/7"
+
+Vagrant.configure(2) do |config|
+ 
+  config.vm.box = box_type
+ 
+# Loop through boxes data and build each vm
+  boxes.each do |opts|
+    config.vm.define opts[:name] do |config|
+      config.vm.hostname = opts[:name]
+ 
+      config.vm.provider "virtualbox" do |v|
+        v.customize ["modifyvm", :id, "--memory", opts[:mem]]
+        v.customize ["modifyvm", :id, "--cpus", opts[:cpu]]
+      end
+ 
+      config.vm.network :private_network, ip: opts[:eth1]
+      config.vm.network :forwarded_port, guest: opts[:guestport], host: opts[:hostport]
+ 
+#
+# Provision guests here
+#
+      config.vm.provision "ansible" do |ansible|
+         ansible.playbook = "playbook.yml"
+      end
+    end
+  end
+end

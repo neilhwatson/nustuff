@@ -1,0 +1,12 @@
+---
+- hosts: all
+  remote_user: vagrant
+  become: true
+  tasks:
+    - name: Get some host data
+      shell: "hostname; free -h"
+      register: host_data
+
+    - name: Show host data
+      debug:
+        msg: "{{ host_data.stdout }}"
