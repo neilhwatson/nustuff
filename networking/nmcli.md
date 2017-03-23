@@ -10,9 +10,9 @@ Embrace NetworkManager with the cli interface. Contributions welcome.
 
     nmcli d wifi
 
-#### Bring up connection
+#### Bring up connection, including wifi
 
-    nmcli con up id <connection name>
+    nmcli con up <connection name>
 
 If a password is required add the ask switch.
 
