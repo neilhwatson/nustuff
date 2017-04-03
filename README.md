@@ -1,4 +1,4 @@
-Neil Unfinished programming, scripting and rc file examples
+Neil Unfinished programming, scripting, and rc file examples
 ---
 
 Here are lots of examples for fellow techies to learn from and would-be employees to learn about me. There's lots to 
