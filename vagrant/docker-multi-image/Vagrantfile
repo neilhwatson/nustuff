@@ -1,0 +1,55 @@
+# -*- mode: ruby -*-
+ 
+# vi: set ft=ruby :
+ 
+=begin
+SYNOPSIS
+
+Provision mulitple docker container
+
+HOWTO
+
+- Change the boxes data structure to set the number and configuration for your
+vms.
+
+- Start with vagrant up --provider=docker
+
+TODO
+
+How do you run each server build and provision parallel?
+
+=end
+
+boxes = [
+    {
+        :name => "server1",
+
+        # What image from docker hub do you want?
+        :image => "nginx:latest",
+        # Alternatively point to dir with a Dockerfile
+        # :build_dir => ".",
+ 
+        # Port to expose host:container
+        :ports => [ "8000:80" ],
+    },
+    {
+        :name  => "server2",
+        :image => "tomcat:latest",
+        :ports => [ "8080:8080" ],
+    },
+]
+ 
+
+Vagrant.configure(2) do |config|
+ 
+# Loop through boxes data and build each vm
+   boxes.each do |opts|
+      config.vm.define opts[:name] do |config|
+         config.vm.provider "docker" do |d|
+            d.name  = opts[:name]
+            d.image = opts[:image]
+            d.ports = opts[:ports]
+         end
+      end
+   end
+end
