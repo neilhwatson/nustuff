@@ -10,7 +10,7 @@ Provision mulitple docker container
 HOWTO
 
 - Change the boxes data structure to set the number and configuration for your
-vms.
+containers.
 
 - Start with vagrant up --provider=docker
 
