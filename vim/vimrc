@@ -39,6 +39,8 @@ if v:version >= 703
    set colorcolumn=78
 endif
 
+call pathogen#infect()
+
 " autowrite buffer on suspend, buffer switch etc...
 set autowrite
 
