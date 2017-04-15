@@ -1,0 +1,6 @@
+# Fill in with your Azure creds and source it.
+export ARM_SUBSCRIPTION_ID=''
+export ARM_CLIENT_SECRET=''
+export ARM_ACCESS_KEY=''
+export ARM_CLIENT_ID=''
+export ARM_TENANT_ID=''

@@ -1,0 +1,13 @@
+---
+- hosts: all
+  remote_user: ansible
+  become:  yes
+
+  tasks:
+
+    - name:
+      shell: "hostname -f; uname -a"
+      register: host_info
+
+    - debug:
+        msg: "echo {{ host_info.stdout_lines }}"
