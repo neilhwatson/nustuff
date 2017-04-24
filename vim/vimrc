@@ -44,9 +44,11 @@ call pathogen#infect()
 " autowrite buffer on suspend, buffer switch etc...
 set autowrite
 
-syntax on
-"colorscheme slate
-"colorscheme industry
+syntax enable
+" solarized
+"colorscheme github
+colorscheme solarized
+set background=dark
 
 "for scp
 set nocp
