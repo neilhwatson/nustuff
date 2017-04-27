@@ -3,7 +3,7 @@
 #
 terraform {
    backend "azure" {
-      storage_account_name = "npterraform"
+      storage_account_name = "myterraform"
       container_name       = "terraform-state"
 ##### TODO rename this key ######
       key                  = "mykey.terraform.tfstate"
