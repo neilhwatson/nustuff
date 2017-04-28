@@ -110,6 +110,20 @@ module "vm01" {
 }
 
 #
+# Build ansible inventory file
+# Rather than run ansible in each vm module above you can build an inventory
+# file here.
+# NOTE requires terraform 0.9.4+
+resource "local_file" "ansible_inventory01" {
+   filename = "hosts.txt"
+   content  = <<EO_inventory
+[all]
+${azurerm_public_ip.ip01.ip_address}
+EO_inventory
+
+}
+
+#
 # Outputs
 #
 # TODO add an output for each public IP.
