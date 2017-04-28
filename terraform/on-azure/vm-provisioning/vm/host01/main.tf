@@ -95,3 +95,7 @@ resource "azurerm_virtual_machine" "host01" {
       command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ${var.public_ip_address}.txt ${var.ansible_playbook}"
    }
 }
+
+output "host_id" {
+   value = "${azurerm_virtual_machine.id}"
+}

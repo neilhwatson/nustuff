@@ -118,7 +118,7 @@ resource "local_file" "ansible_inventory01" {
    filename = "hosts.txt"
    content  = <<EO_inventory
 [all]
-${azurerm_public_ip.ip01.ip_address}
+${azurerm_public_ip.ip01.ip_address} # ${module.vm01.host_id}
 EO_inventory
 
 }
