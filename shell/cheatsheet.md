@@ -44,6 +44,10 @@
        (*[!0-9]*|'') error "--num [$num] is not a number"
     esac
 
+## Test if a program exists in the path 
+
+    command -v <program> 2>&1 >/dev/null || error "<program> not installed"
+
 ## Schedule a command
 
     echo 'mycommand -w args'|at now + 5 minutes
