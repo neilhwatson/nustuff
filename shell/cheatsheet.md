@@ -52,6 +52,12 @@
 
     command -v <program> 2>&1 >/dev/null || error "<program> not installed"
 
+## Redirection
+
+    my_command 2>&1 > command-stdout-stderr.txt
+
+    my_command 2>&1 > /dev/null
+
 ## Schedule a command
 
     echo 'mycommand -w args'|at now + 5 minutes
@@ -69,4 +75,4 @@
    curl wttr.in/yyz
 
    curl wttr.in/~markham+ontario+canada
-`   
+
