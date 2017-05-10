@@ -52,4 +52,10 @@
 
     echo 'mycommand -w args'|at now + 5 minutes
 
+## Search and replace
+
+   perl -pi -e 's///g' <file>
+
+   find /path -name "*files*" -exec perl -pi -e 's///g' {} \;
+
 
