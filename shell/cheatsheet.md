@@ -64,15 +64,15 @@
 
 ## Search and replace
 
-   perl -pi -e 's///g' <file>
+    perl -pi -e 's///g' <file>
 
-   find /path -name "*files*" -exec perl -pi -e 's///g' {} \;
+    find /path -name "*files*" -exec perl -pi -e 's///g' {} \;
 
 ## Weather report
 
-   curl wttr.in
+    curl wttr.in
 
-   curl wttr.in/yyz
+    curl wttr.in/yyz
 
-   curl wttr.in/~markham+ontario+canada
+    curl wttr.in/~markham+ontario+canada
 
