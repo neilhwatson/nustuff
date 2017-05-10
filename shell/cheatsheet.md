@@ -1,3 +1,7 @@
+## Copy files en masse via ssh
+
+   tar czf - /path | ssh host 'tar -C "/" -xzf -'
+
 ## for loop in one line
 
     for i in $(seq 1 4); do echo $i; done
