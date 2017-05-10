@@ -1,6 +1,6 @@
 ## Copy files en masse via ssh
 
-   tar czf - /path | ssh host 'tar -C "/" -xzf -'
+    tar czf - /path | ssh host 'tar -C "/" -xzf -'
 
 ## for loop in one line
 
@@ -62,4 +62,11 @@
 
    find /path -name "*files*" -exec perl -pi -e 's///g' {} \;
 
+## Weather report
 
+   curl wttr.in
+
+   curl wttr.in/yyz
+
+   curl wttr.in/~markham+ontario+canada
+`   
