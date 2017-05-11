@@ -1,6 +1,6 @@
 #!/bin/sh
 
-repos="vim_cf3 cfbot nustuff delta_reporting evolve_cfengine_freelib"
+repos="vim_cf3 cfbot nustuff delta_reporting evolve_cfengine_freelib terraform-modules"
 
 for next_repo in $repos
 do
