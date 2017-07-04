@@ -47,8 +47,7 @@ set autowrite
 syntax enable
 " solarized
 "colorscheme github
-colorscheme solarized
-set background=dark
+colorscheme harlequin
 
 "for scp
 set nocp
