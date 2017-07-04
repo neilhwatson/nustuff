@@ -76,3 +76,12 @@
 
     curl wttr.in/~markham+ontario+canada
 
+## AWK instead of grep
+
+AWK works like grep -E.
+
+    awk '/PATH/' .profile
+    awk '/string/ {print $2}
+    awk '! /PATH/' .profile # works like grep -v
+
+Credit: http://blog.jpalardy.com/posts/skip-grep-use-awk/

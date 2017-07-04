@@ -1,8 +1,10 @@
-from app import convert
 import unittest
 import sys
 
-sys.path.insert(0, '.')
+from os import path
+
+sys.path.append( path.dirname( path.dirname( path.abspath(__file__) ) ) )
+from app import convert
 
 
 class TestUM(unittest.TestCase):

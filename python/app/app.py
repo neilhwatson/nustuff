@@ -58,8 +58,8 @@ def get_cli_args():
         , version='%(prog)s 1.0')
 
 # A required arg. Optional is the default behaviour. Stores in arg.myfile
-    parser.add_argument('--mytest', '-m',
-            , required=True,
+    parser.add_argument('--mytest', '-m'
+            , required=True
             , help='Helpful sentence here')
 
 # Mutually exclusive args, but one or the other is required.
