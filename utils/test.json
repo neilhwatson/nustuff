@@ -1,0 +1,8 @@
+{
+   "tasks": [
+         {
+            "name": "make",
+            "command": "make all"
+         }
+   ]
+}
