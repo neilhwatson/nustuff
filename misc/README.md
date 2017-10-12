@@ -11,3 +11,14 @@ Returns 0 on success.
 
     curl -s --unix-socket /run/docker.sock http://docker/images/json \
         |jq '.[] | select( .RepoTags[] == "my_tag:latest" )|.Created''
+        
+ ### More jq examples
+ 
+    aws elb describe-load-balancers| jq -r '.LoadBalancerDescriptions[] \
+        | select( .CanonicalHostedZoneName \
+        | contains("awseb-e-b-AWSEBLoa") ).CanonicalHostedZoneName'
+        
+    aws elb describe-load-balancers | jq -r '.LoadBalancerDescriptions[] \
+        | select( .CanonicalHostedZoneName \
+        | test(".*\\.elb\\.") ).CanonicalHostedZoneName'
+
