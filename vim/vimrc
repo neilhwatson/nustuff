@@ -44,9 +44,12 @@ call pathogen#infect()
 " autowrite buffer on suspend, buffer switch etc...
 set autowrite
 
+" buffer control using CtrlP plugin
+nmap ; :CtrlPBuffer<CR> 
+noremap <C-Tab> :bnext <CR>
+noremap <S-Tab> :bprevious <CR>
+
 syntax enable
-" solarized
-"colorscheme github
 colorscheme harlequin
 
 "for scp
