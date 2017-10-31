@@ -1,0 +1,6 @@
+# Useful shell fucntions:
+
+ifunction mdr() {
+   pandoc $1 | lynx -stdin -dump
+}
+
