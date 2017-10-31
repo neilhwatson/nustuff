@@ -4,3 +4,20 @@ ifunction mdr() {
    pandoc $1 | lynx -stdin -dump
 }
 
+function docker_stop_all(){
+   docker stop $(curl -s --unix-socket /run/docker.sock \
+      http://docker/containers/json|jq -r '.[].Id')
+}
+
+#### Remove all containers
+function docker_remove_containers(){
+   docker rm $(curl -s --unix-socket /run/docker.sock \
+      http://docker/containers/json?all=1|jq -r '.[].Id')
+}
+
+#### Remove all images
+function docker_remove_images(){
+   docker rmi $(curl -s --unix-socket /run/docker.sock \
+      http://docker/images/json?all=1|jq -r '.[].Id')
+}
+
