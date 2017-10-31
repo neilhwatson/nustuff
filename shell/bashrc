@@ -21,3 +21,8 @@ function docker_remove_images(){
       http://docker/images/json?all=1|jq -r '.[].Id')
 }
 
+#### Open in existing gvim
+function gvim(){
+    args="$@"
+    /usr/bin/gvim --remote-silent $args
+}
