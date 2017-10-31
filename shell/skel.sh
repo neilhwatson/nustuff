@@ -33,24 +33,46 @@ VERSION=
 # Output man page to this default unless specified later.
 mcmd=cat
 
-usage(){
+function usage(){
     cat 1>&2 <<EOF
 
 EOF
 }
 
-man() {
+function man() {
     cat <<EOF | $mcmd
 # Get from man.skel
 EOF
     exit
 }
 
-version(){
+function version(){
     printf "$PROGRAM version $VERSION"
 }
 
-error(){
+function wait_for_dns(){
+   fqhn=$1
+
+   for i in {1..20}
+   do
+      a_record=$(dig +short $fqhn)
+      if [[ $a_record != '' ]]
+      then
+         printf "\n"
+         return 0
+      fi
+      printf '.'
+      sleep 60
+   done
+   return 1
+}
+
+function log() {
+    line=$1
+    printf "%s %s\n" "$(date +'%b %d %H:%M:%S')" "$line"
+}
+
+function error(){
 # Errors are sent to stderr
 
     # This syslog action need only be used on hosts that have a running syslog
