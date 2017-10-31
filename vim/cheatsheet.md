@@ -19,3 +19,7 @@ This is useful when latency is poor.
 
 `vim scp://<hostname>/path/to/file`
 
+## Open in existing gvim
+
+    gvim --remote-silent <file>
+
