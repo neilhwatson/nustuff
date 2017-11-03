@@ -39,6 +39,8 @@ if v:version >= 703
    set colorcolumn=78
 endif
 
+let mapleader = "s"
+
 call pathogen#infect()
 
 " autowrite buffer on suspend, buffer switch etc...
@@ -171,5 +173,9 @@ function Nhw_equal_aligner (AOP)
 endfunction
 endif
 
-nnoremap <buffer> <silent> ,a :call Nhw_equal_aligner("null")<CR>
-
+" Align = or =>
+nnoremap <buffer> <silent> <leader>a :call Nhw_equal_aligner("null")<CR>
+" vsplit
+nnoremap <leader>v :vsplit<CR>
+" equi-space vsplits
+nnoremap <leader>= <C-w>=
