@@ -46,11 +46,6 @@ call pathogen#infect()
 " autowrite buffer on suspend, buffer switch etc...
 set autowrite
 
-" buffer control using CtrlP plugin
-nmap ; :CtrlPBuffer<CR> 
-noremap <C-Tab> :bnext <CR>
-noremap <S-Tab> :bprevious <CR>
-
 syntax enable
 colorscheme harlequin
 
@@ -60,6 +55,7 @@ let g:netrw_silent=1
 if v:version >= 600
     filetype plugin indent on
 endif
+
 
 "date stamps
 "Sunday January 02 2008.
@@ -76,37 +72,9 @@ au BufRead,BufNewFile */journal/*.txt set tw=78 et spell
 au BufRead,BufNewFile *.md set tabstop=4 shiftwidth=4
 au BufRead,BufNewFile *.markdown set tabstop=4 shiftwidth=4
 au BufRead,BufNewFile *.yml set softtabstop=2 tabstop=2 shiftwidth=2
+au BufRead,BufNewFile *.yaml set softtabstop=2 tabstop=2 shiftwidth=2
 au BufRead,BufNewFile Makefile* set noexpandtab
 "au BufRead,BufNewFile *.py set noexpandtab
-
-command! Autorun   au BufWritePost <buffer> !%:p
-command! Noautorun au! BufWritePost <buffer>
-
-" Boxes commands
-autocmd BufEnter * nmap ,mc !!boxes -d simple<CR>
-autocmd BufEnter * vmap ,mc !boxes -d simple<CR>
-autocmd BufEnter * nmap ,xc !!boxes -d simple -r<CR>
-autocmd BufEnter * vmap ,xc !boxes -d simple -r<CR>
-autocmd BufEnter *.sh nmap ,mc !!boxes -d pound-cmt<CR>
-autocmd BufEnter *.sh vmap ,mc !boxes -d pound-cmt<CR>
-autocmd BufEnter *.sh nmap ,xc !!boxes -d pound-cmt -r<CR>
-autocmd BufEnter *.sh vmap ,xc !boxes -d pound-cmt -r<CR>
-autocmd BufEnter *.html nmap ,mc !!boxes -d html-cmt<CR>
-autocmd BufEnter *.html vmap ,mc !boxes -d html-cmt<CR>
-autocmd BufEnter *.html nmap ,xc !!boxes -d html-cmt -r<CR>
-autocmd BufEnter *.html vmap ,xc !boxes -d html-cmt -r<CR>
-autocmd BufEnter *.[chly],*.[pc]c nmap ,mc !!boxes -d c-cmt<CR>
-autocmd BufEnter *.[chly],*.[pc]c vmap ,mc !boxes -d c-cmt<CR>
-autocmd BufEnter *.[chly],*.[pc]c nmap ,xc !!boxes -d c-cmt -r<CR>
-autocmd BufEnter *.[chly],*.[pc]c vmap ,xc !boxes -d c-cmt -r<CR>
-autocmd BufEnter *.C,*.cpp,*.java nmap ,mc !!boxes -d java-cmt<CR>
-autocmd BufEnter *.C,*.cpp,*.java vmap ,mc !boxes -d java-cmt<CR>
-autocmd BufEnter *.C,*.cpp,*.java nmap ,xc !!boxes -d java-cmt -r<CR>
-autocmd BufEnter *.C,*.cpp,*.java vmap ,xc !boxes -d java-cmt -r<CR>
-autocmd BufEnter .vimrc*,.exrc nmap ,mc !!boxes -d vim-cmt<CR>
-autocmd BufEnter .vimrc*,.exrc vmap ,mc !boxes -d vim-cmt<CR>
-autocmd BufEnter .vimrc*,.exrc nmap ,xc !!boxes -d vim-cmt -r<CR>
-autocmd BufEnter .vimrc*,.exrc vmap ,xc !boxes -d vim-cmt -r<CR>
 
 " Add help tags
 ":helptags ~/.vim/doc/
@@ -173,9 +141,59 @@ function Nhw_equal_aligner (AOP)
 endfunction
 endif
 
+"
+" My maps
+"
+
+" Boxes commands
+nnoremap <leader>ms !!boxes -d stone<CR>
+vnoremap <leader>ms !boxes -d stone<CR>
+autocmd BufEnter * nnoremap <leader>mc !!boxes -d simple<CR>
+autocmd BufEnter * vnoremap <leader>mc !boxes -d simple<CR>
+autocmd BufEnter * nnoremap <leader>xc !!boxes -d simple -r<CR>
+autocmd BufEnter * vnoremap <leader>xc !boxes -d simple -r<CR>
+autocmd BufEnter *.sh,*.yml,*.yaml nnoremap <leader>mc !!boxes -d shell<CR>
+autocmd BufEnter *.sh,*.yml,*.yaml vnoremap <leader>mc !boxes -d shell<CR>
+autocmd BufEnter *.sh,*.yml,*.yaml nnoremap <leader>xc !!boxes -d shell -r<CR>
+autocmd BufEnter *.sh,*.yml,*.yaml vnoremap <leader>xc !boxes -d shell -r<CR>
+autocmd BufEnter *.html nnoremap <leader>mc !!boxes -d html-cmt<CR>
+autocmd BufEnter *.html vnoremap <leader>mc !boxes -d html-cmt<CR>
+autocmd BufEnter *.html nnoremap <leader>xc !!boxes -d html-cmt -r<CR>
+autocmd BufEnter *.html vnoremap <leader>xc !boxes -d html-cmt -r<CR>
+"autocmd BufEnter *.[chly],*.[pc]c nnoremap <leader>mc !!boxes -d c-cmt<CR>
+"autocmd BufEnter *.[chly],*.[pc]c vnoremap <leader>mc !boxes -d c-cmt<CR>
+"autocmd BufEnter *.[chly],*.[pc]c nnoremap <leader>xc !!boxes -d c-cmt -r<CR>
+"autocmd BufEnter *.[chly],*.[pc]c vnoremap <leader>xc !boxes -d c-cmt -r<CR>
+autocmd BufEnter *.C,*.cpp,*.java nnoremap <leader>mc !!boxes -d java-cmt<CR>
+autocmd BufEnter *.C,*.cpp,*.java vnoremap <leader>mc !boxes -d java-cmt<CR>
+autocmd BufEnter *.C,*.cpp,*.java nnoremap <leader>xc !!boxes -d java-cmt -r<CR>
+autocmd BufEnter *.C,*.cpp,*.java vnoremap <leader>xc !boxes -d java-cmt -r<CR>
+autocmd BufEnter .vimrc*,.exrc nnoremap <leader>mc !!boxes -d vim-cmt<CR>
+autocmd BufEnter .vimrc*,.exrc vnoremap <leader>mc !boxes -d vim-cmt<CR>
+autocmd BufEnter .vimrc*,.exrc nnoremap <leader>xc !!boxes -d vim-cmt -r<CR>
+autocmd BufEnter .vimrc*,.exrc vnoremap <leader>xc !boxes -d vim-cmt -r<CR>
+
+
 " Align = or =>
-nnoremap <buffer> <silent> <leader>a :call Nhw_equal_aligner("null")<CR>
+"nnoremap <buffer> <silent> <leader>a :call Nhw_equal_aligner("null")<CR>
+nnoremap <leader>a :Tabularize<CR>
 " vsplit
 nnoremap <leader>v :vsplit<CR>
 " equi-space vsplits
 nnoremap <leader>= <C-w>=
+" swap between splits
+nnoremap <leader>s <C-w><C-w>
+" yank to system clipboard
+vnoremap <leader>c "+y
+" paste from system clipboard
+nnoremap <leader>p "+gP
+" buffer control using CtrlP plugin
+nnoremap ; :CtrlPBuffer<CR>
+" Cycle between buffers
+noremap <C-Tab> :bnext <CR>
+noremap <S-Tab> :bprevious <CR>
+
+" Run buffer on write when enabled
+command! Autorun   au BufWritePost <buffer> !%:p
+command! Noautorun au! BufWritePost <buffer>
+nnoremap <leader>r :!%:p<CR>
