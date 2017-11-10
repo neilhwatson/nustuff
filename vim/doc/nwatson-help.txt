@@ -1,0 +1,20 @@
+*nwatson-help.txt*
+
+Editing maps:
+<leader>a Tabularize
+<leader>v vsplie
+<leader>= swap between splits
+<leader>mc wrap with boxes
+<leader>xc wrap with boxes
+<leader>c yank to system clipboard
+<leader>p paste from system clipboard
+
+Buffer control:
+; search for and change buffer
+noremap <C-Tab> :bnext <CR>     Next buffer
+noremap <S-Tab> :bprevious <CR> Previous buffer
+
+Running and testing
+:Autorun enable auto running buffer on write
+:Noautorun disable auto running buffer on write
+<leader>r Run current file
