@@ -96,7 +96,7 @@ def validate_args(arg):
 
     return
 
-def get_ipv6
+def get_ipv6():
 
     mac_addr = requests.get(
         aws_meta, "/latest/meta-data/network/interfaces/macs/")
