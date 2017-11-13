@@ -38,9 +38,10 @@ SOFTWARE.
 """
 
 import argparse
-import boto.route53
+import boto3
 import re
 import requests
+import commonregex
 
 aws_meta = 'http://169.254.169.254/'
 
@@ -120,9 +121,10 @@ def run():
 
     ipv6 = get_ipv6
 
-    conn53 = boto.route53.connect_to_region("universal")
+    #conn53 = boto3.connect_to_region("universal")
+    conn53 = boto3.client('route53')
 
-    upd53 = conn53.get_zone(arg.domain)
+    upd53 = conn53.get_zone_hosted(arg.domain)
     upd53.get_records()
 
     upd53.get_a(arg.record)
