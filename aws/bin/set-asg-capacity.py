@@ -43,8 +43,7 @@ import boto3
 import re
 import os
 
-
-def validate_env():
+def validate_env(ASG, CAP):
     """Validate env arguments."""
 
     if not re.search('(?ix) \A \w+ \Z', ASG):
@@ -55,20 +54,22 @@ def validate_env():
 
     return
 
+def lambda_handler(event, context):
 
-ASG=os.environ['ASG']
-CAP=os.environ['CAP']
+    ASG=os.environ['ASG']
+    CAP=os.environ['CAP']
+    REGION=os.environ['REGION']
 
-validate_env()
+    validate_env(ASG=ASG, CAP=CAP)
 
-CAP=int(CAP)
+    CAP=int(CAP)
 
-asg = boto3.client('autoscaling')
+    asg = boto3.client('autoscaling', region_name=REGION)
 
-response = asg.set_desired_capacity(
-    AutoScalingGroupName=ASG,
-    DesiredCapacity=int(CAP),
-    HonorCooldown=False
-)
+    response = asg.set_desired_capacity(
+        AutoScalingGroupName=ASG,
+        DesiredCapacity=int(CAP),
+        HonorCooldown=False
+    )
 
-print response
+    print response
