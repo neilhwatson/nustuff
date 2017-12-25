@@ -18,3 +18,9 @@ Running and testing
 :Autorun enable auto running buffer on write
 :Noautorun disable auto running buffer on write
 <leader>r Run current file
+
+Sessions
+mks: <session> Make session for later retrieval (Session.vim is default name)
+source <ession> Load saved session
+crtl+o+o Open the last files edited and go to the last cursor location
+
