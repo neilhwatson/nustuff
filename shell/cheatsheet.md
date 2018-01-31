@@ -85,3 +85,7 @@ AWK works like grep -E.
     awk '! /PATH/' .profile # works like grep -v
 
 Credit: http://blog.jpalardy.com/posts/skip-grep-use-awk/
+
+## Trap a signal and take action on it
+
+    trap 'cleanup; exit' SIGINT SIGQUIT
