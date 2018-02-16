@@ -89,6 +89,8 @@ I hope you find this helpful.
 
 =item L</Difference or two date stamps in days>
 
+=item L</Further reading>
+
 =item L</Licence>
 
 =back
@@ -584,6 +586,10 @@ The mtime attribute form get_systems is in epoch seconds.
 Useful in converting datastamps to time objects. Can also diff in minues. See
 L<module documentation|http://search.cpan.org/~rjbs/Time-Piece-1.30/Piece.pm>
 for more info.
+
+=head2 Further reading
+
+L<Perl one liners|https://github.com/learnbyexample/Command-line-text-processing/blob/master/perl_the_swiss_knife.md>
 
 =head2 Licence
 
