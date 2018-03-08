@@ -1,0 +1,43 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use feature 'say';
+
+my $myarg=$ARGV[0];
+my $myarg_org=$myarg;
+my $final_string;
+
+while ( length $myarg > 0 ){
+    $final_string .= "--$myarg | ";
+    $final_string =~ s/ \| \Z// if ( length $myarg == 1 );
+    chop $myarg;
+}
+
+( my $single_dash = $final_string ) =~ s/--/-/g;
+
+$final_string .= <<"END_DASHES";
+|\\
+$single_dash)
+shift
+$myarg_org=\$1
+;;
+END_DASHES
+
+say $final_string;
+
+=pod
+
+=head1 SYNOPSYS
+
+    make-arg.pl myarg
+
+Make shell arg processing statement. Turns the above into this:
+
+    --myarg | --myar | --mya | --my | --m |\
+        -myarg | -myar | -mya | -my | -m )
+    shift
+    myarg=$1
+    ;;
+
+=cut
