@@ -89,3 +89,10 @@ Credit: http://blog.jpalardy.com/posts/skip-grep-use-awk/
 ## Trap a signal and take action on it
 
     trap 'cleanup; exit' SIGINT SIGQUIT
+
+## Variable references in bash
+
+    foo=bar
+    next=foo
+    echo foo: $foo
+    echo print foo by referencing next: ${!next}
