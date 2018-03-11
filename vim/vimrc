@@ -74,6 +74,7 @@ au BufRead,BufNewFile *.markdown set tabstop=4 shiftwidth=4
 au BufRead,BufNewFile *.yml set softtabstop=2 tabstop=2 shiftwidth=2
 au BufRead,BufNewFile *.yaml set softtabstop=2 tabstop=2 shiftwidth=2
 au BufRead,BufNewFile Makefile* set noexpandtab
+au BufRead,BufNewFile *.sh source ~/.vim//plugin/marg.vim
 "au BufRead,BufNewFile *.py set noexpandtab
 
 " Add help tags
@@ -192,6 +193,8 @@ nnoremap ; :CtrlPBuffer<CR>
 " Cycle between buffers
 noremap <C-Tab> :bnext <CR>
 noremap <S-Tab> :bprevious <CR>
+
+au BufRead,BufNewFile *.sh noremap <leader>arg :call Marg()<CR>
 
 " Run buffer on write when enabled
 command! Autorun   au BufWritePost <buffer> !%:p
