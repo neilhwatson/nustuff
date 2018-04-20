@@ -24,17 +24,16 @@ set cursorline
 set cursorcolumn
 set history=50
 set ruler
-set tabstop=3
+set tabstop=8
 set softtabstop=3
 set shiftwidth=3
 set expandtab
-set smartindent
 set autoindent
 set undolevels=100
 set showmatch
 set showcmd
 set number
-set tw=0
+set textwidth=0
 if v:version >= 703
    set colorcolumn=78
 endif
