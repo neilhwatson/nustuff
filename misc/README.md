@@ -12,7 +12,7 @@ Returns 0 on success.
     curl -s --unix-socket /run/docker.sock http://docker/images/json \
         |jq '.[] | select( .RepoTags[] == "my_tag:latest" )|.Created''
         
- ### More jq examples
+### More jq examples
  
     aws elb describe-load-balancers| jq -r '.LoadBalancerDescriptions[] \
         | select( .CanonicalHostedZoneName \
@@ -22,3 +22,8 @@ Returns 0 on success.
         | select( .CanonicalHostedZoneName \
         | test(".*\\.elb\\.") ).CanonicalHostedZoneName'
 
+### Jq showing variable expansion and appending an array
+
+    jq  -M --arg ami_id ${ami_id} \
+        '. += [{"ParameterKey": "AMIid", "ParameterValue": $ami_id }]' \
+        < inputfile > outputfile
