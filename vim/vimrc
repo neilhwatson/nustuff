@@ -45,11 +45,11 @@ call pathogen#infect()
 " autowrite buffer on suspend, buffer switch etc...
 set autowrite
 
-syntax enable
+"syntax enable
 colorscheme harlequin
 
 "for scp
-set nocp
+"set nocp
 let g:netrw_silent=1
 if v:version >= 600
     filetype plugin indent on
