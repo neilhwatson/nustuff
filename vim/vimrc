@@ -45,7 +45,7 @@ call pathogen#infect()
 " autowrite buffer on suspend, buffer switch etc...
 set autowrite
 
-"syntax enable
+syntax enable
 colorscheme harlequin
 
 "for scp
@@ -67,13 +67,10 @@ iab  hms   <c-r>=strftime("%H:%M:%S")<cr>
 " misc abbs
 iab CFE CFEngine
 
-au BufRead,BufNewFile */journal/*.txt set tw=78 et spell
+au BufRead,BufNewFile */journal/*.txt set textwidth=78 spell
 au BufRead,BufNewFile *.md set tabstop=4 shiftwidth=4
 au BufRead,BufNewFile *.markdown set tabstop=4 shiftwidth=4
-au BufRead,BufNewFile *.yml set softtabstop=2 tabstop=2 shiftwidth=2
-au BufRead,BufNewFile *.yaml set softtabstop=2 tabstop=2 shiftwidth=2
 au BufRead,BufNewFile Makefile* set noexpandtab
-au BufRead,BufNewFile *.sh source ~/.vim//plugin/marg.vim
 "au BufRead,BufNewFile *.py set noexpandtab
 
 " Add help tags
@@ -146,33 +143,45 @@ endif
 "
 
 " Boxes commands
-nnoremap <leader>ms !!boxes -d stone<CR>
-vnoremap <leader>ms !boxes -d stone<CR>
-autocmd BufEnter * nnoremap <leader>mc !!boxes -d simple<CR>
-autocmd BufEnter * vnoremap <leader>mc !boxes -d simple<CR>
-autocmd BufEnter * nnoremap <leader>xc !!boxes -d simple -r<CR>
-autocmd BufEnter * vnoremap <leader>xc !boxes -d simple -r<CR>
-autocmd BufEnter *.sh,*.yml,*.yaml nnoremap <leader>mc !!boxes -d shell<CR>
-autocmd BufEnter *.sh,*.yml,*.yaml vnoremap <leader>mc !boxes -d shell<CR>
-autocmd BufEnter *.sh,*.yml,*.yaml nnoremap <leader>xc !!boxes -d shell -r<CR>
-autocmd BufEnter *.sh,*.yml,*.yaml vnoremap <leader>xc !boxes -d shell -r<CR>
-autocmd BufEnter *.html nnoremap <leader>mc !!boxes -d html-cmt<CR>
-autocmd BufEnter *.html vnoremap <leader>mc !boxes -d html-cmt<CR>
-autocmd BufEnter *.html nnoremap <leader>xc !!boxes -d html-cmt -r<CR>
-autocmd BufEnter *.html vnoremap <leader>xc !boxes -d html-cmt -r<CR>
-"autocmd BufEnter *.[chly],*.[pc]c nnoremap <leader>mc !!boxes -d c-cmt<CR>
-"autocmd BufEnter *.[chly],*.[pc]c vnoremap <leader>mc !boxes -d c-cmt<CR>
-"autocmd BufEnter *.[chly],*.[pc]c nnoremap <leader>xc !!boxes -d c-cmt -r<CR>
-"autocmd BufEnter *.[chly],*.[pc]c vnoremap <leader>xc !boxes -d c-cmt -r<CR>
-autocmd BufEnter *.C,*.cpp,*.java nnoremap <leader>mc !!boxes -d java-cmt<CR>
-autocmd BufEnter *.C,*.cpp,*.java vnoremap <leader>mc !boxes -d java-cmt<CR>
-autocmd BufEnter *.C,*.cpp,*.java nnoremap <leader>xc !!boxes -d java-cmt -r<CR>
-autocmd BufEnter *.C,*.cpp,*.java vnoremap <leader>xc !boxes -d java-cmt -r<CR>
-autocmd BufEnter .vimrc*,.exrc nnoremap <leader>mc !!boxes -d vim-cmt<CR>
-autocmd BufEnter .vimrc*,.exrc vnoremap <leader>mc !boxes -d vim-cmt<CR>
-autocmd BufEnter .vimrc*,.exrc nnoremap <leader>xc !!boxes -d vim-cmt -r<CR>
-autocmd BufEnter .vimrc*,.exrc vnoremap <leader>xc !boxes -d vim-cmt -r<CR>
+augroup Java
+   autocmd!
+   " Box comments
+   autocmd Filetype java,groovy nnoremap <buffer> <leader>mc !!boxes -d java-cmt<CR>
+   autocmd Filetype java,groovy vnoremap <buffer> <leader>mc !boxes -d java-cmt<CR>
+   " Remove comments
+   autocmd Filetype java,groovy nnoremap <buffer> <leader>xc !!boxes -r -d java-cmt<CR>
+   autocmd Filetype java,groovy vnoremap <buffer> <leader>xc !boxes -r -d java-cmt<CR>
+augroup END
 
+augroup Vim
+   autocmd!
+   " Box comments
+   autocmd Filetype vim nnoremap <buffer> <leader>mc !!boxes -d vim-cmt<CR>
+   autocmd Filetype vim vnoremap <buffer> <leader>mc !boxes -d vim-cmt<CR>
+   " Remove comments
+   autocmd Filetype vim nnoremap <buffer> <leader>xc !!boxes -r -d vim-cmt<CR>
+   autocmd Filetype vim vnoremap <buffer> <leader>xc !boxes -r -d vim-cmt<CR>
+augroup END
+
+augroup Shell
+   autocmd!
+   " Box comments
+   autocmd Filetype yaml,shell,markdown nnoremap <buffer> <leader>mc !!boxes -d shell-cmt<CR>
+   autocmd Filetype yaml,shell,markdown vnoremap <buffer> <leader>mc !boxes -d shell-cmt<CR>
+   " Remove comments
+   autocmd Filetype yaml,shell,markdown nnoremap <buffer> <leader>xc !!boxes -r -d shell-cmt<CR>
+   autocmd Filetype yaml,shell,markdown vnoremap <buffer> <leader>xc !boxes -r -d shell-cmt<CR>
+augroup END
+
+augroup HTML
+   autocmd!
+   " Box comments
+   autocmd Filetype html nnoremap <buffer> <leader>mc !!boxes -d html-cmt<CR>
+   autocmd Filetype html vnoremap <buffer> <leader>mc !boxes -d html-cmt<CR>
+   " Remove comments
+   autocmd Filetype html nnoremap <buffer> <leader>xc !!boxes -r -d html-cmt<CR>
+   autocmd Filetype html vnoremap <buffer> <leader>xc !boxes -r -d html-cmt<CR>
+augroup END
 
 " Align = or =>
 "nnoremap <buffer> <silent> <leader>a :call Nhw_equal_aligner("null")<CR>
@@ -186,14 +195,12 @@ nnoremap <leader>s <C-w><C-w>
 " yank to system clipboard
 vnoremap <leader>c "+y
 " paste from system clipboard
-nnoremap <leader>p "+gP
+nnoremap <leader>p "+gp
 " buffer control using CtrlP plugin
 nnoremap ; :CtrlPBuffer<CR>
 " Cycle between buffers
 noremap <C-Tab> :bnext <CR>
 noremap <S-Tab> :bprevious <CR>
-
-au BufRead,BufNewFile *.sh noremap <leader>arg :call Marg()<CR>
 
 " Run buffer on write when enabled
 command! Autorun   au BufWritePost <buffer> !%:p
