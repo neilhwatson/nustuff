@@ -8,10 +8,9 @@ Editing maps:
 <leader>xc wrap with boxes
 <leader>c yank to system clipboard
 <leader>p paste from system clipboard
-<leader>arg turn word on line to shell case CLI arg statement See arg
 
 arg:
-<leader>arg turns
+:call Marg turns
 domain
 
 into

@@ -142,7 +142,6 @@ endif
 " My maps
 "
 
-" Boxes commands
 augroup Java
    autocmd!
    " Box comments
