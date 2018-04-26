@@ -105,11 +105,11 @@ def validate_args(arg):
 
 def runcmd(cmd, workdir):
 
-    proc = subprocess.Popen(cmd, cwd=workdir, stderr=subprocess.PIPE, shell=True)
+    proc = subprocess.Popen(cmd, cwd=workdir, stderr=subprocess.STDOUT, shell=True)
 
-    exit_code = proc.wait()
+    exit_code = int( proc.wait() )
     if exit_code != 0:
-        raise proc.stderr
+        raise Exception( proc.stderr )
 
     return
 
