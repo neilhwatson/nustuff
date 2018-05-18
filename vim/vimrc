@@ -165,11 +165,11 @@ augroup END
 augroup Shell
    autocmd!
    " Box comments
-   autocmd Filetype yaml,shell,markdown nnoremap <buffer> <leader>mc !!boxes -d shell<CR>
-   autocmd Filetype yaml,shell,markdown vnoremap <buffer> <leader>mc !boxes -d shell<CR>
+   autocmd Filetype text,yaml,shell,markdown nnoremap <buffer> <leader>mc !!boxes -d shell<CR>
+   autocmd Filetype text,yaml,shell,markdown vnoremap <buffer> <leader>mc !boxes -d shell<CR>
    " Remove comments
-   autocmd Filetype yaml,shell,markdown nnoremap <buffer> <leader>xc !!boxes -r -d shell<CR>
-   autocmd Filetype yaml,shell,markdown vnoremap <buffer> <leader>xc !boxes -r -d shell<CR>
+   autocmd Filetype text,yaml,shell,markdown nnoremap <buffer> <leader>xc !!boxes -r -d shell<CR>
+   autocmd Filetype text,yaml,shell,markdown vnoremap <buffer> <leader>xc !boxes -r -d shell<CR>
 augroup END
 
 augroup HTML
