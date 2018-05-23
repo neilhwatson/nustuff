@@ -2,12 +2,13 @@ FROM python:2-alpine
 
 # A docker file to make a portable ansible image
 
-ENV ANSIBLE=2.4.2
+ENV ANSIBLE=2.5.2
+WORKDIR /ansible
 
 RUN apk --no-cache add sudo gcc musl-dev libffi-dev openssl-dev make
 RUN pip install --upgrade pip cffi
-RUN pip install ansible==${ANSIBLE}
-
+RUN pip install boto3 botocore awscli docker-py ansible==${ANSIBLE}
+ADD ansible.cfg /etc/ansible/
 
 ##################################################################################
 # The MIT License (MIT)                                                          #
