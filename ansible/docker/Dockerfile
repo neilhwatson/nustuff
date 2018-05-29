@@ -7,7 +7,7 @@ WORKDIR /ansible
 
 RUN apk --no-cache add sudo gcc musl-dev libffi-dev openssl-dev make
 RUN pip install --upgrade pip cffi
-RUN pip install boto3 botocore awscli docker-py ansible==${ANSIBLE}
+RUN pip install netaddr boto3 botocore awscli docker-py ansible==${ANSIBLE}
 ADD ansible.cfg /etc/ansible/
 
 ##################################################################################
