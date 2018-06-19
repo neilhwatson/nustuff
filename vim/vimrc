@@ -58,18 +58,16 @@ endif
 
 "date stamps
 "Sunday January 02 2008.
-iab  dmy  <c-r>=strftime("%A %B %d %Y")<cr>
+iab dmy  <c-r>=strftime("%A %B %d %Y")<cr>
 "20080102
-iab  ymd   <c-r>=strftime("%Y%m%d")<cr>
+iab ymd  <c-r>=strftime("%Y%m%d")<cr>
 "02:32:22
-iab  hms   <c-r>=strftime("%H:%M:%S")<cr> 
+iab hms  <c-r>=strftime("%H:%M:%S")<cr> 
 
 " misc abbs
 iab CFE CFEngine
 
 au BufRead,BufNewFile */journal/*.txt set textwidth=78 spell
-au BufRead,BufNewFile *.md set tabstop=4 shiftwidth=4
-au BufRead,BufNewFile *.markdown set tabstop=4 shiftwidth=4
 au BufRead,BufNewFile Makefile* set noexpandtab
 "au BufRead,BufNewFile *.py set noexpandtab
 
@@ -141,45 +139,32 @@ endif
 "
 " My maps
 "
-
 augroup Java
    autocmd!
    " Box comments
-   autocmd Filetype java,groovy nnoremap <buffer> <leader>mc !!boxes -d java-cmt<CR>
-   autocmd Filetype java,groovy vnoremap <buffer> <leader>mc !boxes -d java-cmt<CR>
+   autocmd Filetype java,groovy nnoremap <buffer> <leader>mc
+      \ !!boxes -d java-cmt<CR>
+   autocmd Filetype java,groovy vnoremap <buffer> <leader>mc
+      \ !boxes -d java-cmt<CR>
    " Remove comments
-   autocmd Filetype java,groovy nnoremap <buffer> <leader>xc !!boxes -r -d java-cmt<CR>
-   autocmd Filetype java,groovy vnoremap <buffer> <leader>xc !boxes -r -d java-cmt<CR>
-augroup END
-
-augroup Vim
-   autocmd!
-   " Box comments
-   autocmd Filetype vim nnoremap <buffer> <leader>mc !!boxes -d vim-cmt<CR>
-   autocmd Filetype vim vnoremap <buffer> <leader>mc !boxes -d vim-cmt<CR>
-   " Remove comments
-   autocmd Filetype vim nnoremap <buffer> <leader>xc !!boxes -r -d vim-cmt<CR>
-   autocmd Filetype vim vnoremap <buffer> <leader>xc !boxes -r -d vim-cmt<CR>
+   autocmd Filetype java,groovy nnoremap <buffer> <leader>xc
+      \ !!boxes -r -d java-cmt<CR>
+   autocmd Filetype java,groovy vnoremap <buffer> <leader>xc
+      \ !boxes -r -d java-cmt<CR>
 augroup END
 
 augroup Shell
    autocmd!
    " Box comments
-   autocmd Filetype text,yaml,shell,markdown nnoremap <buffer> <leader>mc !!boxes -d shell<CR>
-   autocmd Filetype text,yaml,shell,markdown vnoremap <buffer> <leader>mc !boxes -d shell<CR>
+   autocmd Filetype text,yaml,sh,shell,markdown nnoremap <buffer> 
+      \ <leader>mc !!boxes -d shell<CR>
+   autocmd Filetype text,yaml,sh,shell,markdown vnoremap <buffer> 
+      \ <leader>mc !boxes -d shell<CR>
    " Remove comments
-   autocmd Filetype text,yaml,shell,markdown nnoremap <buffer> <leader>xc !!boxes -r -d shell<CR>
-   autocmd Filetype text,yaml,shell,markdown vnoremap <buffer> <leader>xc !boxes -r -d shell<CR>
-augroup END
-
-augroup HTML
-   autocmd!
-   " Box comments
-   autocmd Filetype html nnoremap <buffer> <leader>mc !!boxes -d html-cmt<CR>
-   autocmd Filetype html vnoremap <buffer> <leader>mc !boxes -d html-cmt<CR>
-   " Remove comments
-   autocmd Filetype html nnoremap <buffer> <leader>xc !!boxes -r -d html-cmt<CR>
-   autocmd Filetype html vnoremap <buffer> <leader>xc !boxes -r -d html-cmt<CR>
+   autocmd Filetype text,yaml,sh,shell,markdown nnoremap <buffer> 
+      \ <leader>xc !!boxes -r -d shell<CR>
+   autocmd Filetype text,yaml,sh,shell,markdown vnoremap <buffer>
+      \  <leader>xc !boxes -r -d shell<CR>
 augroup END
 
 " Align = or =>

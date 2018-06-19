@@ -5,6 +5,13 @@
 set matchpairs+=<:>
 :syntax match xComment /<!.*/
 
+" Box comments
+nnoremap <buffer> <leader>mc !!boxes -d html-cmt<CR>
+vnoremap <buffer> <leader>mc !boxes -d html-cmt<CR>
+" Remove comments
+nnoremap <buffer> <leader>xc !!boxes -r -d html-cmt<CR>
+vnoremap <buffer> <leader>xc !boxes -r -d html-cmt<CR>
+
 "html comment current line
 map ,c I<!--<ESC>A--><ESC>
 
@@ -15,17 +22,15 @@ map ,h i<html><CR><head><CR><meta name="keywords" content=""><CR><meta name="Aut
 map ,f :i</body><CR></html><C-C>
 
 "create html header lines (h1 to h6)
-if &ft=='html'
-   nmap ,1 <HOME>v$"zdi<h1><ESC>"zp$a</h1><ESC>
-   nmap ,2 <HOME>v$"zdi<h2><ESC>"zp$a</h2><ESC>
-   nmap ,3 <HOME>v$"zdi<h3><ESC>"zp$a</h3><ESC>
-   nmap ,4 <HOME>v$"zdi<h4><ESC>"zp$a</h4><ESC>
-   nmap ,5 <HOME>v$"zdi<h5><ESC>"zp$a</h5><ESC>
-   nmap ,6 <HOME>v$"zdi<h6><ESC>"zp$a</h6><ESC>
+nmap ,1 <HOME>v$"zdi<h1><ESC>"zp$a</h1><ESC>
+nmap ,2 <HOME>v$"zdi<h2><ESC>"zp$a</h2><ESC>
+nmap ,3 <HOME>v$"zdi<h3><ESC>"zp$a</h3><ESC>
+nmap ,4 <HOME>v$"zdi<h4><ESC>"zp$a</h4><ESC>
+nmap ,5 <HOME>v$"zdi<h5><ESC>"zp$a</h5><ESC>
+nmap ,6 <HOME>v$"zdi<h6><ESC>"zp$a</h6><ESC>
 
-   "create html list items
-   nmap ,l vip :s/^\(.*\)$/\t<li>\1<\/li>/g<CR><C-C>:noh<CR>
-endif
+"create html list items
+nmap ,l vip :s/^\(.*\)$/\t<li>\1<\/li>/g<CR><C-C>:noh<CR>
 
 "add html bold tags
 vmap ,b "zdi<b><ESC>"zpgviw<ESC>a</b><ESC>

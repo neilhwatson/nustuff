@@ -13,3 +13,5 @@ nmap,6 <HOME>I###### <ESC>
 "create html list items
 nmap ,l vip :s/^\(.*\)$/1. \1/g<CR><C-C>:noh<CR>
 
+set tabstop=4 shiftwidth=4
+set tabstop=4 shiftwidth=4
