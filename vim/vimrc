@@ -185,6 +185,9 @@ nnoremap ; :CtrlPBuffer<CR>
 " Cycle between buffers
 noremap <C-Tab> :bnext <CR>
 noremap <S-Tab> :bprevious <CR>
+" next and previous errors
+noremap <leader>[ :lprevious<CR>
+noremap <leader>] :lnext<CR>
 
 " Run buffer on write when enabled
 command! Autorun   au BufWritePost <buffer> !%:p
