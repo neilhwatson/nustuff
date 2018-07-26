@@ -98,7 +98,7 @@ def validate_args(arg):
     """Validate command line arguments."""
 
     for next_arg in [ arg.src, arg.dest ]:
-        if not re.search('(?x) \A [\w\-/]+ \Z', str(next_arg)):
+        if not re.search('(?x) \A [\w\-/\.]+ \Z', str(next_arg)):
             raise TypeError("Invalid repo syntax.")
 
     return

@@ -1,0 +1,38 @@
+---
+- hosts: localhost
+
+  tasks:
+    - name: archive lambda
+      archive:
+        path: ./lambda.py
+        format: zip
+
+    - name: my lambda function
+      lambda:
+        state: present
+        name: my_lambda
+        zip_file: lambda.py.zip
+        runtime: python2.7
+        handler: lambda.my_lambda
+        role: "{{ role }}"
+        tags:
+          'responsible party': nwatson@example.com
+
+    - name: Run my lambda
+      execute_lambda:
+        name: my_lambda
+        payload:
+          arg1: foo
+          arg2: bar
+        wait: true
+      register: my_lambda
+
+    - name: my lambda function
+      lambda:
+        state: absent
+        name: my_lambda
+
+    - debug:
+        msg: "{{ my_lambda }}"
+
+

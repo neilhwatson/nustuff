@@ -1,4 +1,18 @@
-*nwatson-help.txt*
+*nwatson.txt*
+
+Search and replace:
+Apply Perl commands like s/// to a buffer
+:perldo s/x/y/g
+
+sudo:
+:w !sudo tee % >/dev/null
+
+ssh:
+vim scp://<hostname>/path/to/file
+
+open:
+Open in existing gvim
+gvim --remote-silent <file>
 
 Editing maps:
 <leader>a Tabularize
@@ -10,6 +24,7 @@ Editing maps:
 <leader>p paste from system clipboard
 
 arg:
+My custom arg builder.
 :call Marg turns
 domain
 
@@ -33,6 +48,23 @@ Running and testing
 
 Sessions
 mks: <session> Make session for later retrieval (Session.vim is default name)
-source <ession> Load saved session
-crtl+o+o Open the last files edited and go to the last cursor location
+source <session> Load saved session
+ctrl+o+o Open the last files edited and go to the last cursor location
 
+Undo:
+Go back 10 minutes
+:ealier 10m
+Go forward 10 minutes
+:later 10m
+
+Numbers:
+ctrl-a increments number. Works with counts: n ctrl-a to increment n times.
+ctrl-z decrements number
+
+Moving:
+% Move to matching bracket or brace.
+
+Indent:
+gg=G Reindent whole file.
+=% Reindent current code block.
+n== Reindent the next n lines.
