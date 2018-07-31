@@ -14,6 +14,12 @@ open:
 Open in existing gvim
 gvim --remote-silent <file>
 
+editing:
+yt<x> yank from current cursor to <x> char in the current line
+yi[{"\[(] yank between given brackets or quotes
+dt<x> delete from current cursor to <x> char in the current line
+di[{"\[(] delete between given brackets or quote
+
 Editing maps:
 <leader>a Tabularize
 <leader>v vsplie
