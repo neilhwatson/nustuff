@@ -47,6 +47,11 @@ Buffer control:
 noremap <C-Tab> :bnext <CR>     Next buffer
 noremap <S-Tab> :bprevious <CR> Previous buffer
 
+Layout:
+Center with:
+:1,4 center
+Also left and right.
+
 Running and testing
 :Autorun enable auto running buffer on write
 :Noautorun disable auto running buffer on write
