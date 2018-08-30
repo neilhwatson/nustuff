@@ -9,4 +9,3 @@ iab r: register:
 iab l: loop:
 iab w: when:
 iab "{ "{{ }}"<Left><Left><Left><Left>
-iab #v # vim:ft=ansible.yaml<ESC>

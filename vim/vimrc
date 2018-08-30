@@ -28,6 +28,7 @@ set tabstop=8
 set softtabstop=3
 set shiftwidth=3
 set expandtab
+set modeline
 set autoindent
 set undolevels=100
 set showmatch
