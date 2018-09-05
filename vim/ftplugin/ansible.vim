@@ -1,4 +1,4 @@
-set filetype=ansible.yaml
+" set filetype=ansible.yaml
 
 " Ideas from: https://github.com/MicahElliott/Rocannon
 
