@@ -168,6 +168,9 @@ augroup Shell
       \  <leader>xc !boxes -r -d shell<CR>
 augroup END
 
+" Make help window vsplit
+autocmd FileType help wincmd L
+
 " Align = or =>
 "nnoremap <buffer> <silent> <leader>a :call Nhw_equal_aligner("null")<CR>
 nnoremap <leader>a :Tabularize<CR>
