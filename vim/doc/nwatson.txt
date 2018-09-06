@@ -4,6 +4,9 @@ Search and replace:
 Apply Perl commands like s/// to a buffer
 :perldo s/x/y/g
 
+regex:
+/v at beginning of regex to avoid having to escape for magic
+
 sudo:
 :w !sudo tee % >/dev/null
 
@@ -19,15 +22,19 @@ yt<x> yank from current cursor to <x> char in the current line
 yi[{"\[(] yank between given brackets or quotes
 dt<x> delete from current cursor to <x> char in the current line
 di[{"\[(] delete between given brackets or quote
+:%y yank whole buffer
+:%y+ yank whole buffer into clipboard
 
 Editing maps:
 <leader>a Tabularize
 <leader>v vsplie
 <leader>= swap between splits
 <leader>mc wrap with boxes
-<leader>xc wrap with boxes
+<leader>xc remove wrap with boxes
 <leader>c yank to system clipboard
+<leader>ca yank buffer to system clipboard
 <leader>p paste from system clipboard
+:nmap list all maps
 
 arg:
 My custom arg builder.
@@ -64,7 +71,7 @@ ctrl+o+o Open the last files edited and go to the last cursor location
 
 Undo:
 Go back 10 minutes
-:ealier 10m
+:earlier 10m
 Go forward 10 minutes
 :later 10m
 
@@ -74,8 +81,17 @@ ctrl-z decrements number
 
 Moving:
 % Move to matching bracket or brace.
+gd fine where variable under curso is defined.
+crtl-o go to previous location
+w beginning of next word
+e end of next word
 
 Indent:
 gg=G Reindent whole file.
 =% Reindent current code block.
 n== Reindent the next n lines.
+
+Registers
+:ctrl-r<register> past register in command line
+:registers to see all registers.
+"+ or "* is the clipboard
