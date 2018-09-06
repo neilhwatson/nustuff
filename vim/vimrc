@@ -181,7 +181,9 @@ nnoremap <leader>= <C-w>=
 " swap between splits
 nnoremap <leader>s <C-w><C-w>
 " yank to system clipboard
-vnoremap <leader>c "+y
+nnoremap <leader>c "+y
+" yank buffer to system clipboard
+nnoremap <leader>ca :%y+<CR>
 " paste from system clipboard
 nnoremap <leader>p "+gp
 " buffer control using CtrlP plugin
