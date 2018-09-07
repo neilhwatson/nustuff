@@ -91,7 +91,10 @@ gg=G Reindent whole file.
 =% Reindent current code block.
 n== Reindent the next n lines.
 
-Registers
+Registers:
 :ctrl-r<register> past register in command line
 :registers to see all registers.
 "+ or "* is the clipboard
+
+Debugging:
+:message See last message that passed by. Works on boot messages too.
