@@ -35,26 +35,36 @@ set showmatch
 set showcmd
 set number
 set textwidth=0
-if v:version >= 703
-   set colorcolumn=78
-endif
+set colorcolumn=78
 
 let mapleader = "s"
 
-call pathogen#infect()
+"
+" Plugins
+"
+call plug#begin('~/.vim/plugged')
+
+Plug 'nielsmadan/harlequin'
+Plug 'w0rp/ale'
+Plug 'ctrlpvim/ctrlp.vim'
+
+call plug#end()
+" Install with:
+":PlugInstall
+" Update with:
+":PlugUpgrade
+"
+" End of plugins
+"
 
 " autowrite buffer on suspend, buffer switch etc...
 set autowrite
 
-syntax enable
 colorscheme harlequin
 
 "for scp
 "set nocp
 let g:netrw_silent=1
-if v:version >= 600
-    filetype plugin indent on
-endif
 
 
 "date stamps
