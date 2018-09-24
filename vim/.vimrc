@@ -47,6 +47,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'nielsmadan/harlequin'
 Plug 'w0rp/ale'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'godlygeek/tabular'
 
 call plug#end()
 " Install with:
