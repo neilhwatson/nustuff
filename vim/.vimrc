@@ -22,6 +22,7 @@
 
 set cursorline
 set cursorcolumn
+set directory=$HOME/.vim/swap//
 set history=50
 set ruler
 set tabstop=8
