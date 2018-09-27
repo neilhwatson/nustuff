@@ -37,6 +37,8 @@ set showcmd
 set number
 set textwidth=0
 set colorcolumn=78
+" for fancy status line plugins
+set laststatus=2
 
 let mapleader = "s"
 
@@ -46,6 +48,7 @@ let mapleader = "s"
 call plug#begin('~/.vim/plugged')
 
 Plug 'nielsmadan/harlequin'
+Plug 'itchyny/lightline.vim'
 Plug 'w0rp/ale'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'godlygeek/tabular'
