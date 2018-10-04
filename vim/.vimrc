@@ -52,6 +52,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'w0rp/ale'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'godlygeek/tabular'
+Plug 'tpope/vim-commentary'
 
 call plug#end()
 " Install with:
