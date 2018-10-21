@@ -1,6 +1,6 @@
 # Useful shell fucntions:
 
-ifunction mdr() {
+function mdr() {
    pandoc $1 | lynx -stdin -dump
 }
 
