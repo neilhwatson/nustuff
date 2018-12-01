@@ -1,44 +1,84 @@
-*nwatson.txt*
+*nwatson.txt*             For Vim version 8            Last change: see github
 
-Search and replace:
+==============================================================================
+1. Neil Watson's Vim cheatsheet
+
+------------------------------------------------------------------------------
+PURPOSE
+
+A collection of Vim cheats I can never remember and some custom settings of my
+own.
+
+------------------------------------------------------------------------------
+USE
+
+Place this file in ~/.vim/doc/nwatson.txt and activate with
+:helptags ~/.vim/doc
+
+
+==============================================================================
+2. Cheatsheet
+
+------------------------------------------------------------------------------
+SEARCH AND REPLACE                                *nwatson-search-and-replace*
+
 Apply Perl commands like s/// to a buffer
 :perldo s/x/y/g
 
-regex:
+------------------------------------------------------------------------------
+REGEX                                                          *nwatson-regex*
+
 /v at beginning of regex to avoid having to escape for magic
 
-sudo:
+------------------------------------------------------------------------------
+SUDO                                                            *nwatson-sudo*
+
 :w !sudo tee % >/dev/null
 
-ssh:
+------------------------------------------------------------------------------
+SCP                                                              *nwatson-scp*
+
 vim scp://<hostname>/path/to/file
 
-open:
-Open in existing gvim
+------------------------------------------------------------------------------
+OPEN                                                            *nwatson-open*
+
+Open in existing gvim instance.
 gvim --remote-silent <file>
 
-editing:
-yt<x> yank from current cursor to <x> char in the current line
-yi[{"\[(] yank between given brackets or quotes
-dt<x> delete from current cursor to <x> char in the current line
-di[{"\[(] delete between given brackets or quote
-:%y yank whole buffer
-:%y+ yank whole buffer into clipboard
+------------------------------------------------------------------------------
+EDITING                                                      *nwatson-editing*
 
-Editing maps:
-<leader>a Tabularize
-<leader>v vsplie
-<leader>= swap between splits
-<leader>mc wrap with boxes
-<leader>xc remove wrap with boxes
-<leader>c yank to system clipboard
-<leader>ca yank buffer to system clipboard
-<leader>p paste from system clipboard
-:nmap list all maps
+yt<x>      Yank from current cursor to <x> char in the current line
+yi[{"\[(]  Yank between given brackets or quotes
+:%y        Yank whole buffer
+:%y+       Yank whole buffer into clipboard
 
-arg:
+dt<x>      Delete from current cursor to <x> char in the current line
+di[{"\[(]  Delete between given brackets or quote
+
+78i-<ESC>  Insert 78 hyphens and return to normal mode
+
+<leader>a  Tabularize
+
+<leader>v  vsplit
+<leader>=  Swap between splits
+<leader>mc Wrap with boxes
+
+<leader>xc Remove wrap with boxes
+
+<leader>c  Yank to system clipboard
+<leader>ca Yank buffer to system clipboard
+<leader>p  Paste from system clipboard
+
+:nmap      List all maps
+
+------------------------------------------------------------------------------
+ARG                                                              *nwatson-arg*
+
 My custom arg builder.
 :call Marg turns
+
 domain
 
 into
@@ -49,52 +89,73 @@ shift
 domain=$1
 ;;
 
-Buffer control:
-; search for and change buffer
+------------------------------------------------------------------------------
+BUFFER                                                        *nwatson-buffer*
+
+;                               Crtl-p plugin search for and change buffer
 noremap <C-Tab> :bnext <CR>     Next buffer
 noremap <S-Tab> :bprevious <CR> Previous buffer
 
-Layout:
-Center with:
-:1,4 center
-Also left and right.
+------------------------------------------------------------------------------
+AUTORUN                                                              *autorun*
 
-Running and testing
-:Autorun enable auto running buffer on write
-:Noautorun disable auto running buffer on write
-<leader>r Run current file
+:Autorun   Enable auto running buffer on write
+:Noautorun Disable auto running buffer on write
+<leader>r  Run current file
 
-Sessions
-mks: <session> Make session for later retrieval (Session.vim is default name)
-source <session> Load saved session
-ctrl+o+o Open the last files edited and go to the last cursor location
+------------------------------------------------------------------------------
+SESSIONS                                                    *nwatson-sessions*
 
-Undo:
-Go back 10 minutes
-:earlier 10m
-Go forward 10 minutes
-:later 10m
+mks: <session>    Make session for later retrieval (Session.vim is default
+                  name)
 
-Numbers:
-ctrl-a increments number. Works with counts: n ctrl-a to increment n times.
-ctrl-z decrements number
+source <session>  Load saved session
 
-Moving:
-% Move to matching bracket or brace.
-gd fine where variable under curso is defined.
-crtl-o go to previous location
-w beginning of next word
-e end of next word
+ctrl+o+o          Open the last files edited and go to the last cursor
+                  location
 
-Indent:
-gg=G Reindent whole file.
-=% Reindent current code block.
-n== Reindent the next n lines.
+------------------------------------------------------------------------------
+UNDO                                                            *nwatson-undo*
 
-Registers:
-:ctrl-r<register> past register in command line
-:registers to see all registers.
-"+ or "* is the clipboard
+:earlier 10m  Go back 10 minutes
+:later 10m    Go forward 10 minutes
 
-Debugging:
-:message See last message that passed by. Works on boot messages too.
+------------------------------------------------------------------------------
+NUMBERS                                                      *nwatson-numbers*
+
+ctrl-a  Increments number. Works with counts: n ctrl-a to increment n times.
+ctrl-z  Decrements number
+
+------------------------------------------------------------------------------
+MOVING                                                        *nwatson-moving*
+
+%       Move to matching bracket or brace.
+gd      Find where variable under curso is defined.
+crtl-o  Go to previous location
+b       Beginning of previous word
+B       Beginning of previous WORD
+w       Beginning of next word
+W       Beginning of next WORD
+e       End of next word
+E       End of next WORD
+
+------------------------------------------------------------------------------
+INDENT                                                        *nwatson-indent*
+
+gg=G  Reindent whole file.
+=%    Reindent current code block.
+n==   Reindent the next n lines.
+
+------------------------------------------------------------------------------
+Registers                                                  *nwatson-registers*
+
+:ctrl-r<register>  Paste register in command line
+:registers         List all registers.
+"+ or "*           Are the clipboard
+
+------------------------------------------------------------------------------
+DEBUG                                                          *nwatson-debug*
+
+:message  See last message that passed by. Works on boot messages too.
+
+vim: tw=78
