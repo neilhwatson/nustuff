@@ -215,3 +215,6 @@ noremap <leader>] :lnext<CR>
 command! Autorun   au BufWritePost <buffer> !%:p
 command! Noautorun au! BufWritePost <buffer>
 nnoremap <leader>r :!%:p<CR>
+
+" Custom files
+source ~/.vim/autoclosing.vim
