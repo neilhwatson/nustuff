@@ -187,6 +187,9 @@ augroup END
 " Make help window vsplit
 autocmd FileType help wincmd L
 
+
+" update file
+nnoremap <leader>u :update<CR>
 " Align = or =>
 "nnoremap <buffer> <silent> <leader>a :call Nhw_equal_aligner("null")<CR>
 nnoremap <leader>a :Tabularize<CR>
