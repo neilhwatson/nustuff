@@ -184,32 +184,35 @@ augroup Shell
       \  <leader>xc !boxes -r -d shell<CR>
 augroup END
 
-" Make help window vsplit
-autocmd FileType help wincmd L
-
 
 " update file
 nnoremap <leader>u :update<CR>
-" Align = or =>
-"nnoremap <buffer> <silent> <leader>a :call Nhw_equal_aligner("null")<CR>
-nnoremap <leader>a :Tabularize<CR>
+
+" splits and windows
 " vsplit
 nnoremap <leader>v :vsplit<CR>
+" move right to next window
+nnoremap <leader>l <C-w>l
+" move left to next window
+nnoremap <leader>h <C-w>h
+" swap between splits
+nnoremap <leader>x <C-w>x
 " equi-space vsplits
 nnoremap <leader>= <C-w>=
-" swap between splits
-nnoremap <leader>s <C-w><C-w>
+" Make help window vsplit
+autocmd FileType help wincmd L
+
+" buffer control using CtrlP plugin
+nnoremap ; :CtrlPBuffer<CR>
+
+" clipboard maps
 " yank to system clipboard
 nnoremap <leader>c "+y
 " yank buffer to system clipboard
 nnoremap <leader>ca :%y+<CR>
 " paste from system clipboard
 nnoremap <leader>p "+gp
-" buffer control using CtrlP plugin
-nnoremap ; :CtrlPBuffer<CR>
-" Cycle between buffers
-noremap <C-Tab> :bnext <CR>
-noremap <S-Tab> :bprevious <CR>
+
 " next and previous errors
 noremap <leader>[ :lprevious<CR>
 noremap <leader>] :lnext<CR>
