@@ -5,6 +5,7 @@ wmname LG3D
 xscreensaver -no-splash &
 dbar_clock.sh & disown
 xset b 50 440 50
+# xrdb -merge .Xdefaults
 #
 # dwm
 #

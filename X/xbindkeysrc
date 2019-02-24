@@ -31,7 +31,9 @@
 	 Control + 2
 "~/bin/starter pidgin"
     Control + 3
-"~/bin/starter gnome-terminal" 
+"xterm -fg black -bg white"
+    Control + 6
+"xterm -fg white -bg black"
     Control + 7
 "~/bin/starter gvim"
     Control + 8

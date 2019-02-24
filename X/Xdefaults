@@ -1,44 +1,30 @@
-# The MIT License (MIT)
-# 
-# Copyright (c) 2014 Neil H Watson
-# 
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-# 
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-# 
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-#
-# Xterm 
-xterm*faceName: Bitstream Vera Sans Mono:style=Bold
-xterm*faceSize: 10
-xterm*termName: xterm
-xterm*background: black
-xterm*foreground: white
-xterm*geometry: 78x68+1+1
-xterm*tn: xterm
-xterm*scrollBar: false
-xterm*sl: 1000
-xterm*colorMode: 1
-xterm*Utf8: 1
-xterm*loginShell: 1
-xterm*charClass: 33:48, 37:48, 42:48, 45-47:48, 58:48, 63-64:48, 126:48
+Xcursor.size: 32
 
-# Fonts
+XTerm*faceName: Bitstream Vera Sans Mono:style=Bold
+XTerm*faceSize: 14
+XTerm*termName: XTerm-256color
+XTerm*background: black
+XTerm*foreground: white
+XTerm*geometry: 78x68+1+1
+XTerm*tn: XTerm
+XTerm*scrollBar: false
+XTerm*sl: 1000
+XTerm*colorMode: true
+XTerm*Utf8: true
+XTerm*loginShell: true
+XTerm*visualBell: true
+XTerm*bellIsUrgent: true
+XTerm*fullscreen: never
+XTerm*charClass: 33:48, 37:48, 42:48, 45-47:48, 58:48, 63-64:48, 126:48
+*VT100.Translations: #override \
+   Shift <Btn1Up>: exec-formatted("firefox '%t'", PRIMARY)
+
 Xft.antialias:true
-Xft.dpi:120
+Xft.dpi:140
 Xft.hinting:true
 Xft.hintstyle:hintslight
 
-# Cursor
+XTerm*vt100.translations: #override \
+    Shift Ctrl <Key> C: copy-selection(CLIPBOARD) \n\
+    Shift Ctrl <Key> V: insert-selection(CLIPBOARD)
+
