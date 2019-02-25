@@ -207,7 +207,7 @@ nnoremap ; :CtrlPBuffer<CR>
 
 " clipboard maps
 " yank to system clipboard
-nnoremap <leader>c "+y
+nnoremap <leader>c "+y<CR>
 " yank buffer to system clipboard
 nnoremap <leader>ca :%y+<CR>
 " paste from system clipboard
