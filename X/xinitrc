@@ -1,11 +1,11 @@
 xbindkeys &
 dunst &
 synclient TouchPadOff=1
-wmname LG3D
+#wmname LG3D
 xscreensaver -no-splash &
-dbar_clock.sh & disown
+(conky -c ~/src/test/conky.conf |while read LINE; do xsetroot -name "$LINE" done) &
 xset b 50 440 50
-# xrdb -merge .Xdefaults
+xrdb -merge .Xdefaults
 #
 # dwm
 #
