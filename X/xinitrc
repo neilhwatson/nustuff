@@ -3,7 +3,7 @@ dunst &
 synclient TouchPadOff=1
 #wmname LG3D
 xscreensaver -no-splash &
-(conky -c ~/src/test/conky.conf |while read LINE; do xsetroot -name "$LINE" done) &
+(conky -c ~/.conky.conf |while read LINE; do xsetroot -name "$LINE" done) &
 xset b 50 440 50
 xrdb -merge .Xdefaults
 #
