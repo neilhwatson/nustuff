@@ -25,46 +25,26 @@
 #keystate_capslock = enable
 
 ## For a macbook
-"~/bin/starter /home/neil/firefox/firefox"
+"/home/neil/firefox/firefox"
     Control + 1
-"~/bin/starter /home/neil/firefox/firefox"
-    Mod4 + Super_L + 1
 
-"~/bin/starter emacs ~/calendar/*.org"
+"emacs ~/calendar/*.org"
 	 Control + 2
-"~/bin/starter emacs ~/calendar/*.org"
-    Mod4 + Super_L + 2
 
-"~/bin/starter pidgin"
+"pidgin"
     Control + 3
-"~/bin/starter pidgin"
-    Mod4 + Super_L + 3
 
 "xterm -fg white -bg black -e mutt"
     Control + 5
-"xterm -fg white -bg black -e mutt"
-    Mod4 + Super_L + 5
 
 "xterm -fg black -bg white"
     Control + 6
-"xterm -fg black -bg white"
-    Mod4 + Super_L + 6
 
 "xterm -fg white -bg black"
     Control + 7
-"xterm -fg white -bg black"
-    Mod4 + Super_L + 7
 
-"~/bin/starter gvim"
+"gvim"
     Control + 8
-"~/bin/starter gvim"
-    Mod4 + Super_L + 8
-#"vncviewer 192.168.0.3"
-#    F10
-"dmenu_run"
-    Control + 0
-"dmenu_run"
-    Mod4 + Super_L + 0
 
 "slock"
     Control+Alt + l 
