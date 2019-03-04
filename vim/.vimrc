@@ -28,6 +28,7 @@ set ruler
 set tabstop=8
 set softtabstop=3
 set shiftwidth=3
+set shiftround
 set expandtab
 set modeline
 set autoindent
@@ -53,6 +54,7 @@ Plug 'w0rp/ale'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
 
 call plug#end()
 " Install with:
@@ -160,7 +162,7 @@ augroup Java
    autocmd!
    " Box comments
    autocmd Filetype java,groovy nnoremap <buffer> <leader>mc
-      \ !!boxes -d java-cmt<CR>
+      \ !!boxes -d java-cmt<cr>
    autocmd Filetype java,groovy vnoremap <buffer> <leader>mc
       \ !boxes -d java-cmt<CR>
    " Remove comments
