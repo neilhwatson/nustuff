@@ -225,4 +225,4 @@ command! Noautorun au! BufWritePost <buffer>
 nnoremap <leader>r :!%:p<CR>
 
 " Custom files
-source ~/.vim/autoclosing.vim
+"source ~/.vim/autoclosing.vim

@@ -7,3 +7,6 @@ do
    echo ./gitmirror.py -g2b "neilhwatson/$next_repo" "neilhwatson/$next_repo"
    ./gitmirror.py -g2b "neilhwatson/$next_repo" "neilhwatson/$next_repo"
 done
+
+./gitmirror.py -b2g neilhwatson/calendar neilhwatson/calendar
+
