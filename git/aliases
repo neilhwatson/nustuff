@@ -3,7 +3,7 @@
 
    aliases = config --get-regexp alias
    ci = commit
-   co = !git checkout -b $1
+   co = "!f(){ git checkout -b \"$1\"; }; f"
    cp = "!f(){ git commit --all --message \"$1\" && git push; }; f"
    nope = reset --hard HEAD
    mr = push -u origin HEAD
