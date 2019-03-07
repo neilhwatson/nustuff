@@ -24,34 +24,33 @@
 #keystate_scrolllock = enable
 #keystate_capslock = enable
 
-## For a macbook
 "/home/neil/firefox/firefox"
-    Control + 1
+    Mod4 + Super_L + 1
 
 "emacs ~/calendar/*.org"
-	 Control + 2
+    Mod4 + Super_L + 2
 
 "pidgin"
-    Control + 3
+    Mod4 + Super_L + 3
 
-"xterm -fg white -bg black -e mutt"
-    Control + 5
+#"xterm -fg white -bg black -e mutt"
+
+"gnome-terminal -e mutt"
+    Mod4 + Super_L + 5
 
 "xterm -fg black -bg white"
-    Control + 6
+    Mod4 + Super_L + 6
 
-"xterm -fg white -bg black"
-    Control + 7
+#"xterm -fg white -bg black"
+
+"gnome-terminal"
+    Mod4 + Super_L + 7
 
 "gvim"
-    Control + 8
+    Mod4 + Super_L + 8
 
 "slock"
     Control+Alt + l 
-"feh --bg-center $(find ~/wallpapers/ -type f|shuf|head -n1)"
-    Control+Alt + w
-"xclock -digital -strftime %H:%M:%S -update 1 -geom +1+1"
-    Control+Alt + c
 
 #hibernate
 #"sudo /usr/sbin/pm-hibernate"
