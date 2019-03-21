@@ -1,3 +1,4 @@
+set -o vi
 export PATH=~/bin:$PATH
 
 # Useful shell fucntions:
