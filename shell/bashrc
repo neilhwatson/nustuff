@@ -7,41 +7,50 @@ function mdr() {
    pandoc $1 | lynx -stdin -dump
 }
 
-function docker_stop_all(){
-   docker stop $(curl -s --unix-socket /run/docker.sock \
-      http://docker/containers/json|jq -r '.[].Id')
+##########
+# Docker #
+##########
+
+alias dockerr='docker run --rm -it'
+
+#### Stop all running containers
+function docker-kill {
+   docker kill $(docker ps -q)
 }
 
 #### Remove all containers
-function docker_remove_containers(){
-   docker rm $(curl -s --unix-socket /run/docker.sock \
-      http://docker/containers/json?all=1|jq -r '.[].Id')
+function docker-remove {
+   docker rm $(docker ps -a -q)
 }
 
 #### Remove all images
-function docker_remove_images(){
-   docker rmi $(curl -s --unix-socket /run/docker.sock \
+function docker-remove-images {
+   if [[ $1 == 'force' ]]
+   then
+      force='--force'
+   else
+      force=''
+   fi
+
+   docker rmi $force $(curl -s --unix-socket /run/docker.sock \
       http://docker/images/json?all=1|jq -r '.[].Id')
 }
 
+#######
+# vim #
+#######
+
 #### Open in existing gvim
 function gvimr(){
-    args="$@"
-    /usr/bin/gvim --remote-silent $args
+    local args="$@"
+    gvim --remote-silent $args
 }
+alias gvimr='gvim --remote-silent'
+alias gvimo='gvim -O'
 
-function rkey(){
-   ssh-keygen -f "/home/neil/.ssh/known_hosts" -R orion.watson-wilson.ca
-}
-
-alias journal='vim ~/neil/docs/journal/$(date +%Y).txt'
-
-alias tableflip='echo "(╯°□°）╯︵ ┻━┻"'
-alias shrug='echo "¯\_(ツ)_/¯"'
-alias bear='echo "ʕ •ᴥ•ʔ"'
-alias kitty='echo "/ᐠ｡ꞈ｡ᐟ\\"'
-
-# For laptop monitor switching
+#####################
+# Monitor switching #
+#####################
 if [[ $HOSTNAME == 'luna' ]]
 then
    alias monitor_home='xrandr --output eDP-1 --mode 1920x1200 --output HDMI-2 --mode 1920x1200 --same-as eDP-1'
@@ -49,3 +58,52 @@ then
    alias monitor_laptop='xrandr --output eDP-1 --mode 2560x1600 --output HDMI-2 --off'
 fi
 
+#######
+# ssh #
+#######
+function sskey {
+   local time=${1:-4h}
+   ssh-agent -k 2>/dev/null
+   eval $(ssh-agent -t $time)
+   ssh-add
+}
+
+function rkey(){
+   ssh-keygen -f "/home/neil/.ssh/known_hosts" -R orion.watson-wilson.ca
+}
+
+########
+# misc #
+########
+function ch {
+   curl -s cheat.sh/$1
+}
+
+function weather {
+   local location=$1
+
+   case $location in
+
+      markham)
+         curl wttr.in/~markham+ontario+canada?m
+         ;;
+      cottage|brighton)
+         curl wttr.in/~brighton+ontario+canada?m
+         ;;
+      # TODO Presquil point
+
+      *)
+         echo "$location not know. Try raw curl wttr.in instead."
+         ;;
+
+   esac
+}
+alias journal='vim ~/neil/docs/journal/$(date +%Y).txt'
+
+alias tableflip='echo "(╯°□°）╯︵ ┻━┻"'
+alias shrug='echo "¯\_(ツ)_/¯"'
+alias bear='echo "ʕ •ᴥ•ʔ"'
+alias kitty='echo "/ᐠ｡ꞈ｡ᐟ\\"'
+
+alias update-calendar="cd ~/calendar; git commit -am 'update' \
+   && git push origin master; cd \$OLDPWD"
