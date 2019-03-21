@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# test random file selector
+
+dir=$1
+
+while [ true ]
+do
+    feh --bg-max --no-fehbg -z $dir &
+    sleep 180
+done
