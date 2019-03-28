@@ -1,4 +1,6 @@
 set -o vi
+bind -m vi-insert "\C-l":clear-screen
+
 export PATH=~/bin:$PATH
 
 # Useful shell fucntions:
@@ -53,7 +55,7 @@ alias gvimo='gvim -O'
 #####################
 if [[ $HOSTNAME == 'luna' ]]
 then
-   alias monitor_home='xrandr --output eDP-1 --mode 1920x1200 --output HDMI-2 --mode 1920x1200 --same-as eDP-1'
+   alias monitor_home='xrandr --output eDP-1 --off --output HDMI-2 --mode 1920x1200'
    alias monitor_work='xrandr --output eDP-1 --mode 1920x1080 --output HDMI-2 --mode 1920x1080 --same-as eDP-1'
    alias monitor_laptop='xrandr --output eDP-1 --mode 2560x1600 --output HDMI-2 --off'
 fi
