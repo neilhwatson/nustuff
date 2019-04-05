@@ -96,3 +96,7 @@ Credit: http://blog.jpalardy.com/posts/skip-grep-use-awk/
     next=foo
     echo foo: $foo
     echo print foo by referencing next: ${!next}
+    
+## HTTP server in one line
+
+    { echo -e 'HTTP/1.1 503 OK\nService Temporarily Unavailable\n\n'; } | netcat -l -p 8000
