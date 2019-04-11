@@ -4,3 +4,7 @@ set show-mode-in-prompt on
 set vi-ins-mode-string \e[38;5;45m(i)\e[1 q\e[0m
 # Prefix prompt with (c) in green when in command mode
 set vi-cmd-mode-string \e[1;32m(c)\e[1 q\e[0m
+
+set bell-style visible
+set colored-completion-prefix on
+set colored-stats on
