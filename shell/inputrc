@@ -1,0 +1,4 @@
+set editing-mode vi
+set show-mode-in-prompt on
+set vi-ins-mode-string \e[38;5;45m(ins) \e[1 q\e[0m
+set vi-cmd-mode-string \e[1;32m(cmd) \e[1 q\e[0m
