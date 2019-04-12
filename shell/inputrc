@@ -1,10 +1,19 @@
 set editing-mode vi
 set show-mode-in-prompt on
 # Prefix prompt with (1) in light blue when in insert mode
-set vi-ins-mode-string \e[38;5;45m(i)\e[1 q\e[0m
+set vi-ins-mode-string \e[38;5;45m(i)\e[5 q\e[0m
 # Prefix prompt with (c) in green when in command mode
 set vi-cmd-mode-string \e[1;32m(c)\e[1 q\e[0m
 
 set bell-style visible
 set colored-completion-prefix on
 set colored-stats on
+
+# Other options (replace the number after \e[):
+# Ps = 0  -> blinking block.
+# Ps = 1  -> blinking block (default).
+# Ps = 2  -> steady block.
+# Ps = 3  -> blinking underline.
+# Ps = 4  -> steady underline.
+# Ps = 5  -> blinking bar (xterm).
+# Ps = 6  -> steady bar (xterm).
