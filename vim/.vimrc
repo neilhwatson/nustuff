@@ -85,6 +85,7 @@ iab hms  <c-r>=strftime("%H:%M:%S")<cr>
 
 " misc abbs
 iab CFE CFEngine
+iab vimmode vim: sw=3 sts=3 tw=78
 
 au BufRead,BufNewFile */journal/*.txt set textwidth=78 spell
 au BufRead,BufNewFile Makefile* set noexpandtab
