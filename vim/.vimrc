@@ -211,7 +211,7 @@ autocmd FileType help wincmd L
 " nnoremap ; :CtrlPBuffer<CR>
 nnoremap ; :Buffers<CR>
 nnoremap <C-P> :Files<CR>
-"let g:fzf_layout = { 'right': '~30%' }
+let g:fzf_layout = { 'left': '~40%' }
 
 " clipboard maps
 " yank to system clipboard
