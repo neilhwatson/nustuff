@@ -74,6 +74,30 @@ function rkey(){
    ssh-keygen -f "/home/neil/.ssh/known_hosts" -R orion.watson-wilson.ca
 }
 
+###########
+# git-fzf #
+###########
+is_in_git_repo() {
+  git rev-parse HEAD > /dev/null 2>&1
+}
+
+gf() {
+  is_in_git_repo &&
+    git -c color.status=always status --short |
+    fzf --height 40% -m --ansi --nth 2..,.. | awk '{print $2}'
+}
+
+gb() {
+  is_in_git_repo &&
+    git branch -a -vv --color=always | grep -v '/HEAD\s' |
+    fzf --height 40% --ansi --multi --tac | sed 's/^..//' | awk '{print $1}' |
+    sed 's#^remotes/[^/]*/##'
+}
+
+bind '"\er": redraw-current-line'
+bind '"\C-g\C-f": "$(gf)\n\e\C-e\er"'
+bind '"\C-g\C-b": "$(gb)\n\e\C-e\er"'
+
 ########
 # misc #
 ########

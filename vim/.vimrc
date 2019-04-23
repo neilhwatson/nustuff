@@ -51,10 +51,12 @@ call plug#begin('~/.vim/plugged')
 Plug 'nielsmadan/harlequin'
 Plug 'itchyny/lightline.vim'
 Plug 'w0rp/ale'
-Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'ctrlpvim/ctrlp.vim'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all --no-fish --no-zsh' }
+Plug 'junegunn/fzf.vim'
 
 call plug#end()
 " Install with:
@@ -85,6 +87,7 @@ iab hms  <c-r>=strftime("%H:%M:%S")<cr>
 
 " misc abbs
 iab CFE CFEngine
+iab vimmode vim: sw=3 sts=3 tw=78
 
 au BufRead,BufNewFile */journal/*.txt set textwidth=78 spell
 au BufRead,BufNewFile Makefile* set noexpandtab
@@ -205,7 +208,10 @@ nnoremap <leader>= <C-w>=
 autocmd FileType help wincmd L
 
 " buffer control using CtrlP plugin
-nnoremap ; :CtrlPBuffer<CR>
+" nnoremap ; :CtrlPBuffer<CR>
+nnoremap ; :Buffers<CR>
+nnoremap <C-P> :Files<CR>
+let g:fzf_layout = { 'left': '~40%' }
 
 " clipboard maps
 " yank to system clipboard
