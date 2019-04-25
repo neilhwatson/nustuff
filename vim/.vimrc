@@ -38,6 +38,7 @@ set showcmd
 set number
 set textwidth=0
 set colorcolumn=78
+set wildmenu
 " for fancy status line plugins
 set laststatus=2
 
