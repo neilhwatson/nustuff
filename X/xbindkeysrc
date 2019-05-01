@@ -35,7 +35,7 @@
 
 #"xterm -fg white -bg black -e mutt"
 
-"gnome-terminal -e mutt"
+"gnome-terminal -- mutt"
     Mod4 + Super_L + 5
 
 "xterm -fg black -bg white"
@@ -51,6 +51,9 @@
 
 "slock"
     Control+Alt + l 
+
+"gnome-terminal -- $HOME/bin/fmenu"
+    Mod4 + Super_L + p
 
 #hibernate
 #"sudo /usr/sbin/pm-hibernate"
