@@ -68,6 +68,10 @@
 
     find /path -name "*files*" -exec perl -pi -e 's///g' {} \;
 
+## Find duplicate files
+
+    md5sum *|awk -e '{print $1}'|sort|uniq -d
+
 ## Weather report
 
     curl wttr.in

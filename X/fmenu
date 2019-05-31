@@ -1,0 +1,17 @@
+#!/bin/bash
+
+export PATH=$HOME/.fzf/bin:$HOME:/bin:$PATH
+# source $HOME/.bashrc
+
+if ( ! which fzf )
+then
+   echo fzf command not found
+   sleep 10
+   exit 1
+fi
+
+selection=$(dmenu_path|fzf --ansi --preview 'man {}')
+# setsid $selection >/dev/null 2>&1 < /dev/null &
+# exec $selection &
+nohup $selection </dev/null >/dev/null 2>&1 &
+sleep 1

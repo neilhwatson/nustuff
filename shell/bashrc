@@ -1,6 +1,17 @@
 set -o vi
 bind -m vi-insert "\C-l":clear-screen
 
+# history
+shopt -s histappend
+shopt -s cmdhist
+HISTFILESIZE=1000000
+HISTSIZE=1000000
+HISTCONTROL=ignoreboth
+HISTIGNORE='ls:bg:fg:history'
+HISTTIMEFORMAT='%F %T '
+PROMPT_COMMAND='history -a'
+
+
 export PATH=~/bin:$PATH
 
 # Useful shell fucntions:
