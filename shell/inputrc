@@ -1,9 +1,9 @@
 set editing-mode vi
 set show-mode-in-prompt on
 # Prefix prompt with (1) in light blue when in insert mode
-set vi-ins-mode-string \1\e[38;5;45m(i)\e[1 q\e[0m\2
+# set vi-ins-mode-string \1\e[38;5;45m(i)\e[1 q\e[0m\2
 # Prefix prompt with (c) in green when in command mode
-set vi-cmd-mode-string \1\e[1;32m(c)\e[1 q\e[0m\2
+# set vi-cmd-mode-string \1\e[1;32m(c)\e[1 q\e[0m\2
 
 set bell-style visible
 set colored-completion-prefix on
