@@ -6,6 +6,7 @@
    co = "!f(){ git checkout \"$1\"; }; f"
    nb = "!f(){ git checkout -b \"$1\"; }; f"
    cp = "!f(){ git commit --all --message \"$1\" && git push; }; f"
+   db = "!f(){ git push -d origin \"$1\"; git branch -d \"$1\" }; f"
    nope = reset --hard HEAD
    mr = push -u origin HEAD
    st = status
