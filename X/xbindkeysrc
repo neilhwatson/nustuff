@@ -55,6 +55,12 @@
 "gnome-terminal -- $HOME/bin/fmenu"
     Mod4 + Super_L + p
 
+'xrandr --output eDP-1 --mode 2560x1600 --output HDMI-2 --off'
+   Mod4 + Super_L + 9
+
+   'xrandr --output eDP-1 --off --output HDMI-2 --mode 1920x1200'
+   Mod4 + Super_L + 0
+   
 #hibernate
 #"sudo /usr/sbin/pm-hibernate"
     #m:0x0 + c:213
