@@ -56,8 +56,10 @@ Plug 'w0rp/ale'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
+Plug 'hashivim/vim-terraform'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all --no-fish --no-zsh' }
 Plug 'junegunn/fzf.vim'
+Plug 'drmikehenry/vim-fontsize'
 
 call plug#end()
 " Install with:

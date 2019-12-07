@@ -158,3 +158,13 @@ man() {
     LESS_TERMCAP_us=$'\e[01;32m' \
     command man "$@"
 }
+
+#############
+# Terraform #
+#############
+
+alias tfv='terraform validate'
+alias tfp='terraform plan'
+alias tfa='terraform apply'
+alias tfi='terraform init'
+export ARM_PROVIDER_STRICT=true
