@@ -196,24 +196,21 @@ augroup END
 " update file
 nnoremap <leader>u :update<CR>
 
-" splits and windows
-" vsplit
-nnoremap <leader>v :vsplit<CR>
-" move right to next window
-nnoremap <leader>l <C-w>l
-" move left to next window
-nnoremap <leader>h <C-w>h
-" swap between splits
-nnoremap <leader>x <C-w>x
-" equi-space vsplits
-nnoremap <leader>= <C-w>=
 " Make help window vsplit
 autocmd FileType help wincmd L
 
+" FZF maps
+nnoremap <leader>fb :Buffers<CR>
+nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fl :Blines<CR>
+nnoremap <leader>fh :History<CR>
+nnoremap <leader>fh: :History:<CR>
+nnoremap <leader>fh/ :History/<CR>
+"
 " buffer control using CtrlP plugin
 " nnoremap ; :CtrlPBuffer<CR>
-nnoremap ; :Buffers<CR>
-nnoremap <C-P> :Files<CR>
+" nnoremap ; :Buffers<CR>
+" nnoremap <C-P> :Files<CR>
 let g:fzf_layout = { 'left': '~40%' }
 
 " clipboard maps
@@ -234,4 +231,4 @@ command! Noautorun au! BufWritePost <buffer>
 nnoremap <leader>r :!%:p<CR>
 
 " Custom files
-"source ~/.vim/autoclosing.vim
+"source ~</.vim/autoclosing.vim
