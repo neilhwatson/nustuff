@@ -49,10 +49,10 @@ let mapleader = "s"
 "
 call plug#begin('~/.vim/plugged')
 
+Plug 'tpope/vim-vividchalk'
 Plug 'nielsmadan/harlequin'
 Plug 'itchyny/lightline.vim'
 Plug 'w0rp/ale'
-"Plug 'ctrlpvim/ctrlp.vim'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
@@ -73,7 +73,8 @@ call plug#end()
 " autowrite buffer on suspend, buffer switch etc...
 set autowrite
 
-colorscheme harlequin
+"colorscheme harlequin
+colorscheme vividchalk
 
 "for scp
 "set nocp

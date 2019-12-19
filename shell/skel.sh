@@ -26,6 +26,10 @@
 OLDPATH=$PATH
 export PATH=/bin:/usr/bin
 
+# For bash shells:
+set -euo pipefail
+IFS=$'\n\t'
+
 # Name me!
 PROGRAM=
 VERSION=
