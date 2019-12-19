@@ -1,6 +1,8 @@
 set -o vi
 bind -m vi-insert "\C-l":clear-screen
 
+export PS1="\[\e[37m\]\u\[\e[m\]@\[\e[32m\]\w\[\e[m\]\\$ "
+
 # history
 shopt -s histappend
 shopt -s cmdhist
