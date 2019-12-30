@@ -1,3 +1,6 @@
-# Vim cheatsheet
+# Line movements
 
-Moved to doc/nwatson.txt so I can call it from Vim
+0|^   Fx   Tx ge           b         h
+Start Find To End of word  Back word Left
+
+l e w t

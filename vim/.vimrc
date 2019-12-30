@@ -36,6 +36,7 @@ set undolevels=100
 set showmatch
 set showcmd
 set number
+set relativenumber
 set textwidth=0
 set colorcolumn=78
 set wildmenu
@@ -60,6 +61,7 @@ Plug 'hashivim/vim-terraform'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all --no-fish --no-zsh' }
 Plug 'junegunn/fzf.vim'
 Plug 'drmikehenry/vim-fontsize'
+Plug '0x0dea/vim-molasses'
 
 call plug#end()
 " Install with:
@@ -97,8 +99,9 @@ au BufRead,BufNewFile */journal/*.txt set textwidth=78 spell
 au BufRead,BufNewFile Makefile* set noexpandtab
 "au BufRead,BufNewFile *.py set noexpandtab
 
-" Add help tags
-":helptags ~/.vim/doc/
+" Add help tags, causes E154 duplicate tag error
+" :helptags ~/.vim/doc/
+
 let g:EnableCFE3KeywordAbbreviations=1
 
 "===================================
@@ -203,7 +206,7 @@ autocmd FileType help wincmd L
 " FZF maps
 nnoremap <leader>fb :Buffers<CR>
 nnoremap <leader>ff :Files<CR>
-nnoremap <leader>fl :Blines<CR>
+nnoremap <leader>fl :BLines<CR>
 nnoremap <leader>fh :History<CR>
 nnoremap <leader>fh: :History:<CR>
 nnoremap <leader>fh/ :History/<CR>

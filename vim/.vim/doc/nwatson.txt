@@ -3,51 +3,51 @@
 ==============================================================================
 1. Neil Watson's Vim cheatsheet
 
-------------------------------------------------------------------------------
-PURPOSE
-
-A collection of Vim cheats I can never remember and some custom settings of my
-own.
-
-------------------------------------------------------------------------------
-USE
-
-Place this file in ~/.vim/doc/nwatson.txt and activate with
+Place this file in ~/.vim/doc/nw.txt and activate with
 :helptags ~/.vim/doc
 
-
 ==============================================================================
-2. Cheatsheet
+2 Moving                                                         *nw-moving*
 
 ------------------------------------------------------------------------------
-SEARCH AND REPLACE                                *nwatson-search-and-replace*
+HORIZONTAL MOVE
+
+0/^   | Fx   | Tx | ge          | b         | h
+Start | Find | To | End of word | Back word | Left
+
+
+l e w tx fx $
+right | End of word | word
+
+------------------------------------------------------------------------------
+SEARCH AND REPLACE                                *nw-search-and-replace*
 
 Apply Perl commands like s/// to a buffer
 :perldo s/x/y/g
 
 ------------------------------------------------------------------------------
-REGEX                                                          *nwatson-regex*
+REGEX                                                          *nw-regex*
 
 /v at beginning of regex to avoid having to escape for magic
 
 ------------------------------------------------------------------------------
-SUDO                                                            *nwatson-sudo*
+SUDO                                                            *nw-sudo*
 
 :w !sudo tee % >/dev/null
 
 ------------------------------------------------------------------------------
-SCP                                                              *nwatson-scp*
+SCP                                                              *nw-scp*
 
 vim scp://<hostname>/path/to/file
 
 ------------------------------------------------------------------------------
-OPEN                                                            *nwatson-open*
+OPEN                                                            *nw-open*
 
 Open in existing gvim instance.
 gvim --remote-silent <file>
 
 ------------------------------------------------------------------------------
-EDITING                                                      *nwatson-editing*
+EDITING                                                      *nw-editing*
 
 yt<x>      Yank from current cursor to <x> char in the current line
 yi[{"\[(]  Yank between given brackets or quotes
@@ -74,7 +74,7 @@ di[{"\[(]  Delete between given brackets or quote
 :nmap      List all maps
 
 ------------------------------------------------------------------------------
-ARG                                                              *nwatson-arg*
+ARG                                                              *nw-arg*
 
 My custom arg builder.
 :call Marg turns
@@ -90,7 +90,7 @@ domain=$1
 ;;
 
 ------------------------------------------------------------------------------
-BUFFER                                                        *nwatson-buffer*
+BUFFER                                                        *nw-buffer*
 
 ;                               Crtl-p plugin search for and change buffer
 noremap <C-Tab> :bnext <CR>     Next buffer
@@ -104,7 +104,7 @@ AUTORUN                                                              *autorun*
 <leader>r  Run current file
 
 ------------------------------------------------------------------------------
-SESSIONS                                                    *nwatson-sessions*
+SESSIONS                                                    *nw-sessions*
 
 mks: <session>    Make session for later retrieval (Session.vim is default
                   name)
@@ -115,19 +115,19 @@ ctrl+o+o          Open the last files edited and go to the last cursor
                   location
 
 ------------------------------------------------------------------------------
-UNDO                                                            *nwatson-undo*
+UNDO                                                            *nw-undo*
 
 :earlier 10m  Go back 10 minutes
 :later 10m    Go forward 10 minutes
 
 ------------------------------------------------------------------------------
-NUMBERS                                                      *nwatson-numbers*
+NUMBERS                                                      *nw-numbers*
 
 ctrl-a  Increments number. Works with counts: n ctrl-a to increment n times.
 ctrl-z  Decrements number
 
 ------------------------------------------------------------------------------
-MOVING                                                        *nwatson-moving*
+MOVING                                                        *nw-moving*
 
 %       Move to matching bracket or brace.
 gd      Find where variable under curso is defined.
@@ -140,21 +140,21 @@ e       End of next word
 E       End of next WORD
 
 ------------------------------------------------------------------------------
-INDENT                                                        *nwatson-indent*
+INDENT                                                        *nw-indent*
 
 gg=G  Reindent whole file.
 =%    Reindent current code block.
 n==   Reindent the next n lines.
 
 ------------------------------------------------------------------------------
-Registers                                                  *nwatson-registers*
+Registers                                                  *nw-registers*
 
 :ctrl-r<register>  Paste register in command line
 :registers         List all registers.
 "+ or "*           Are the clipboard
 
 ------------------------------------------------------------------------------
-DEBUG                                                          *nwatson-debug*
+DEBUG                                                          *nw-debug*
 
 :message  See last message that passed by. Works on boot messages too.
 
