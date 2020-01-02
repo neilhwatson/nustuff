@@ -46,7 +46,7 @@
 "gnome-terminal"
     Mod4 + Super_L + 7
 
-"gvim"
+"~/bin/vim -g || vim -g"
     Mod4 + Super_L + 8
 
 "slock"
