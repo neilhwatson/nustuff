@@ -1,7 +1,6 @@
 clear lock
-keycode  0x42 = Escape
-keycode  66 = Escape
-        
+! keycode  0x42 = Control_L NoSymbol Control_L
+keycode  66 = Control_L NoSymbol Control_L
 
 keycode   8 =
 keycode   9 = Escape NoSymbol Escape
