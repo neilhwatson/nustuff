@@ -217,6 +217,9 @@ nnoremap <leader>fh/ :History/<CR>
 " nnoremap <C-P> :Files<CR>
 let g:fzf_layout = { 'left': '~40%' }
 
+" Window control
+nnoremap <leader>w <C-w>
+
 " clipboard maps
 " yank to system clipboard
 nnoremap <leader>c "+y<CR>
