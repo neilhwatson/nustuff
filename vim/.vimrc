@@ -36,7 +36,7 @@ set undolevels=100
 set showmatch
 set showcmd
 set number
-set relativenumber
+" set relativenumber
 set textwidth=0
 set colorcolumn=78
 set wildmenu
