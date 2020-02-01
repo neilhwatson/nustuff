@@ -51,7 +51,6 @@ let mapleader = "s"
 call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-vividchalk'
-Plug 'nielsmadan/harlequin'
 Plug 'itchyny/lightline.vim'
 Plug 'w0rp/ale'
 Plug 'godlygeek/tabular'

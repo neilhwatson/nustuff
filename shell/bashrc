@@ -112,8 +112,9 @@ gb() {
 }
 
 bind '"\er": redraw-current-line'
-bind '"\C-g\C-f": "$(gf)\n\e\C-e\er"'
-bind '"\C-g\C-b": "$(gb)\n\e\C-e\er"'
+bind '"\C-g\C-f": "$(gf)\n\er"'
+bind '"\C-g\C-b": "$(gb)\n\er"'
+# bind '"\C-g\C-b": "$(gb)\n\e\C-e\er"'
 
 ########
 # misc #
