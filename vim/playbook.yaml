@@ -2,7 +2,7 @@
 - hosts: localhost
   vars:
     # https://github.com/ycm-core/YouCompleteMe/wiki/Building-Vim-from-source
-    vim_version: v8.2.0076
+    vim_version: v8.2.0439
     deps:
       - libtool-bin
       - libncurses5-dev
@@ -57,10 +57,16 @@
           args:
             chdir: ~/src/vim
 
+    - name: Make clean
+      make:
+        chdir: ~/src/vim
+        target: distclean
+        params:
+          NUM_THREADS: 2
+
     - name: configure
       shell: |
-        ./configure --with-features=huge \
-          --enable-multibyte \
+        ./configure \
           --enable-rubyinterp=yes \
           --enable-python3interp=yes \
           --with-python3-config-dir=$(python3-config --configdir) \
