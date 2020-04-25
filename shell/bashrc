@@ -3,7 +3,7 @@ bind -m vi-insert "\C-l":clear-screen
 
 function colorized_prompt {
    # Check if last command exit code equals 0
-   exit=$?
+   local exit=$?
    if (($exit)); then
       printf "\e[31m╯°□°）╯︵ ┻━┻ ${exit}\e[m"
    else
