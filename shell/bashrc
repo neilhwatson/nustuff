@@ -1,7 +1,19 @@
 set -o vi
 bind -m vi-insert "\C-l":clear-screen
 
-export PS1="\[\e[37m\]\u\[\e[m\]@\[\e[32m\]\w\[\e[m\]\\$ "
+function colorized_prompt {
+   # Check if last command exit code equals 0
+   exit=$?
+   if (($exit)); then
+      printf "\e[31m╯°□°）╯︵ ┻━┻ ${exit}\e[m"
+   else
+      printf "\e[32m${exit}\e[m"
+   fi
+
+}
+export PS1='\[\e[37m\]\u\[\e[m\]@\[\e[32m\]\w\[\e[m\] $(colorized_prompt) '
+# export PS1='[\t] \W $(colorized_prompt) '
+# export PS1="\[\e[37m\]\u\[\e[m\]@\[\e[32m\]\w\[\e[m\]\\$ "
 
 # history
 shopt -s histappend
