@@ -33,6 +33,8 @@ set expandtab
 set modeline
 set autoindent
 set undolevels=100
+set undofile
+set undodir=~/.vim/undo
 set showmatch
 set showcmd
 set number
