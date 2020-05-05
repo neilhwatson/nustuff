@@ -11,7 +11,7 @@ function colorized_prompt {
    fi
 
 }
-export PS1='\[\e[37m\]\u\[\e[m\]@\[\e[32m\]\w\[\e[m\] $(colorized_prompt) '
+export PS1="\[\e[37m\]\u\[\e[m\]@\[\e[32m\]\w\[\e[m $(colorized_prompt)\] \\$ "
 # export PS1='[\t] \W $(colorized_prompt) '
 # export PS1="\[\e[37m\]\u\[\e[m\]@\[\e[32m\]\w\[\e[m\]\\$ "
 
