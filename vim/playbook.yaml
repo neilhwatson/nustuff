@@ -2,30 +2,16 @@
 - hosts: localhost
   vars:
     # https://github.com/ycm-core/YouCompleteMe/wiki/Building-Vim-from-source
-    vim_version: v8.2.0439
-    deps:
-      - libtool-bin
-      - libncurses5-dev
-      - libgtk-3-dev
-      - libatk1.0-dev
-      - libcairo2-dev
-      - libx11-dev
-      - libxpm-dev
-      - libxt-dev
-      - python-dev
-      - python3-dev
-      - ruby-dev
-      - libperl-dev
-      - git
+    # https://vim.fandom.com/wiki/Building_Vim
+    vim_version: v8.2.0801
 
   tasks:
 
     - name: Install deps
-      package:
-        name: "{{ item }}"
-        state: present
+      apt:
+        name: vim-gtk3, vim-gui-common
+        state: build-dep
       become: yes
-      loop: "{{ deps }}"
 
     - name: Vim source code
       block:
