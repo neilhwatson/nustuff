@@ -3,7 +3,7 @@
   vars:
     # https://github.com/ycm-core/YouCompleteMe/wiki/Building-Vim-from-source
     # https://vim.fandom.com/wiki/Building_Vim
-    vim_version: v8.2.0801
+    vim_version: v8.2.0805
 
   tasks:
 
