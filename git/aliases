@@ -1,14 +1,17 @@
 # vim: set ft=gitconfig
 [alias]
 
+   # nb = "!f(){ git checkout -b \"$1\"; }; f"
    aliases = config --get-regexp alias
    ci = commit
-   co = "!f(){ git checkout \"$1\"; }; f"
-   nb = "!f(){ git checkout -b \"$1\"; }; f"
    cp = "!f(){ git commit --all --message \"$1\" && git push; }; f"
    db = "!f(){ git push -d origin \"$1\"; git branch -d \"$1\" }; f"
-   nope = reset --hard HEAD
+   last = log -1 HEAD
    mr = push -u origin HEAD
+   nb = switch -c
+   nope = reset --hard HEAD
+   re = restore
    st = status
+   sw = switch
 
 
