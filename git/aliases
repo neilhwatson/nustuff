@@ -10,6 +10,7 @@
    mr = push -u origin HEAD
    nb = switch -c
    nope = reset --hard HEAD
+   oops = commit --amend
    re = restore
    st = status
    sw = switch
