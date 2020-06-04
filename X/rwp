@@ -1,11 +1,19 @@
-#!/bin/sh
+#!/bin/bash
 
-# test random file selector
+dir=${1:-~/wallpaper}
+delay=${2:-180}
 
-dir=$1
+# Get screen size
+screen_size=$(xdpyinfo | awk '/dimensions:/ { print $2 }')
 
-while [ true ]
-do
-    feh --bg-max --no-fehbg -z $dir &
-    sleep 180
+cd $dir || exit
+
+while true; do
+   image=$(ls *.jp?g *.png | shuf -n 1)
+   ext=${image##*.}
+
+   convert $image -resize "${screen_size}>" /tmp/wallpaper.${ext}
+   feh --bg-center --no-fehgb /tmp/wallpaper.${ext}
+   sleep $delay
 done
+
