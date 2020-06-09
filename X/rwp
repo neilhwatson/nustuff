@@ -12,8 +12,9 @@ while true; do
    image=$(ls *.jp?g *.png | shuf -n 1)
    ext=${image##*.}
 
-   convert $image -resize "${screen_size}>" /tmp/wallpaper.${ext}
-   feh --bg-center --no-fehbg /tmp/wallpaper.${ext}
+   convert $image -resize "${screen_size}>" /tmp/$image
+   feh --bg-center --no-fehbg $dir/$image
+   echo $image > /tmp/wallpaper
    sleep $delay
 done
 
