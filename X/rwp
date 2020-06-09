@@ -13,7 +13,7 @@ while true; do
    ext=${image##*.}
 
    convert $image -resize "${screen_size}>" /tmp/$image
-   feh --bg-center --no-fehbg $dir/$image
+   feh --bg-center --no-fehbg /tmp/$image
    echo $image > /tmp/wallpaper
    sleep $delay
 done
