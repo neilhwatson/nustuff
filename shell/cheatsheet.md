@@ -104,3 +104,12 @@ Credit: http://blog.jpalardy.com/posts/skip-grep-use-awk/
 ## HTTP server in one line
 
     { echo -e 'HTTP/1.1 503 OK\nService Temporarily Unavailable\n\n'; } | netcat -l -p 8000
+
+## Make a meme
+
+```shell
+    convert inputmemeimage.png -font impact -fill white -pointsize 84 \
+        -stroke black -strokewidth 3 -gravity north -annotate +0+20 \
+        'TOP MEME TEXT' -gravity south -annotate +0+20 'BOTTOM MEME TEXT' \
+        outputmemeimage.png 
+```
