@@ -9,6 +9,7 @@
    last = log -1 HEAD
    mr = push -u origin HEAD
    nb = switch -c
+   ca = commit --all --message
    nope = reset --hard HEAD
    oops = commit --amend
    re = restore
