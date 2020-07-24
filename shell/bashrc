@@ -140,7 +140,6 @@ if [[ $HOSTNAME == 'luna' ]]
 then
    alias monitor-home='xrandr --output eDP-1 --off --output HDMI-2 --mode 3840x2160'
    alias monitor-work='xrandr --output eDP-1 --mode 1920x1080 --output HDMI-2 --mode 1920x1080 --same-as eDP-1'
-   alias monitor-both='xrandr --output eDP-1 --mode 2560x1600 --output HDMI-2 --mode 2560x1600 --same-as eDP-1'
    alias monitor-laptop='xrandr --output eDP-1 --mode 2560x1600 --output HDMI-2 --off'
 fi
 
@@ -200,15 +199,13 @@ function weather {
    case $location in
 
       markham)
-         curl wttr.in/~markham+ontario+canada?m
+         curl wttr.in/~markham+ontario+canada
          ;;
       cottage|brighton)
-         curl wttr.in/~brighton+ontario+canada?m
+         curl wttr.in/~presquile+point+ontario+canada
          ;;
-      # TODO Presquil point
-
       *)
-         echo "$location not know. Try raw curl wttr.in instead."
+         curl wttr.in
          ;;
 
    esac
@@ -220,6 +217,8 @@ alias shrug='echo "¯\_(ツ)_/¯"'
 alias bear='echo "ʕ •ᴥ•ʔ"'
 alias kitty='echo "/ᐠ｡ꞈ｡ᐟ\\"'
 alias whyyouno='echo "(ノಠ益ಠ)ノ"'
+
+alias xc="xclip -selection CLIPBOARD"
 
 alias update-calendar="cd ~/calendar; git commit -am 'update' \
    && git push origin master; cd \$OLDPWD"

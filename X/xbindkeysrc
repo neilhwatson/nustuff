@@ -24,7 +24,8 @@
 #keystate_scrolllock = enable
 #keystate_capslock = enable
 
-"/home/neil/firefox/firefox"
+
+"~/bin/firefox --profile ~/.mozilla/firefox/ziz2ukct.default/ --no-remote"
     Mod4 + Super_L + 1
 
 "emacs ~/calendar/*.org"
@@ -33,12 +34,14 @@
 "pidgin"
     Mod4 + Super_L + 3
 
+"zoom"
+    Mod4 + Super_L + 4
 #"xterm -fg white -bg black -e mutt"
 
 "gnome-terminal -- mutt"
     Mod4 + Super_L + 5
 
-"xterm -fg black -bg white"
+"~/bin/firefox --profile ~/.mozilla/firefox/c21momgc.genesys/ --no-remote"
     Mod4 + Super_L + 6
 
 #"xterm -fg white -bg black"
@@ -55,10 +58,10 @@
 "gnome-terminal -- $HOME/bin/fmenu"
     Mod4 + Super_L + p
 
-'xrandr --output eDP-1 --mode 2560x1600 --output HDMI-2 --off'
+"xrandr --output eDP-1 --mode 2560x1600 --output HDMI-2 --off"
    Mod4 + Super_L + 9
 
-   'xrandr --output eDP-1 --off --output HDMI-2 --mode 1920x1200'
+"xrandr --output eDP-1 --off --output HDMI-2 --mode 3840x2160"
    Mod4 + Super_L + 0
    
 #hibernate

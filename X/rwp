@@ -4,11 +4,11 @@ dir=${1:-~/wallpaper}
 delay=${2:-180}
 
 # Get screen size
-screen_size=$(xdpyinfo | awk '/dimensions:/ { print $2 }')
 
 cd $dir || exit
 
 while true; do
+   screen_size=$(xdpyinfo | awk '/dimensions:/ { print $2 }')
    image=$(ls *.jp?g *.png | shuf -n 1)
    ext=${image##*.}
 
