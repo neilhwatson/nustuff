@@ -1,0 +1,44 @@
+#!/bin/bash
+
+mode=$1
+
+
+monitor=none
+
+case $(hostname -s) in
+
+   vega)
+      monitor=DP-3
+      ;;
+
+   luna)
+      monitor=HDMI-2
+      ;;
+
+   *)
+      echo "unknown host. Expecting vega or luna"
+      ;;
+
+esac
+
+
+function set_mon() {
+   local mode=${1:=x}
+   local monitor=${2:=x}
+
+   if [[ $monitor == 'x' ]]; then
+      echo unknown monitor. Expecting DP-3 or HDMI-2
+      exit 3
+   fi
+
+   if [[ $mode == 'monitor' ]]; then
+      xrandr --output $monitor --auto --output eDP-1 --off
+   elif [[ $mode == 'laptop' ]]; then
+      xrandr --output eDP-1 --auto --output $monitor --off
+   else
+      echo unknown mode. Expecting monitor or laptop
+      exit 2
+   fi
+}
+
+set_mon $mode $monitor
