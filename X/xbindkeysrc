@@ -38,7 +38,7 @@
     Mod4 + Super_L + 4
 #"xterm -fg white -bg black -e mutt"
 
-"gnome-terminal -- mutt"
+"terminology --exec mutt"
     Mod4 + Super_L + 5
 
 "~/bin/firefox --profile ~/.mozilla/firefox/c21momgc.genesys/"
@@ -46,7 +46,7 @@
 
 #"xterm -fg white -bg black"
 
-"gnome-terminal"
+"terminology || xterm"
     Mod4 + Super_L + 7
 
 "~/bin/gvim || gvim"
