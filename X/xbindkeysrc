@@ -25,7 +25,7 @@
 #keystate_capslock = enable
 
 
-"~/bin/firefox --profile ~/.mozilla/firefox/ziz2ukct.default/ --no-remote"
+"~/bin/firefox --profile ~/.mozilla/firefox/ziz2ukct.default/"
     Mod4 + Super_L + 1
 
 "emacs ~/calendar/*.org"
@@ -41,7 +41,7 @@
 "gnome-terminal -- mutt"
     Mod4 + Super_L + 5
 
-"~/bin/firefox --profile ~/.mozilla/firefox/c21momgc.genesys/ --no-remote"
+"~/bin/firefox --profile ~/.mozilla/firefox/c21momgc.genesys/"
     Mod4 + Super_L + 6
 
 #"xterm -fg white -bg black"
