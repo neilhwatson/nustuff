@@ -46,7 +46,7 @@
 
 #"xterm -fg white -bg black"
 
-"gnome-terminal"
+"gnome-terminal || xfce4-terminal"
     Mod4 + Super_L + 7
 
 "~/bin/gvim || gvim"
