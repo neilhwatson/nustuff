@@ -58,10 +58,10 @@
 "gnome-terminal -- $HOME/bin/fmenu"
     Mod4 + Super_L + p
 
-"xrandr --output eDP-1 --mode 2560x1600 --output HDMI-2 --off"
+"$HOME/bin/xmon laptop"
    Mod4 + Super_L + 9
 
-"xrandr --output eDP-1 --off --output HDMI-2 --mode 3840x2160"
+"$HOME/bin/xmon monitor"
    Mod4 + Super_L + 0
    
 #hibernate
