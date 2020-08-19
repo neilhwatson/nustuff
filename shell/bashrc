@@ -242,3 +242,14 @@ alias tfp='terraform plan'
 alias tfa='terraform apply'
 alias tfi='terraform init'
 export ARM_PROVIDER_STRICT=true
+
+function meme() {
+   local image=$1
+   local top=$2
+   local bottom=$3
+
+   convert $image -font impact -fill white -pointsize 72 -stroke black \
+      -strokewidth 2 -gravity north -annotate 0 $top -gravity south \
+      -annotate 0 $bottom meme.jpg
+   tycat meme.jpg
+}
