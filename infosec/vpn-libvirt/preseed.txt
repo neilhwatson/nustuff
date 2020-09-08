@@ -12,15 +12,15 @@ d-i keyboard-configuration/xkb-keymap select us
 # Any hostname and domain names assigned from dhcp take precedence over
 # values set here. However, setting the values still prevents the questions
 # from being shown, even if values come from dhcp.
-d-i netcfg/get_hostname string gvpn
+d-i netcfg/get_hostname string vpn
 d-i netcfg/get_domain string watson-wilson.ca
 
 ### Mirror settings
 # If you select ftp, the mirror/country string does not need to be set.
 #d-i mirror/protocol string ftp
-d-i mirror/country string ca
-d-i mirror/http/hostname string http.ca.debian.org
-d-i mirror/http/directory string /debian
+d-i mirror/country string Canada
+d-i mirror/http/mirror select deb.debian.org
+d-i mirror/http/directory string /debian/
 d-i mirror/http/proxy string
 
 ### Account setup
