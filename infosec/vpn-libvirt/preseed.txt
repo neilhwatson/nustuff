@@ -110,6 +110,8 @@ d-i finish-install/keep-consoles boolean true
 # Avoid that last message about the install being complete.
 d-i finish-install/reboot_in_progress note
 
+popularity-contest popularity-contest/participate boolean false
+
 ### Preseeding other packages
 # Depending on what software you choose to install, or if things go wrong
 # during the installation process, it's possible that other questions may
