@@ -20,6 +20,7 @@ d-i netcfg/get_domain string watson-wilson.ca
 #d-i mirror/protocol string ftp
 d-i mirror/country string Canada
 d-i mirror/http/mirror select deb.debian.org
+d-i mirror/http/hostname string deb.debian.org
 d-i mirror/http/directory string /debian/
 d-i mirror/http/proxy string
 
