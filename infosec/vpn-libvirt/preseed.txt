@@ -37,7 +37,7 @@ d-i passwd/username string nwatson
 # Normal user's password, either in clear text
 # or encrypted using a crypt(3) hash.
 # Don't get excited, it's a temp password on isolated hosts.
-d-i passwd/user-password-crypted password [$6$hcojm55ttIQ6R75r$UEJIsMwydaDFJvMmqE7k5ua9d.TxVfthWebVlFPOfu1jQ.Yt3IfEq0/VETqp8QLFf6taK9f3gCh1o0R5hoojS1]
+d-i passwd/user-password-crypted password $6$hcojm55ttIQ6R75r$UEJIsMwydaDFJvMmqE7k5ua9d.TxVfthWebVlFPOfu1jQ.Yt3IfEq0/VETqp8QLFf6taK9f3gCh1o0R5hoojS1
 
 # The user account will be added to some standard initial groups. To
 # override that, use this.
@@ -88,10 +88,10 @@ d-i apt-setup/security_host string security.debian.org
 tasksel tasksel/first multiselect standard
 
 # Individual additional packages to install
-d-i pkgsel/include string openssh-server build-essential
+d-i pkgsel/include string openssh-server build-essential ansible
 # Whether to upgrade packages after debootstrap.
 # Allowed values: none, safe-upgrade, full-upgrade
-d-i pkgsel/upgrade select full-upgrade
+# d-i pkgsel/upgrade select full-upgrade # TODO
 
 # This is fairly safe to set, it makes grub install automatically to the MBR
 # if no other operating system is detected on the machine.
