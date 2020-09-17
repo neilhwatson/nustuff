@@ -253,3 +253,12 @@ function meme() {
       -annotate 0 $bottom meme.jpg
    tycat meme.jpg
 }
+
+function anykey() {
+   # Prevents laptop from sleeping
+   while true
+   do
+      xdotool key shift
+      sleep 239
+   done
+}

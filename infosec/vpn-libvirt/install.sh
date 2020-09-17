@@ -1,6 +1,6 @@
 #!/bin/bash
 
-virt-install -n vpn --description "Work VPN" -r 1024 --vcpus 1 \
+virt-install -n vpn --description "Work VPN" -r 4096 --vcpus 2 \
    -l http://ftp.ca.debian.org/debian/dists/stable/main/installer-amd64/ \
    --os-type=linux --os-variant=debian10 \
    --file=/var/lib/libvirt/images/vpn.img \
