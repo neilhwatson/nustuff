@@ -1,0 +1,12 @@
+[Unit]
+Description=Dell laptop thermal monitoring
+Documentation=man:i8kmon
+ConditionPathExists=/proc/i8k
+After=suspend.target hibernate.target hybrid-sleep.target
+
+[Service]
+ExecStartPre=/usr/local/bin/dell-bios-fan-control disable
+ExecStart= /usr/bin/i8kmon --nouserconfig
+
+[Install]
+WantedBy=multi-user.target
