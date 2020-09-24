@@ -5,7 +5,7 @@ ConditionPathExists=/proc/i8k
 After=suspend.target hibernate.target hybrid-sleep.target
 
 [Service]
-ExecStartPre=/usr/local/bin/dell-bios-fan-control disable
+ExecStartPre=/usr/local/bin/dell-bios-fan-control 0
 ExecStart= /usr/bin/i8kmon --nouserconfig
 
 [Install]
