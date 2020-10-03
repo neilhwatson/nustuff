@@ -93,6 +93,10 @@ Credit: http://blog.jpalardy.com/posts/skip-grep-use-awk/
 ## Trap a signal and take action on it
 
     trap 'cleanup; exit' SIGINT SIGQUIT
+    
+### Debug TIP
+
+If the signal is DEBUG bash will execute the trap commands at every normal command.
 
 ## Variable references in bash
 
