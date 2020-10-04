@@ -1,0 +1,4 @@
+Fan: ${i8k_right_fan_rpm} \
+Temp1: ${exec sensors |grep -C3 cannonlake |awk '/temp1/ {print $2}' } \
+Temp2: ${exec sensors |grep -C3 iwlwifi |awk '/temp1/ {print $2}' } \
+-- \
