@@ -249,8 +249,8 @@ function meme() {
    local bottom=$3
 
    convert $image -font impact -fill white -pointsize 72 -stroke black \
-      -strokewidth 2 -gravity north -annotate 0 $top -gravity south \
-      -annotate 0 $bottom meme.jpg
+      -strokewidth 2 -gravity north -annotate 0 "$top" -gravity south \
+      -annotate 0 "$bottom" meme.jpg
    tycat meme.jpg
 }
 
