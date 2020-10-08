@@ -247,10 +247,12 @@ function meme() {
    local image=$1
    local top=$2
    local bottom=$3
+   local size=${4:-0} # added to 72
 
-   convert $image -font impact -fill white -pointsize 72 -stroke black \
-      -strokewidth 2 -gravity north -annotate 0 "$top" -gravity south \
-      -annotate 0 "$bottom" meme.jpg
+   echo size is $size
+   convert $image -font impact -fill white -pointsize $((72+${size}))  \
+      -stroke black -strokewidth 2 -gravity north -annotate 0 "$top" \
+      -gravity south -annotate 0 "$bottom" meme.jpg
    tycat meme.jpg
 }
 
