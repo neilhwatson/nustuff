@@ -1,4 +1,27 @@
+conky.config = {
+   out_to_console = true,
+   background = false,
+   update_interval = 60,
+   total_run_times = 0,
+   use_spacer = 'none',
+};
+
+conky.text = [[
+${if_existing /proc/i8k}\
 Fan: ${i8k_right_fan_rpm} \
 Temp1: ${exec sensors |grep -C3 cannonlake |awk '/temp1/ {print $2}' } \
 Temp2: ${exec sensors |grep -C3 iwlwifi |awk '/temp1/ {print $2}' } \
+--\
+${endif}\
+${if_existing /sys/class/power_supply/BAT0/present}\
+${battery} \
+${battery_time} \
+${endif}\
 -- \
+${execi 1800 curl -s "wttr.in/markham?m&format=%C+%f+%t+%w+%o"}\
+-- \
+${time %A %d %B %R} \
+[${tztime America/Los_Angeles %H:%M %Z}] \
+[${tztime Europe/Dublin %H:%M %Z}] \
+[${utime %H:%M UTC}] \
+]]
