@@ -51,7 +51,8 @@ function _prompt_command() {
       PSX="$PS_BASE ${GREEN}${exit}"
    fi
 
-   PS1="$PSX${NO_COLOR} \\$ "
+   PS1="$PSX${NO_COLOR} \\$ ${GREEN}"
+   PS0="${NO_COLOR}"
 }
 export PROMPT_COMMAND=_prompt_command
 
