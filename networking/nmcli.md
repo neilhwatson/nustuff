@@ -59,3 +59,13 @@ Embrace NetworkManager with the cli interface. Contributions welcome.
 ## Turn off wifi
 
     nmcli radio wifi off
+
+## Network bridge
+
+```
+nmcli con add ifname br0 type bridge con-name br0
+nmcli con add type bridge-slave ifname <interface> master br0
+nmcli con up br0
+```
+
+[See more](https://www.cyberciti.biz/faq/ubuntu-20-04-add-network-bridge-br0-with-nmcli-command/)
