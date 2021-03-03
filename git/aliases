@@ -11,6 +11,7 @@
    nb = switch -c
    ca = commit --all --message
    nope = reset --hard HEAD
+   again = commit --allow-empty
    oops = commit --amend
    re = restore
    st = status
