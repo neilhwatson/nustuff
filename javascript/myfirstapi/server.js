@@ -4,7 +4,7 @@ const app = express();
 
 const port = 8000;
 
-app.listen(port, function (err) {
+var server = app.listen(port, function (err) {
    if(err){
       console.log("Error starting server");
    }
@@ -28,3 +28,4 @@ app.get('/400', function(req, res) {
 app.get('/500', function(req, res) {
    res.sendStatus(500)
 })
+module.exports = server;
