@@ -1,0 +1,20 @@
+xbindkeys &
+dunst &
+/home/neil/bin/rwp /home/neil/wallpaper/ &
+# synclient TouchPadOff=1
+# wmname LG3D
+# xscreensaver -no-splash &
+xrdb -merge .Xdefaults &
+setxkbmap -layout us -option ctrl:nocaps
+xcape -e 'Control_L=Escape'
+# gnome-settings-daemon &
+# xrandr --dpi 180
+#dbar_clock.sh -u -b &
+(conky -c ~/conky/conky.conf |while read LINE; do xsetroot -name "$LINE"; done) &
+xset b 50 440 50
+brightness -60
+#
+# dwm
+#
+dwm;exit
+

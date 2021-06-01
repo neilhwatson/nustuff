@@ -1,0 +1,68 @@
+---
+debian:
+  version: buster
+
+docker:
+  prereqs:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - software-properties-common
+  apt:
+    key_url: https://download.docker.com/linux/debian/gpg
+    repo: https://download.docker.com/linux/debian
+
+azure:
+  apt:
+    key_url: https://packages.microsoft.com/keys/microsoft.asc
+    repo: https://packages.microsoft.com/repos/azure-cli/
+
+myuser:
+  name: nwatson
+  comment: Neil Watson
+  groups:
+    - sudo
+    - docker
+
+pips:
+  - ansible-lint
+  - awscli
+  - ical2orgpy
+
+packages:
+  # - azure-cli
+  - unifont
+  - unifont-bin
+  - conky-cli
+  - dnsutils
+  - dwm
+  - docker-ce
+  - emacs
+  - vim
+  - vim-gtk3
+  - gcc
+  - gawk
+  - autoconf
+  - make
+  - texinfo
+  - jq
+  - python3-pip
+  - git
+  - openconnect
+  - sudo
+  - uuid-runtime
+  - dunst
+  - boxes
+  - yamllint
+  - ruby-notify
+  - python3-ruamel.yaml
+  - feh
+  - python3-pip
+  - keychain
+  - python3-azure-storage
+  - python3-msrestazure
+  - python3-msrest
+  - python3-packaging
+  - python3-azure
+
+# calendar: https://outlook.office365.com/owa/calendar/96a0011602f146aea5f08c5902c04cf3@genesys.com/ab4b8f32fb2c49b39bb5720ca796225111988885032206834427/calendar.ics

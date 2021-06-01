@@ -1,0 +1,181 @@
+# For provisioning a useful Linux workstation using Ansible.
+#
+# Docker Repo
+---
+- hosts: localhost
+  tasks:
+
+    - name: Install prerequisites
+      apt:
+        name: "{{item}}"
+        update_cache: yes
+      loop: "{{ docker.prereqs }}"
+
+    - name: remove packages
+      apt:
+        name: "{{ item }}"
+        state: absent
+      loop:
+        - unattended-upgrades
+
+    - name: Add Docker GPG key
+      apt_key:
+        url: "{{ docker.apt.key_url }}"
+
+    # - name: Add Azure GPG key
+    #   apt_key:
+    #     url: "{{ azure.apt.key_url }}"
+
+    - name: Add Docker APT repository
+      apt_repository:
+        repo: >-
+          deb [arch=amd64] {{ docker.apt.repo }}
+          {{ debian.version }} stable
+          # {{ ansible_facts.lsb.codename }} stable
+
+    # - name: Add azure cli repository
+    #   apt_repository:
+    #     repo: >-
+    #       deb [arch=amd64] {{ azure.apt.repo }}
+    #       {{ debian.version }} main
+
+# Root tasks
+- hosts: localhost
+  tasks:
+
+    - name: ANsible config
+      copy:
+        src: files/ansible.cfg
+        dest: /etc/ansible/
+        mode: '0644'
+
+    - name: Docker daemon config
+      copy:
+        src: files/daemon.json
+        dest: /etc/docker/
+        mode: '0644'
+        owner: root
+        group: root
+
+    - name: remove packages
+      package:
+        name: unattened-upgrades
+        state: absent
+
+    - name: install all packages
+      package:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ packages }}"
+
+    - name: pips
+      pip:
+        name: "{{ item }}"
+      loop: "{{ pips }}"
+
+    - name: create user
+      user:
+        name: "{{ myuser.name }}"
+        shell: /bin/bash
+        comment: "{{ myuser.comment }}"
+        groups: "{{ myuser.groups }}"
+
+# With myuser
+- hosts: localhost
+  become_user: "{{ myuser.name }}"
+  become: true
+  vars:
+    repos:
+      - nustuff
+      - nvim
+
+  tasks:
+    - name: bin dir
+      file:
+        dest: "{{ item }}"
+        state: directory
+        mode: 0700
+      loop:
+        - ~/bin
+        - ~/calendar
+        - ~/wallpaper
+
+    - debug:
+        msg: |
+          clone the following an rerun
+            git@bitbucket.org:neilhwatson/calendar.git
+            git@bitbucket.org:neilhwatson/wallpaper.git
+            git@github.com:neilhwatson/nustuff
+            git@github.com:neilhwatson/nvim
+
+    - name: bin files
+      file:
+        path: ~/bin/
+        mode: 0755
+        recurse: true
+
+    - name: xbindkeysrc
+      file:
+        src: ~/src/neil/nustuff/X/xbindkeysrc
+        dest: ~/.xbindkeysrc
+        state: link
+        force: yes
+
+    - name: xsession
+      file:
+        src: ~/src/neil/nustuff/X/xsession
+        dest: ~/.xsession
+        state: link
+
+    - name: conky dwm status
+      file:
+        src: ~/src/neil/nustuff/X/conky.conf
+        dest: ~/.conky.conf
+        state: link
+
+    - name: Install spacemacs
+      git:
+        repo: https://github.com/syl20bnr/spacemacs
+        dest: ~/.emacs.d
+
+    - name: Spacemacs config
+      copy:
+        src: "/home/{{ myuser.name }}/src/neil/nustuff/emacs/.spacemacs"
+        dest: "/home/{{ myuser.name }}/.spacemacs"
+        force: no
+
+    - name: download Terraform linter
+      get_url:
+        url: https://github.com/wata727/tflint/releases/download/v0.7.2/tflint_linux_amd64.zip
+        dest: /tmp/tflint.zip
+
+    - name: Install Terraform linter
+      unarchive:
+        src: /tmp/tflint.zip
+        dest: ~/bin/
+
+    # - name: o365 to org cronjob
+    #   cron:
+    #     name: "o365 to org cronjob"
+    #     minute: "*/30"
+    #     user: "{{ myuser.name }}"
+    #     job: >-
+    #       /home/{{ myuser.name }}/src/genesys/neilstuff/bin/o365-2-org.sh
+    #       {{ calendar }} /home/{{ myuser.name }}/calendar/genesys.org
+
+    - name: inputrc
+      file:
+        src: "/home/{{ myuser.name }}/src/neil/nustuff/shell/inputrc"
+        dest: "/home/{{ myuser.name }}/.inputrc"
+        state: link
+
+    # - name: git config
+    #   file:
+    #     src: "/home/{{ myuser.name }}/src/genesys/neilstuff/workstation/gitconfig"
+    #     dest: "/home/{{ myuser.name }}/.gitconfig"
+    #     force: yes
+    #     state: link
+
+- name: Import vim build and configure playbook
+  import_playbook: "/home/nwatson/src/nvim/ansible/playbook.yaml"
+

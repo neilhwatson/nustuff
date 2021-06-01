@@ -31,20 +31,17 @@
 "emacs ~/calendar/*.org"
     Mod4 + Super_L + 2
 
-"pidgin"
+"signal-desktop"
     Mod4 + Super_L + 3
 
 "zoom"
     Mod4 + Super_L + 4
-#"xterm -fg white -bg black -e mutt"
 
 "terminology --exec mutt"
     Mod4 + Super_L + 5
 
-"~/bin/firefox --profile ~/.mozilla/firefox/c21momgc.genesys/"
+"~/bin/firefox --profile ~/.mozilla/firefox/2bhyklz6.corellium"
     Mod4 + Super_L + 6
-
-#"xterm -fg white -bg black"
 
 "terminology || xterm"
     Mod4 + Super_L + 7
