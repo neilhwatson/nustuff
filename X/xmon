@@ -32,7 +32,7 @@ function set_mon() {
    fi
 
    if [[ $mode == 'monitor' ]]; then
-      xrandr --output $monitor --mode 3480x2160 --output eDP-1 --off
+      xrandr --output $monitor --mode 3840x2160 --output eDP-1 --off
    elif [[ $mode == 'laptop' ]]; then
       xrandr --output eDP-1 --auto --output $monitor --off
    else

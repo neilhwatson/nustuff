@@ -269,3 +269,17 @@ function anykey() {
 function aws-setup() {
    complete -C '/usr/local/bin/aws_completer' aws
 }
+
+function vpn() {
+   state=$1
+
+   if [[ "$state" == 'on' ]]
+   then
+      # sudo ip link add dev core type wireguard
+      sudo wg-quick up core
+   elif [[ "$state" == 'off' ]]
+   then
+      sudo wg-quick down core
+      # sudo ip link del dev core
+   fi
+}
