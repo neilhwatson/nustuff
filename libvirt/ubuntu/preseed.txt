@@ -1,8 +1,6 @@
 # See
 # https://www.debian.org/releases/stable/example-preseed.txt
 
-d-i console-keymaps-at/keymap string us
-d-i console-setup/ask_detect boolean false
 #### Contents of the preconfiguration file (for buster)
 ### Localization
 # Preseeding only locale sets language, country and locale.
@@ -10,6 +8,9 @@ d-i debian-installer/locale string en_CA
 
 # Keyboard selection.
 d-i keyboard-configuration/xkb-keymap select us
+d-i keyboard-configuration/variant select us
+d-i console-keymaps-at/keymap select us
+d-i console-setup/ask_detect boolean false
 
 # Any hostname and domain names assigned from dhcp take precedence over
 # values set here. However, setting the values still prevents the questions
