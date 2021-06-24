@@ -9,9 +9,10 @@ virt-install -n ubuntu-test --description "ubuntu tester" -r 4096 --vcpus 2 \
    --autostart \
    --nographics \
    --extra-args "console=tty0 console=ttyS0,115200n8 \
-   console-keymaps-at/keymap=us \
-   locale=en_CA \
+   console-setup/ask_detect=false \
+   console-setup/layoutcode=us \
    keyboard-configuration/xkb-keymap=us \
+   locale=en_CA \
    netcfg/get_hostname=ubuntu-test \
    netcfg/get_domain=watson-wilson.ca \
    netcfg/disable_dhcp=true \
