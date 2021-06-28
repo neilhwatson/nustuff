@@ -137,5 +137,5 @@ popularity-contest popularity-contest/participate boolean false
 #   debconf-get-selections >> file
 
 d-i preseed/late_command string in-target \
-   curl -s https://raw.githubusercontent.com/neilhwatson/nustuff/master/libvirt/ubuntu/playbook.yaml > playbook.yaml \
-   && ansible-playbook playbook.yaml
+   curl -s https://raw.githubusercontent.com/neilhwatson/nustuff/master/libvirt/ubuntu/playbook.yaml -o playbook.yaml \
+   ; ansible-playbook playbook.yaml ; true
