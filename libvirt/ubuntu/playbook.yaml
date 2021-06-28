@@ -12,7 +12,7 @@
         name: nano
 
     - name: ssh key
-      authorized_keys:
+      authorized_key:
         user: nwatson
         key: "{{ public_key }}"
 
