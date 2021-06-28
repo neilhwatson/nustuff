@@ -5,12 +5,11 @@ virt-install -n ubuntu-test --description "ubuntu tester" -r 4096 --vcpus 2 \
    --os-type=linux --os-variant=ubuntu20.04 \
    --file=/var/lib/libvirt/images/ubuntu.img \
    --network default \
-   --file-size=5 \
+   --file-size=7 \
    --autostart \
    --nographics \
    --extra-args "console=tty0 console=ttyS0,115200n8 \
    console-setup/ask_detect=false \
-   console-setup/layoutcode=us \
    keyboard-configuration/xkb-keymap=us \
    locale=en_CA \
    netcfg/get_hostname=ubuntu-test \

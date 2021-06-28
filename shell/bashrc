@@ -1,6 +1,9 @@
 set -o vi
 bind -m vi-insert "\C-l":clear-screen
 
+export LIBVIRT_DEFAULT_URI=qemu:///system
+export ANSIBLE_STDOUT_CALLBACK=yaml
+
 NO_COLOR='\[\e[0m\]'
 WHITE='\[\e[1;37m\]'
 BLACK='\[\e[0;30m\]'
