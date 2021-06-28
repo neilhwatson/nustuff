@@ -5,7 +5,7 @@ virt-install -n ubuntu-test --description "ubuntu tester" -r 4096 --vcpus 2 \
    --os-type=linux --os-variant=ubuntu20.04 \
    --file=/var/lib/libvirt/images/ubuntu.img \
    --network default \
-   --file-size=7 \
+   --file-size=9 \
    --autostart \
    --nographics \
    --extra-args "console=tty0 console=ttyS0,115200n8 \
