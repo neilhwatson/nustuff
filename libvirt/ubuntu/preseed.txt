@@ -20,7 +20,7 @@ d-i netcfg/get_domain string watson-wilson.ca
 
 ### Mirror settings
 # If you select ftp, the mirror/country string does not need to be set.
-d-i mirror/http/mirror select ca.archive.ubuntu.com
+d-i mirror/http/mirror select CA.archive.ubuntu.com
 d-i mirror/suite string focal
 #d-i mirror/protocol string ftp
 d-i pkgsel/update-policy select none
