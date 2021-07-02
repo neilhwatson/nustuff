@@ -1,0 +1,33 @@
+- name: late install ubuntu preseed
+  hosts: localhost
+  vars:
+
+    public_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDFTC49mzYqTX+dhiFv7oOxOiT6H8cen05+2itNP/GzRxq1KI2aeDk9eohaY173XFJC7/ReaudaXvXbNR+WE3xmddX6nLmZfi5tErT38WJgXDRVfJSUic/ixSpAU5QQdAiDuINvpUip1E96lJPDlNZXQ3TDREHiC7XCGsnDz8BuNv6JDOZ/K8G/7gFPcNJb3muggUFIj30lu9ooeDolrPWxCpuNyZ1p2tQHwJKurVyy43S1s+28h8TAM8cgvk47TJN31dm0p0J1ulBeJLcvlqxglbOfIVW1rqdPf66dgkDAP/zt4qjOpjufD9gIrjWdn+f1z99EKKfwoTQLeXUqqfOt neil@neptune"
+
+  tasks:
+
+    - name: remove packages
+      apt:
+        state: absent
+        name: nano
+
+    - name: ssh key
+      authorized_key:
+        user: nwatson
+        key: "{{ public_key }}"
+
+    - name: Add user nwatson to sudo
+      lineinfile:
+        path: /etc/sudoers.d/nwatson
+        line: 'nwatson ALL=(ALL) NOPASSWD: ALL'
+        state: present
+        mode: '0440'
+        create: yes
+        validate: 'visudo -cf %s'
+
+    - name: Set includedir in sudoers
+      lineinfile:
+        dest: /etc/sudoers
+        line: "#includedir /etc/sudoers.d"
+        state: present
+        validate: "/usr/sbin/visudo -cf %s"

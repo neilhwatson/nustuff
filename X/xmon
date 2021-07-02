@@ -15,6 +15,10 @@ case $(hostname -s) in
       monitor=HDMI-2
       ;;
 
+   mars)
+      monitor=HDMI-2
+      ;;
+
    *)
       echo "unknown host. Expecting vega or luna"
       ;;
