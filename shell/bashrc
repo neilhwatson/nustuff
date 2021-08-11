@@ -227,15 +227,16 @@ alias xc="xclip -selection CLIPBOARD"
 alias update-calendar="cd ~/calendar; git commit -am 'update' \
    && git push origin master; cd \$OLDPWD"
 
-man() {
-    LESS_TERMCAP_md=$'\e[01;31m' \
-    LESS_TERMCAP_me=$'\e[0m' \
-    LESS_TERMCAP_se=$'\e[0m' \
-    LESS_TERMCAP_so=$'\e[01;44;33m' \
-    LESS_TERMCAP_ue=$'\e[0m' \
-    LESS_TERMCAP_us=$'\e[01;32m' \
-    command man "$@"
-}
+export MANPAGER="vim -M +MANPAGER --not-a-term -"
+# man() {
+#     LESS_TERMCAP_md=$'\e[01;31m' \
+#     LESS_TERMCAP_me=$'\e[0m' \
+#     LESS_TERMCAP_se=$'\e[0m' \
+#     LESS_TERMCAP_so=$'\e[01;44;33m' \
+#     LESS_TERMCAP_ue=$'\e[0m' \
+#     LESS_TERMCAP_us=$'\e[01;32m' \
+#     command man "$@"
+# }
 
 #############
 # Terraform #
@@ -285,4 +286,19 @@ function vpn() {
       sudo wg-quick down core
       # sudo ip link del dev core
    fi
+}
+
+function hashicorp-upgrade {
+   local program=$1
+   local version=$2
+
+   (
+      cd ~/tmp || return
+      curl -s \
+         https://releases.hashicorp.com/${program}/${version}/${program}_${version}_linux_amd64.zip \
+         --output ${program}.zip || return
+      unzip ${program}.zip || return 
+      mv ${program} ~/bin/
+      ${program} -version
+   )
 }
