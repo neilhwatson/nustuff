@@ -302,3 +302,17 @@ function hashicorp-upgrade {
       ${program} -version
    )
 }
+
+function jlint {
+
+   local jenkinsfile=${1:-Jenkinsfile}
+   local JENKINS_URL='http://jenkins.example.com'
+   if [[ ! -r $jenkinsfile ]]
+   then
+      echo "Can't read $jenkinsfile"
+      return 1
+   fi
+
+   # Assuming "anonymous read access" has been enabled on your Jenkins instance.
+   curl -F "jenkinsfile=<$jenkinsfile" $JENKINS_URL/pipeline-model-converter/validate
+}
