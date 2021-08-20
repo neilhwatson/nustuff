@@ -160,7 +160,7 @@ function sskey {
 function rkey(){
    ssh-keygen -f "/home/neil/.ssh/known_hosts" -R orion.watson-wilson.ca
 }
-if [ -f $(which keychain) ]
+if [ -f $(command -v keychain) ]
 then
    eval $(keychain --nogui --noask --eval --quiet ~/.ssh/id_rsa)
 fi
