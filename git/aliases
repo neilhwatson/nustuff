@@ -5,7 +5,7 @@
    aliases = config --get-regexp alias
    ci = commit
    cp = "!f(){ git commit --all --message \"$1\" && git push; }; f"
-   db = "!f(){ git push -d origin \"$1\"; git branch -d \"$1\" }; f"
+   db = "!f(){ git push -d origin \"$1\"; git branch -d \"$1\"; }; f"
    last = log -1 HEAD
    mr = push -u origin HEAD
    nb = switch -c
