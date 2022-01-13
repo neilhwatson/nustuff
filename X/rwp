@@ -16,5 +16,6 @@ while true; do
    feh --bg-center --no-fehbg /tmp/$image
    echo $image > /tmp/wallpaper
    sleep $delay
+   rm /tmp/$image
 done
 

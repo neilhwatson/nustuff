@@ -143,7 +143,6 @@ alias gvimo='gvim -O'
 if [[ $HOSTNAME == 'luna' ]]
 then
    alias monitor-home='xrandr --output eDP-1 --off --output HDMI-2 --mode 3840x2160'
-   alias monitor-work='xrandr --output eDP-1 --mode 1920x1080 --output HDMI-2 --mode 1920x1080 --same-as eDP-1'
    alias monitor-laptop='xrandr --output eDP-1 --mode 2560x1600 --output HDMI-2 --off'
 fi
 
@@ -301,6 +300,17 @@ function hashicorp-upgrade {
       mv ${program} ~/bin/
       ${program} -version
    )
+}
+
+function jslint {
+   file="$1"
+   if [[ -e "$file" ]]
+   then
+      docker run -it --rm -v "$PWD":/work -w /work node:12 "npm run lint \"$file\""
+   else
+      echo error "$file" no found
+      return 1
+   fi
 }
 
 function jlint {
