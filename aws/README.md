@@ -175,4 +175,10 @@ We can combine filters and query
 ]
 ```
 
+## Remote console
 
+Rather than SSH you can use the ssm
+
+```
+aws ssm start-session --region <region> --target <instance id>
+```
