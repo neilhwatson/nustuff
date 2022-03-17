@@ -15,10 +15,7 @@ choose from.
 - Terraform examples.
 - Vagrant multi host and docker examples.
 
----
-- Vim files to make editing faster.
 
 ---
 - X Windows configs and tools.
 - Tools and tips for running Linux on a MacBook.
-
