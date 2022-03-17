@@ -25,7 +25,7 @@
 #keystate_capslock = enable
 
 
-"~/bin/firefox --profile ~/.mozilla/firefox/ziz2ukct.default/"
+"~/bin/firefox"
     Mod4 + Super_L + 1
 
 "emacs ~/calendar/*.org"
@@ -39,9 +39,6 @@
 
 "terminology --exec mutt"
     Mod4 + Super_L + 5
-
-"~/bin/firefox --profile ~/.mozilla/firefox/2bhyklz6.corellium"
-    Mod4 + Super_L + 6
 
 "terminology || xterm"
     Mod4 + Super_L + 7
