@@ -16,5 +16,6 @@ brightness -60
 #
 # dwm
 #
+xautolock -time 10 -locker slock
 dwm;exit
 
