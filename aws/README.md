@@ -182,3 +182,13 @@ Rather than SSH you can use the ssm
 ```
 aws ssm start-session --region <region> --target <instance id>
 ```
+
+## ECS
+
+Console
+
+    aws ecs execute-command --cluster <cluster-name> \
+        --task task-id \
+        --container <container-name> \
+        --interactive \
+        --command "/bin/sh"
