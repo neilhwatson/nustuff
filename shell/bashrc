@@ -326,3 +326,6 @@ function jlint {
    # Assuming "anonymous read access" has been enabled on your Jenkins instance.
    curl -F "jenkinsfile=<$jenkinsfile" $JENKINS_URL/pipeline-model-converter/validate
 }
+
+
+aws-setup
