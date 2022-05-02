@@ -8,5 +8,5 @@ supports:
   - os-family: debian # must list the platform where inspec will run
 depends:
   - name: aws
-    git: git@github.com:inspec/inspec-aws.git
+    git: https://github.com/inspec/inspec-aws.git
     tag: v1.83.8
