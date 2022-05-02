@@ -5,7 +5,6 @@ title: Prototype of testing AWS resources
 version: 1.0.0 # choose your version
 supports:
   - platform-family: aws
-  - os-family: debian # must list the platform where inspec will run
 depends:
   - name: aws
     git: https://github.com/inspec/inspec-aws.git
