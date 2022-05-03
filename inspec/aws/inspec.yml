@@ -5,7 +5,7 @@ title: Prototype of testing AWS resources
 version: 1.0.0 # choose your version
 supports:
   - platform-family: aws
-depends:
-  - name: aws
-    git: https://github.com/inspec/inspec-aws.git
-    tag: v1.83.8
+# depends:
+#   - name: inspec-aws
+#     git: https://github.com/inspec/inspec-aws.git
+#     tag: v1.83.8
