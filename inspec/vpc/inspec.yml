@@ -1,0 +1,15 @@
+name: vpc
+title: AWS InSpec Profile
+maintainer: The Authors
+copyright: The Authors
+copyright_email: you@example.com
+license: Apache-2.0
+summary: An InSpec Compliance Profile For AWS
+version: 0.1.0
+inspec_version: '~> 5'
+depends:
+  - name: inspec-aws
+    git: https://github.com/inspec/inspec-aws.git
+    tag: v1.83.8
+supports:
+  - platform: aws

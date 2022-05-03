@@ -1,0 +1,8 @@
+---
+lockfile_version: 1
+depends:
+- name: inspec-aws
+  resolved_source:
+    git: https://github.com/inspec/inspec-aws.git
+    ref: f743acf2a2dc33ecc7ea5bda8e1cb6f1e4023447
+  version_constraints: []
