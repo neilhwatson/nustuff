@@ -1,0 +1,7 @@
+{
+  "AWS_ACCESS_KEY_ID": "bad bad bad",
+  "AWS_SECRET_ACCESS_KEY": "do no share this",
+  "TAG": "1.2.3",
+  "PORT": "4000",
+  "DB": "db.example.com"
+}
