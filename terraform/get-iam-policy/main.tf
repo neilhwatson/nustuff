@@ -21,3 +21,4 @@ output policies {
    value = local.policies
 }
 
+# Get final json with `terraform output policies` and use as a vars file
