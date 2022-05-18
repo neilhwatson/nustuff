@@ -12,6 +12,16 @@ locals {
    env_vars_cleaned = { 
       for k,v in local.env_vars : k => v if ! contains( local.excludes, k )
    }
+
+   # Try to encode json
+   some_def = jsonencode(
+      {
+         name = "task1"
+         owner = "neil"
+         env = local.env_vars_cleaned
+      }
+   )
+
 }
 
 
@@ -21,4 +31,8 @@ output env_vars {
 
 output env_vars_cleaned {
    value = local.env_vars_cleaned
+}
+
+output some_def {
+   value = local.some_def
 }
