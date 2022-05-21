@@ -22,6 +22,8 @@ locals {
       }
    )
 
+   # Read json file but mark it sensitive
+   secret_vars = sensitive(jsondecode(file("var.json")))
 }
 
 
@@ -35,4 +37,9 @@ output env_vars_cleaned {
 
 output some_def {
    value = local.some_def
+}
+
+output secret_vars {
+   value = local.secret_vars
+   sensitive = true
 }
