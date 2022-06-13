@@ -192,3 +192,12 @@ Console
         --container <container-name> \
         --interactive \
         --command "/bin/sh"
+
+## Beanstalk
+
+Get user defined options
+
+    aws elasticbeanstalk describe-configuration-options \
+        --environment-name <name> \
+        --application-name <name> \
+        | jq -r '.Options[] |select(.UserDefined==true) | { name: .Name }[]
