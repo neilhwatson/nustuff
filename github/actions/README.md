@@ -217,7 +217,6 @@ jobs:
       AWS_REGION: ${{ inputs.AWS_REGION }}
     steps:
       - name: Checkout repo
-        if: inputs.rollback_prod != 'true'
         uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2.4.0
       - name: Terraform Init
         run: terraform -chdir=${{ inputs.ROOT_MODULE }} init
