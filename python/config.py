@@ -33,7 +33,7 @@ SOFTWARE.
 import yaml
 
 with open("config.yml", "r") as yamlfile:
-    config = yaml.load(yamlfile)
+    config = yaml.safe_load(yamlfile)
 
 yamlfile.close()
 
