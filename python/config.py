@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 
 """
 SYNOPSIS
@@ -37,5 +37,5 @@ with open("config.yml", "r") as yamlfile:
 
 yamlfile.close()
 
-print("connect to " + config['db']['host'] + " as " + config['db']['user']
-    + "/" + config['db']['pass'] + " to database " + config['db']['db'])
+print(("connect to " + config['db']['host'] + " as " + config['db']['user']
+    + "/" + config['db']['pass'] + " to database " + config['db']['db']))
