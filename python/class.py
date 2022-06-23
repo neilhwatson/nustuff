@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 
 """
 This example shows how to make and use a class. It mirrors my perl example
@@ -17,7 +17,7 @@ class MyPerson(object):
         self.title      = title
         self.salary     = salary
 
-        if not isinstance(salary, (int, long)):
+        if not isinstance(salary, int):
             raise TypeError("Error salary must be an integer")
 
     def salary_pretty(self):
@@ -27,14 +27,14 @@ class MyPerson(object):
 
 person = MyPerson(given_name='neil', surname='watson', title='sysadmin')
 
-print 'Name is ' + person.given_name + ' ' + person.surname
+print('Name is ' + person.given_name + ' ' + person.surname)
 
 # Python has no simple methods for making attributes read-only :(
 
-print 'Title is ' + person.title
+print('Title is ' + person.title)
 person.title = 'Manager'
-print 'Title is now ' + person.title
+print('Title is now ' + person.title)
 
 person.salary = 10000
-print 'salary is', person.salary
-print'Formatted salary is ' + person.salary_pretty()
+print('salary is', person.salary)
+print('Formatted salary is ' + person.salary_pretty())

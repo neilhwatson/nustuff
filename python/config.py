@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 
 """
 SYNOPSIS
@@ -33,9 +33,9 @@ SOFTWARE.
 import yaml
 
 with open("config.yml", "r") as yamlfile:
-    config = yaml.load(yamlfile)
+    config = yaml.safe_load(yamlfile)
 
 yamlfile.close()
 
-print("connect to " + config['db']['host'] + " as " + config['db']['user']
-    + "/" + config['db']['pass'] + " to database " + config['db']['db'])
+print(("connect to " + config['db']['host'] + " as " + config['db']['user']
+    + "/" + config['db']['pass'] + " to database " + config['db']['db']))
