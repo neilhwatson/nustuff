@@ -1,0 +1,20 @@
+- name: install tflint
+  get_url:
+    url: "https://github.com/terraform-linters/tflint/releases/download/{{ tflint.version }}/tflint_linux_amd64.zip"
+    checksum: "{{ tflint.checksum }}"
+    dest: /tmp/tflint.zip
+
+- name: Unzip # noqa 303 command-instead-of-module
+  command: unzip /tmp/tflint.zip
+  args:
+    chdir: /tmp/
+    creates: /tmp/tflint
+
+- name: copy to bin
+  copy:
+    src: /tmp/tflint
+    dest: /usr/bin/tflint
+    mode: "0755"
+
+- name: confirm # noqa 301 no-changed-when
+  command: tflint --version

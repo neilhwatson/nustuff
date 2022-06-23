@@ -1,0 +1,12 @@
+- name: get inspec package
+  get_url:
+    url: "http://downloads.cinc.sh/files/stable/cinc-auditor/{{ inspec.version }}/ubuntu/20.04/cinc-auditor_{{ inspec.version }}-1_amd64.deb"
+    checksum: "{{ inspec.checksum }}"
+    dest: "/tmp/cinc-auditor_{{ inspec.version }}-1_amd64.deb"
+
+- name: Install inpsec package
+  apt:
+    deb: "/tmp/cinc-auditor_{{ inspec.version }}-1_amd64.deb"
+
+- name: confirm # noqa 301 no-changed-when
+  command: inspec --version
