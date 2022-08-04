@@ -1,0 +1,19 @@
+- name: cookbook
+  hosts: localhost
+
+  vars:
+    some_string: "3459735djeghehoh4hwr file.zip"
+
+  pre_tasks:
+
+  tasks:
+
+    - name: extract a string into a fact
+      set_fact:
+        myfact: "{{ some_string | regex_search( '(\\w+) file.zip', '\\1' ) | first }}"
+
+    - debug:
+        msg: "myfact is {{ myfact }}"
+
+  post_tasks:
+
