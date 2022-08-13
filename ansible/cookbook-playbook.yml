@@ -15,5 +15,35 @@
     - debug:
         msg: "myfact is {{ myfact }}"
 
+    - name: Set alert if filesystem is full
+      # This number is in bytes so do math
+      set_fact:
+        alert: true
+      when: >
+        ( item.mount == '/'     and item.size_available > 1  )
+        or
+        ( item.mount == '/boot' and item.size_available > 1 )
+      loop: "{{ ansible_mounts }}"
+      loop_control:
+        label: "{{ item.mount }}"
+
+    - name: Set alert of free ram drops
+      set_fact:
+        alert: true
+      when: ansible_memfree_mb > 500
+
+    - name: Get 5m load average
+      shell: awk '{print $2}' < /proc/loadavg
+      register: load
+
+    - name: Set alert if load too high
+      set_fact:
+        alert: true
+        when: load.stdout > 0.1
+
   post_tasks:
 
+    - name: Take action on alert
+      debug:
+        msg: taking action because alert is true
+      when: alert is true
