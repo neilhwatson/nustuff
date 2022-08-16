@@ -114,20 +114,12 @@ jobs:
         git push --force origin prod
 ```
 
-
-
-    environment: testing
-    env:
-      dothis: true
-      tflint_ver: v0.35.0
-
 ## Shell globbing
 
 ```yaml
     steps:
     - name: Tricky shell globbing
       run: |
-        bash --version
         touch foo.yaml
         touch bar.yml
         shopt -s extglob
