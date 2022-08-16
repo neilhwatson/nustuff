@@ -6,6 +6,27 @@
 
   pre_tasks:
 
+    - name: Add apt repo without apt-key
+      block:
+
+        - name: install gpg
+          apt:
+            name: gpg
+            state: present
+
+        - name: download public key
+          get_url:
+            url: https://releases.jfrog.io/artifactory/jfrog-gpg-public/jfrog_public_gpg.key
+            dest: /tmp/jfrog.gpg
+
+        - name: dearmor key and install
+          shell: gpg --dearmor < /tmp/jfrog.gpg > /usr/share/keyrings/jfrog.gpg
+
+        - name: Setup jfrog repo
+          apt_repository:
+            repo: "deb [signed-by=/usr/share/keyrings/jfrog.gpg] https://releases.jfrog.io/artifactory/jfrog-debs xenial contrib"
+            state: present
+
   tasks:
 
     - name: extract a string into a fact
