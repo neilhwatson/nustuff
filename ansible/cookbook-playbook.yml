@@ -4,6 +4,9 @@
   vars:
     some_string: "3459735djeghehoh4hwr file.zip"
 
+  # Run ansible to learn what facts it knows:
+  # ansible localhost -m setup
+
   pre_tasks:
 
     - name: Add apt repo without apt-key
