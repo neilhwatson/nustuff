@@ -17,4 +17,7 @@
    st = status
    sw = switch
 
+# git fetch should return origin/master branch
+# Then git diff origin/master to see what has changed.
+   fa = "!f(){ git fetch && git diff origin/master; }; f"
 
