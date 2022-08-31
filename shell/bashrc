@@ -140,11 +140,9 @@ docker-remove-images () {
 #####################
 # Monitor switching #
 #####################
-if [[ $HOSTNAME == 'luna' ]]
-then
-   alias monitor-home='xrandr --output eDP-1 --off --output HDMI-2 --mode 3840x2160'
-   alias monitor-laptop='xrandr --output eDP-1 --mode 2560x1600 --output HDMI-2 --off'
-fi
+alias monitor-home='xrandr --output eDP-1 --off --output HDMI-2 --mode 3840x2160'
+alias monitor-mac='xrandr --output eDP-1 --mode 2560x1600 --output HDMI-2 --off'
+alias monitor-x1=' xrandr --output eDP-1 --mode 2560x1440 --output HDMI-1 --off'
 
 #######
 # ssh #
