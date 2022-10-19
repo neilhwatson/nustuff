@@ -65,13 +65,16 @@
 
 # xbacklight and kbdlight (AUR) needed WIP
 
-'sh -c "pactl set-sink-mute 1 false ; pactl set-sink-volume 1 +5%"'
+#'sh -c "pactl set-sink-mute 1 false ; pactl set-sink-volume 1 +5%"'
+"wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
     XF86AudioRaiseVolume
 
-'sh -c "pactl set-sink-mute 1 false ; pactl set-sink-volume 1 -5%"'
+#'sh -c "pactl set-sink-mute 1 false ; pactl set-sink-volume 1 -5%"'
+"wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
     XF86AudioLowerVolume
 
-'pactl set-sink-mute 0 toggle'
+#'pactl set-sink-mute 0 toggle'
+"wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
     XF86AudioMute
 
 "~/bin/brightness -10"
