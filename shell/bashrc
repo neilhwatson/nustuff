@@ -157,10 +157,10 @@ sskey() {
 rkey(){
    ssh-keygen -f "/home/neil/.ssh/known_hosts" -R orion.watson-wilson.ca
 }
-if [ -f $(command -v keychain) ]
-then
-   eval $(keychain --nogui --noask --eval --quiet ~/.ssh/id_rsa)
-fi
+# if [ -f $(command -v keychain) ]
+# then
+#    eval $(keychain --nogui --noask --eval --quiet ~/.ssh/id_rsa)
+# fi
 
 ###########
 # git-fzf #
@@ -323,4 +323,22 @@ jlint() {
 
    # Assuming "anonymous read access" has been enabled on your Jenkins instance.
    curl -F "jenkinsfile=<$jenkinsfile" $JENKINS_URL/pipeline-model-converter/validate
+}
+
+
+function ft {
+    local future_date="$1"
+    local TZ="${2:-}"
+
+    if [[ "$1" == "" ]]; then
+        echo "Show hours until future date"
+        echo "Usage: ft <future date> [timezone]"
+        echo "Example: ft '2022-01-01 12:00:00' 'Europe/Stockholm'"
+        return 1
+    fi
+
+    local now=$(date +%s)
+    local future=$(TZ="$TZ" date -d "$future_date" +%s)
+    local hours=$(( (future - now) / 3600 ))
+    echo $hours
 }
