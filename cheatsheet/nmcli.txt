@@ -1,0 +1,17 @@
+nm-connection-editor # gui connection editor
+nmcli c # list configured connections
+nmcli connection show # list configured connections
+nmcli d w # list available wifi
+nmcli d wifi # list available wifi
+nmcli device wifi # list available wifi
+nmcli device wifi list # list available wifi
+nmcli device wifi connect SSID password password # connect to a wifi network
+nmcli device wifi connect SSID password password hidden yes # connect to a hidden network
+nmcli con up <connection name> # bring up connection, including wifi
+nmcli --ask con up id <connection name> # if a password is required add the ask switch.
+nmcli con down id <connection name> # bring down connection
+nmcli device wifi connect SSID password password ifname wlan1 profile_name # connect to a wifi on the wlan1 wifi interface
+nmcli device disconnect ifname eth0 # disconnect an interface
+nmcli connection up uuid UUID # reconnect an interface marked as disconnected
+nmcli device # see a list of network devices and their state
+nmcli radio wifi off # turn off wifi

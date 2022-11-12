@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -e
+set -o pipefail
+
+list="${1}.txt"
+
+command -v fzf || ( echo "fzf required but not found" && exit 1 )
+
+if [[ -f $list ]]; then
+  fzf < "$list"
+else
+  echo "File not found: $list"
+  exit 2
+fi
