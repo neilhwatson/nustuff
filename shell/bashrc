@@ -1,4 +1,4 @@
-export EDITOR=vim
+export EDITOR=nvim
 set -o vi
 bind -m vi-insert "\C-l":clear-screen
 
@@ -211,7 +211,7 @@ weather() {
 
    esac
 }
-alias journal='vim ~/neil/docs/journal/$(date +%Y).txt'
+alias journal='nvim ~/neil/docs/journal/$(date +%Y).txt'
 
 alias tableflip='echo "(╯°□°）╯︵ ┻━┻"'
 alias shrug='echo "¯\_(ツ)_/¯"'
@@ -224,7 +224,7 @@ alias xc="xclip -selection CLIPBOARD"
 alias update-calendar="cd ~/calendar; git commit -am 'update' \
    && git push origin master; cd \$OLDPWD"
 
-export MANPAGER="vim -M +MANPAGER --not-a-term -"
+export MANPAGER="nvim +Man!"
 # man() {
 #     LESS_TERMCAP_md=$'\e[01;31m' \
 #     LESS_TERMCAP_me=$'\e[0m' \

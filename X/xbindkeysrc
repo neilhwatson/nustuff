@@ -28,7 +28,7 @@
 "~/bin/firefox"
     Mod4 + Super_L + 1
 
-"emacs ~/calendar/*.org"
+"terminology --exec nvim ~/calendar/*.org"
     Mod4 + Super_L + 2
 
 "signal-desktop"
@@ -43,8 +43,8 @@
 "terminology || xterm"
     Mod4 + Super_L + 7
 
-"~/bin/gvim || gvim"
-    Mod4 + Super_L + 8
+# "~/bin/gvim || gvim"
+    # Mod4 + Super_L + 8
 
 "slock"
     Control+Alt + l 
