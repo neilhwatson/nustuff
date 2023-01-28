@@ -342,3 +342,5 @@ function ft {
     local hours=$(( (future - now) / 3600 ))
     echo $hours
 }
+
+showcolor() { display -size 400x400 xc:"#${1}"; }
