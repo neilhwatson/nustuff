@@ -41,6 +41,9 @@ class ConfigModel(BaseModel):
 
 c = ConfigModel(hosts=configs)
 
+print(c)
+print("first username in first host ", c.hosts[0].users[0].name)
+print("hosts ", c.hosts)
 for host in c.hosts:
     print(host.host)
     for user in host.users:
