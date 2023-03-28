@@ -37,8 +37,7 @@ class HostModel(BaseModel):
     packages: list[str]
 
 class ConfigModel(BaseModel):
-    __root__: list[HostModel]
-
+    __root__: list[HostModel] = []
 
     def __iter__(self):
         return iter(self.__root__)
@@ -47,12 +46,19 @@ class ConfigModel(BaseModel):
         return self.__root__[item]
 
 
+config = None
+e = ConfigModel.parse_obj(config)
+print("TYPE", type(e))
+print(e)
+
 c = ConfigModel.parse_obj(configs)
 print("TYPE", type(c))
 print(c)
 
 print("First host config is", c[0])
 print("First host config hostname is", c[0].host)
+
+c.__root__.append(HostModel(host="earth", users=[], packages=[]))
 
 d = c.dict()
 print("TYPE", type(d))
@@ -62,12 +68,15 @@ j = c.json()
 print("TYPE", type(j))
 print(j)
 
+n = []
 for host in c:
-    print("host ",host.host)
+    print("host ", host.host)
+    n.append(host.dict())
     for user in host.users:
-        print("username ",user.name)
+        print("username ", user.name)
         print("groups ", user.groups)
 
+print(n)
 # config_rules = c.configs
 # print("TYPE", type(config_rules))
 # print("TYPE 0", type(config_rules[0]))
