@@ -35,21 +35,24 @@ class HostModel(BaseModel):
     host: str
     users: list[UserModel]
     packages: list[str]
-    print("class")
 
-    @staticmethod
-    def get_hosts(hosts: Any) -> list["HostModel"]:
-        print("get_hosts")
-        class ConfigModel(BaseModel):
-            __root__: list[HostModel]
-        return ConfigModel.parse_obj(hosts).__root__
+class ConfigModel(BaseModel):
+    configs: list[HostModel]
 
 
-c = HostModel.get_hosts(hosts=configs)
+c = ConfigModel(configs=configs)
+print("TYPE", type(c))
 print(c)
-print("first username in first host ", c[0].users[0].name)
-for host in c:
-    print(host.host)
-    for user in host.users:
-        print(user.name)
-        print(user.groups)
+j = c.json()
+print("TYPE", type(j))
+print(j)
+config_rules = c.configs
+print("TYPE", type(config_rules))
+print(config_rules)
+
+# print("first username in first host ", c[0].users[0].name)
+# for host in c:
+#     print(host.host)
+#     for user in host.users:
+#         print(user.name)
+#         print(user.groups)
