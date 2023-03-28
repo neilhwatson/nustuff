@@ -47,9 +47,9 @@ _prompt_command() {
    local LIGHT_GRAY='\[\e[0;37m\]'
 
 
-   if [ "$HOSTNAME" == 'toolbox' ]
+   if [ "$DISTTAG" != '' ]
    then
-      PS_BASE="${YELLOW}\h ${NO_COLOR}\u@${GREEN}\w"
+      PS_BASE="${YELLOW}toolbox ${NO_COLOR}\u@${GREEN}\w"
    else
       PS_BASE="${NO_COLOR}\u@${GREEN}\w"
    fi
