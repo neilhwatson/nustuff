@@ -277,6 +277,10 @@ aws-setup() {
    complete -C aws_completer aws
 }
 
+azure-setup() {
+   eval "$(register-python-argcomplete az)"
+}
+
 vpn() {
    state=$1
 
