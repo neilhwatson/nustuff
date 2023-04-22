@@ -27,16 +27,7 @@ class RuleItems(BaseModel):
     def __iter__(self):
         return iter(self.__root__)
 
-my_rules = RuleItems(__root__=old_rules)
-new_rules = [rule.dict() for rule in my_rules]
-
-print("object ", my_rules)
-print("dict ", my_rules.dict())
-
-print("new_rules ", new_rules)
-print("new rules type ", type(new_rules))
-print("new_rules[0] type ", type(new_rules[0]))
-
-rules_list = [Rule(**rule) for rule in old_rules]
-print("ruules_list ", rules_list)
-print("rules type ", type(rules_list))
+my_rules = [rule.dict() for rule in RuleItems(__root__=old_rules)]
+print("my_rules ", my_rules)
+print("new rules type ", type(my_rules))
+print("my_rules[0] type ", type(my_rules[0]))
