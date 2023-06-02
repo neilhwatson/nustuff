@@ -203,8 +203,7 @@ bind '"\C-g\C-b": "$(gb)\n\er"'
 ch() {
    if [ ${#} -eq 0 ]
    then
-      selection=$(curl -s cheat.sh/:list | fzf)
-      if ! [ "${selection}" = '' ]
+      if selection=$(curl -s cheat.sh/:list | fzf)
       then
          curl -s cheat.sh/"${selection}" | less -R
       fi
@@ -220,7 +219,7 @@ ch() {
 }
 
 weather() {
-   local location=$1
+   local location="$1"
 
    case $location in
 
