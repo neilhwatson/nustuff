@@ -197,7 +197,22 @@ bind '"\C-g\C-b": "$(gb)\n\er"'
 # misc #
 ########
 ch() {
-   curl -s cheat.sh/$1
+   if [ ${#} -eq 0 ]
+   then
+      selection=$(curl -s cheat.sh/:list | fzf)
+      if ! [ "${selection}" = '' ]
+      then
+         curl -s cheat.sh/"${selection}" | less -R
+      fi
+   elif [ "${1}" = '-h' ]
+   then
+      curl -s cheat.sh/:help | less -R
+   elif [ "${1}" = '-l' ]
+   then
+      curl -s cheat.sh/:list
+   else
+      curl -s "cheat.sh/${1}" | less -R
+   fi
 }
 
 weather() {
