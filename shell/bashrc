@@ -47,9 +47,13 @@ _prompt_command() {
    local LIGHT_GRAY='\[\e[0;37m\]'
 
 
+
    if [ "$DISTTAG" != '' ]
    then
       PS_BASE="${YELLOW}toolbox ${NO_COLOR}\u@${GREEN}\w"
+   elif [[ "$HOSTNAME" =~ 'bastion-shared' ]]
+   then
+      PS_BASE="${YELLOW}OVH ${NO_COLOR}\u@${GREEN}\w"
    else
       PS_BASE="${NO_COLOR}\u@${GREEN}\w"
    fi
