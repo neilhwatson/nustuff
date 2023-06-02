@@ -201,21 +201,13 @@ bind '"\C-g\C-b": "$(gb)\n\er"'
 # misc #
 ########
 ch() {
-   if [ ${#} -eq 0 ]
-   then
-      if selection=$(curl -s cheat.sh/:list | fzf)
-      then
-         curl -s cheat.sh/"${selection}" | less -R
-      fi
-   elif [ "${1}" = '-h' ]
-   then
-      curl -s cheat.sh/:help | less -R
-   elif [ "${1}" = '-l' ]
-   then
-      curl -s cheat.sh/:list
-   else
-      curl -s "cheat.sh/${1}" | less -R
-   fi
+case "$1" in
+    '')   selection=$(curl -s cheat.sh/:list | fzf) && \
+              curl -s cheat.sh/"${selection}" | less -R ;;
+    '-h') curl -s cheat.sh/:help | less -R ;;
+    '-l') curl -s cheat.sh/:list           ;;
+    *)    curl -s "cheat.sh/$1" | less -R  ;;
+esac
 }
 
 weather() {
