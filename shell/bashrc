@@ -192,9 +192,16 @@ gb() {
     sed 's#^remotes/[^/]*/##'
 }
 
+gd() {
+   is_in_git_repo &&
+      root=$(realpath --relative-to=. "$(git rev-parse --show-toplevel)")
+      find "$root" -type d -not -name '.git' | fzf
+}
+
 bind '"\er": redraw-current-line'
 bind '"\C-g\C-f": "$(gf)\n\er"'
 bind '"\C-g\C-b": "$(gb)\n\er"'
+bind '"\C-g\C-d": "$(gd)\n\er"'
 # bind '"\C-g\C-b": "$(gb)\n\e\C-e\er"'
 
 ########
