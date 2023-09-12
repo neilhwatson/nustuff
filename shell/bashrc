@@ -310,6 +310,8 @@ gcloud-setup() {
    if [ -f "$HOME/local/google-cloud-sdk/completion.bash.inc" ]
    then
       . "$HOME/local/google-cloud-sdk/completion.bash.inc"; fi
+
+   alias gcp='$gcloud_dir/bin/gcloud'
 }
 
 vpn() {
