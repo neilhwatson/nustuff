@@ -23,10 +23,12 @@ Embrace NetworkManager with the cli interface. Contributions welcome.
 ## Connect to a wifi network
 
     nmcli device wifi connect SSID password password
+    nmcli device wifi connect SSID --ask # for password prompt
 
 ## Connect to a hidden network
 
     nmcli device wifi connect SSID password password hidden yes
+    nmcli device wifi connect SSID hidden yes --ask
 
 ## Bring up connection, including wifi
 
