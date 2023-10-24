@@ -16,6 +16,7 @@ Embrace NetworkManager with the cli interface. Contributions welcome.
 ## List available wifi
 
     nmcli d w
+    nmcli d w list --rescan yes # rescan if less than 30s since last check
     nmcli d wifi
     nmcli device wifi
     nmcli device wifi list
