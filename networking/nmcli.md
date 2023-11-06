@@ -16,6 +16,7 @@ Embrace NetworkManager with the cli interface. Contributions welcome.
 ## List available wifi
 
     nmcli d w
+    nmcli d w list --rescan yes # rescan if less than 30s since last check
     nmcli d wifi
     nmcli device wifi
     nmcli device wifi list
@@ -23,10 +24,12 @@ Embrace NetworkManager with the cli interface. Contributions welcome.
 ## Connect to a wifi network
 
     nmcli device wifi connect SSID password password
+    nmcli device wifi connect SSID --ask # for password prompt
 
 ## Connect to a hidden network
 
     nmcli device wifi connect SSID password password hidden yes
+    nmcli device wifi connect SSID hidden yes --ask
 
 ## Bring up connection, including wifi
 
