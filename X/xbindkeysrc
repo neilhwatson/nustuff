@@ -40,6 +40,9 @@
 "terminology --exec mutt"
     Mod4 + Super_L + 5
 
+"yubioath-desktop"
+    Mod4 + Super_L + 6
+ 
 "terminology || xterm"
     Mod4 + Super_L + 7
 
