@@ -386,4 +386,27 @@ function ft {
     echo $hours
 }
 
+function note {
+    local note="$1"
+    local dirs[0]="neil/docs/notes"
+    local dirs[1]="src/aiven/neilwatson/notes"
+
+    echo start loop
+    for next_dir in ${dirs[@]}
+    do
+       echo dir is $next_dir
+       if [[ -d "$HOME/$next_dir" ]]
+       then
+          echo next dir exists
+          note_path=$(dirname "$HOME/$next_dir/$note")
+          if [[ ! -d "$note_path" ]]
+          then
+             mkdir -p "$note_path"
+          fi
+          nvim "$next_dir/$note"
+          break
+       fi
+    done
+}
+
 showcolor() { display -size 400x400 xc:"#${1}"; }
