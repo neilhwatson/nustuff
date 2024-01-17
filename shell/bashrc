@@ -388,22 +388,20 @@ function ft {
 
 function note {
     local note="$1"
-    local dirs[0]="neil/docs/notes"
-    local dirs[1]="src/aiven/neilwatson/notes"
+    local repos[0]="neil/docs"
+    local repos[1]="src/aiven/neilwatson"
 
-    echo start loop
-    for next_dir in ${dirs[@]}
+    for next_repo in "${repos[@]}"
     do
-       echo dir is $next_dir
-       if [[ -d "$HOME/$next_dir" ]]
+       if [ -d "$HOME/$next_repo" ]
        then
-          echo next dir exists
-          note_path=$(dirname "$HOME/$next_dir/$note")
-          if [[ ! -d "$note_path" ]]
+          note_file="$HOME/$next_repo/notes/$note"
+          note_dirname=$(dirname "$HOME/$next_repo/notes/$note")
+          if [ ! -d "$note_dirname" ]
           then
-             mkdir -p "$note_path"
+             mkdir -p "$note_dirname"
           fi
-          nvim "$next_dir/$note"
+          nvim "$note_file"
           break
        fi
     done
