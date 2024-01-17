@@ -28,7 +28,7 @@
 "~/bin/firefox"
     Mod4 + Super_L + 1
 
-"terminology --exec nvim ~/calendar/*.org"
+"terminology --login=true --exec nvim ~/calendar/*.org"
     Mod4 + Super_L + 2
 
 "signal-desktop"
