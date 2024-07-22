@@ -5,6 +5,8 @@ pcall(require, "luarocks.loader")
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
+
+local vicious = require("vicious")
 require("awful.autofocus")
 -- Widget and layout library
 local wibox = require("wibox")
@@ -130,25 +132,40 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 mytextclock = wibox.widget.textclock("%A %d %B %R")
 alttimezone = wibox.widget {
     timezone = "UTC",
-    widget = wibox.widget.textclock('<span color="Teal"> %H:%M UTC </span>')
+    widget = wibox.widget.textclock('<span color="Teal">%H:%M UTC</span>')
 }
+
+-- weather
+weather = wibox.widget.textbox()
+interval = 3600
+vicious.register(weather, vicious.widgets.weather,
+    '${tempc}C, ${sky}, wind ${wind} ${windkmh}km/h', interval, 'CYOO')
+-- end weather
+
+-- {{{ battery state
+if vicious.widgets.bat then            
+    batwidget = wibox.widget.textbox()
+    vicious.register(batwidget, vicious.widgets.bat,
+        '<span color="Teal">$1 $2%</span>', 120, "BAT0")
+end
+-- {{{ end battery state
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
-                    awful.button({ }, 1, function(t) t:view_only() end),
-                    awful.button({ modkey }, 1, function(t)
-                                              if client.focus then
-                                                  client.focus:move_to_tag(t)
-                                              end
-                                          end),
-                    awful.button({ }, 3, awful.tag.viewtoggle),
-                    awful.button({ modkey }, 3, function(t)
-                                              if client.focus then
-                                                  client.focus:toggle_tag(t)
-                                              end
-                                          end),
-                    awful.button({ }, 4, function(t) awful.tag.viewnext(t.screen) end),
-                    awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
+    awful.button({ }, 1, function(t) t:view_only() end),
+    awful.button({ modkey }, 1, function(t)
+        if client.focus then
+            client.focus:move_to_tag(t)
+        end
+    end),
+    awful.button({ }, 3, awful.tag.viewtoggle),
+    awful.button({ modkey }, 3, function(t)
+        if client.focus then
+            client.focus:toggle_tag(t)
+        end
+    end),
+    awful.button({ }, 4, function(t) awful.tag.viewnext(t.screen) end),
+    awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
                 )
 
 local tasklist_buttons = gears.table.join(
@@ -234,7 +251,10 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
+            spacing = 10,
             wibox.widget.systray(),
+            weather,
+            batwidget,
             mytextclock,
             alttimezone,
             s.mylayoutbox,
@@ -352,12 +372,11 @@ globalkeys = gears.table.join(
     awful.key({ modkey }, "p", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"}),
     -- custom
-    awful.key({ modkey }, "F1", function() awful.spawn("~/bin/firefox") end),
+    awful.key({ modkey }, "F1", function() awful.spawn("/home/neil/bin/firefox") end),
     awful.key({ modkey }, "F3", function() awful.spawn("signal-desktop") end),
     awful.key({ modkey }, "F4", function() awful.spawn("keepassxc") end),
-    awful.key({ modkey }, "F5", function() awful.util.spawn_with_shell("mutt") end),
-    awful.key({ modkey }, "F6", function() awful.spawn("yubioath-desktop") end),
-    awful.key({ modkey }, "F7", function() awful.spawn("keepassxc") end)
+    awful.key({ modkey }, "F5", function() awful.spawn(terminal.." --login=true --exec mutt") end),
+    awful.key({ modkey }, "F6", function() awful.spawn("yubioath-desktop") end)
 
 )
 
@@ -596,4 +615,5 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 
 -- startup
-awful.spawn("/home/neil/bin/rwp /home/neil/wallpaper/")
+-- awful.spawn("/home/neil/bin/rwp /home/neil/wallpaper/")
+

@@ -37,7 +37,7 @@
 "zoom"
     Mod4 + Super_L + 4
 
-"terminology --exec mutt"
+"terminology --login=true --exec mutt"
     Mod4 + Super_L + 5
 
 "yubioath-desktop"
