@@ -374,6 +374,7 @@ globalkeys = gears.table.join(
               {description = "show the menubar", group = "launcher"}),
     -- custom
     awful.key({ modkey }, "F1", function() awful.spawn("/home/neil/bin/firefox") end),
+    awful.key({ modkey }, "F2", function() awful.spawn("terminology --login=true --exec nvim ~/neil/docs/organizer/index.md") end),
     awful.key({ modkey }, "F3", function() awful.spawn("signal-desktop") end),
     awful.key({ modkey }, "F4", function() awful.spawn("keepassxc") end),
     awful.key({ modkey }, "F5", function() awful.spawn(terminal.." --login=true --exec mutt") end),
