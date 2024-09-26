@@ -247,6 +247,7 @@ alias xc="xclip -selection CLIPBOARD"
 alias update-calendar="cd ~/calendar; git commit -am 'update' \
    && git push origin master; cd \$OLDPWD"
 
+alias mycal="batcat --line-range 1:20 --style grid ~/neil/docs/organizer/index.md"
 export MANPAGER="nvim +Man!"
 # man() {
 #     LESS_TERMCAP_md=$'\e[01;31m' \
