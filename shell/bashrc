@@ -247,7 +247,13 @@ alias xc="xclip -selection CLIPBOARD"
 alias update-calendar="cd ~/calendar; git commit -am 'update' \
    && git push origin master; cd \$OLDPWD"
 
-alias mycal="batcat --line-range 1:20 --style grid ~/neil/docs/organizer/index.md"
+
+mycal() {
+   cal=~/neil/docs/organizer/index.md
+   batcat --line-range 1:20 --style grid "$cal"
+   grep "$(date '+%B')" -A 5 "$cal" | batcat --style grid --language md
+}
+
 export MANPAGER="nvim +Man!"
 # man() {
 #     LESS_TERMCAP_md=$'\e[01;31m' \
