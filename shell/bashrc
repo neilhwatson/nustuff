@@ -1,4 +1,4 @@
-export EDITOR=nvim
+export EDITOR=vim
 set -o vi
 bind -m vi-insert "\C-l":clear-screen
 
@@ -234,7 +234,7 @@ weather() {
 
    esac
 }
-alias journal='nvim ~/neil/docs/journal/$(date +%Y).txt'
+alias journal='vim ~/neil/docs/journal/$(date +%Y).txt'
 
 alias tableflip='echo "(╯°□°）╯︵ ┻━┻"'
 alias shrug='echo "¯\_(ツ)_/¯"'
@@ -254,7 +254,7 @@ mycal() {
    grep "$(date '+%B')" -A 5 "$cal" | batcat --style grid --language md
 }
 
-export MANPAGER="nvim +Man!"
+export MANPAGER="vim +Man!"
 # man() {
 #     LESS_TERMCAP_md=$'\e[01;31m' \
 #     LESS_TERMCAP_me=$'\e[0m' \
@@ -408,7 +408,7 @@ function note {
           then
              mkdir -p "$note_dirname"
           fi
-          nvim "$note_file"
+          vim "$note_file"
           break
        fi
     done
