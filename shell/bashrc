@@ -98,7 +98,7 @@ HISTTIMEFORMAT='%F %T '
 # PROMPT_COMMAND='history -a'
 
 
-export PATH=~/bin:~/.local/bin:$PATH:~/node-v16.18.0-linux-x64/bin
+export PATH=~/bin
 
 # Useful shell fucntions:
 
