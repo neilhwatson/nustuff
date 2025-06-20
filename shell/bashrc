@@ -98,7 +98,7 @@ HISTTIMEFORMAT='%F %T '
 # PROMPT_COMMAND='history -a'
 
 
-export PATH=~/bin
+export PATH=~/bin:$PATH
 
 # Useful shell fucntions:
 
