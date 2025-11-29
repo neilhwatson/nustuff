@@ -24,7 +24,6 @@
 #keystate_scrolllock = enable
 #keystate_capslock = enable
 
-
 "~/bin/firefox"
     Mod4 + Super_L + 1
 
@@ -43,7 +42,7 @@
 "yubioath-desktop"
     Mod4 + Super_L + 6
  
-"terminology || xterm"
+"kitty || terminology || xterm"
     Mod4 + Super_L + 7
 
 # "~/bin/gvim || gvim"
