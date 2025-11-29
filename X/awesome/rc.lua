@@ -2,6 +2,8 @@
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
 
+-- local bashets = require("bashets")
+
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -55,8 +57,8 @@ beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 beautiful.border_focus = "#00ff0000"
 
 -- This is used later as the default terminal and editor to run.
-terminal = "kitty"
 -- terminal = "terminology"
+terminal = "kitty"
 -- terminal = "x-terminal-emulator"
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
@@ -138,11 +140,32 @@ alttimezone = wibox.widget {
 }
 
 -- weather
-weather = wibox.widget.textbox()
-interval = 3600
-vicious.register(weather, vicious.widgets.weather,
-    '${tempc}C, ${sky}, wind ${wind} ${windkmh}km/h', interval, 'CYOO')
+-- weather = wibox.widget.textbox()
+-- interval = 3600
+-- vicious.register(weather, vicious.widgets.weather,
+--     '${tempc}C, ${sky}, wind ${wind} ${windkmh}km/h', interval, 'CYOO')
 -- end weather
+
+-- weather 2.0
+weather_cmd = "curl -s 'wttr.in/markham+ontario?m&format=%t/%f+%C+%w+%o'"
+-- weather_cmd = "date"
+weather2 = wibox.widget.textbox()
+weather_timer = gears.timer {
+   timeout  = 60*30,
+   call_now = true,
+   autstart = true,
+   callback = function()
+      awful.spawn.easy_async(
+         weather_cmd,
+         function(out)
+            weather2.text = out
+         end
+      )
+   end
+}
+
+weather_timer:start()
+-- end weather 2.0
 
 -- {{{ battery state
 if vicious.widgets.bat then            
@@ -256,6 +279,7 @@ awful.screen.connect_for_each_screen(function(s)
             spacing = 10,
             wibox.widget.systray(),
             weather,
+            weather2,
             batwidget,
             mytextclock,
             alttimezone,
