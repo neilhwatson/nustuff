@@ -140,9 +140,36 @@ alttimezone = wibox.widget {
 }
 
 -- volume 
+local mute_color = "Yellow"
+local mute_status = -1
+local mute_status = wibox.widget.textbox()
 
+local mute_check = gears.timer {
+   timeout   = 1,
+   call_now  = true,
+   autostart = true,
+   callback  = function()
+      awful.spawn.easy_async(
+         "pactl get-source-mute @DEFAULT_SOURCE@",
+         function(out)
+            if string.match(out, "Mute: yes")
+            then
+               mute_color = "DimGrey"
+            elseif string.match(out, "Mute: no")
+            then
+               mute_color = "OrangeRed"
+            else
+               mute_color = "Yellow"
+            end
+            mute_status:set_markup('<span color="'.. mute_color ..'">On Air</span>')
+         end
+      )
+   end
+}
+mute_check:start()
 
 -- end volume
+
 
 -- weather
 -- weather = wibox.widget.textbox()
@@ -152,10 +179,10 @@ alttimezone = wibox.widget {
 -- end weather
 
 -- weather 2.0
-weather_cmd = "curl -s 'wttr.in/markham+ontario?m&format=%t/%f+%C+%w+%o'"
+local weather_cmd = "curl -s 'wttr.in/markham+ontario?m&format=%t/%f+%C+%w+%o'"
 -- weather_cmd = "date"
-weather2 = wibox.widget.textbox()
-weather_timer = gears.timer {
+local weather2 = wibox.widget.textbox()
+local weather_timer = gears.timer {
    timeout  = 60*30,
    call_now = true,
    autstart = true,
@@ -283,6 +310,7 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             spacing = 10,
             wibox.widget.systray(),
+            mute_status, 
             -- weather,
             weather2,
             batwidget,
@@ -404,7 +432,7 @@ globalkeys = gears.table.join(
               {description = "show the menubar", group = "launcher"}),
     -- custom
     awful.key({ modkey }, "F1", function() awful.spawn("/home/neil/bin/firefox") end),
-    awful.key({ modkey }, "F12", function() awful.spawn("xterm") end),
+    awful.key({ modkey }, "F12", function() awful.spawn("pactl set-source-mute @DEFAULT_SOURCE@ toggle") end),
     -- awful.key({ modkey }, "F2", function() awful.spawn("terminology --login=true --exec nvim ~/neil/docs/organizer/index.md") end),
     awful.key({ modkey }, "F3", function() awful.spawn("signal-desktop") end),
     awful.key({ modkey }, "F4", function() awful.spawn("keepassxc") end),
